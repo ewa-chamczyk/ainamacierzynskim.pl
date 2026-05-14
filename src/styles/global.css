@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  /* Główny akcent — terra z marki osobistej Ewa Chamczyk (most wizualny) */
+  --color-terra: #C4704B;
+  --color-terra-dark: #B85C3A;
+  --color-terra-light: #D4856A;
+
+  /* Drugi akcent — granat ("kobieta zawodowa", odróżnia od mama-marek) */
+  --color-navy: #49607A;
+  --color-navy-dark: #3A4F66;
+
+  /* Tekst */
+  --color-charcoal: #1A1A1A;
+
+  /* Tła — cieplejsze niż w marce osobistej (kremowe, "AI między kawą a drzemką") */
+  --color-cream: #F7F4EF;
+  --color-beige: #E9E3DA;
+  --color-beige-dark: #D1C6B8;
+
+  /* Font */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-charcoal);
+    line-height: 1.7;
+    background-color: var(--color-cream);
+  }
+
+  h1, h2, h3, h4 {
+    line-height: 1.2;
+    font-weight: 600;
+  }
+}
