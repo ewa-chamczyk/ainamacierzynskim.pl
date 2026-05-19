@@ -1,0 +1,152 @@
+---
+// Preview ebooka – fragmenty 7 listów + EasyCart embed
+// Update 19.05.2026: id=ebook, mechanizm pre-order 29 zł / 48 zł, CTA do checkout
+const letters = [
+  { n: '01', title: 'Nie zniknęłaś', quote: 'Pomyśl o tym jak o pokoju w Twoim domu, który zamknęłaś na czas remontu. Meble stoją pod prześcieradłami. Kurz osiada. Ale pokój nadal istnieje' },
+  { n: '02', title: 'Strach kłamie', quote: 'Strach to emocja, nie fakt' },
+  { n: '03', title: 'Nie jesteś gorszym pracownikiem', quote: 'Nie jesteś gorsza. Jesteś inna. Inna nie znaczy mniej – znaczy: szybciej, celniej, z mniejszą liczbą zbędnych ruchów' },
+  { n: '04', title: 'Na swoich warunkach', quote: 'Stawianie warunków to nie słabość. To siła' },
+  { n: '05', title: 'Twoje dziecko nie zabrało Ci kariery', quote: 'Twoja kariera nie umarła. Zmieniła kształt' },
+  { n: '06', title: 'Rola to nie Ty', quote: 'Gdzieś pod tymi wszystkimi etykietami jest kobieta. Z własnymi pragnieniami, marzeniami, potrzebami. Znajdź ją. Ma na Ciebie ochotę' },
+  { n: '07', title: 'Pozwolenie', quote: 'Nie jesteś sama. Jest nas więcej. I każda z nas robi to po swojemu. To jest jedyny sposób, żeby zrobić to dobrze' },
+];
+
+// Pre-order vs post-launch
+const preorderEndDate = new Date('2026-05-25T23:59:59');
+const launchDate = new Date('2026-05-26T08:00:00');
+const today = new Date();
+const isPreorderActive = today.getTime() <= preorderEndDate.getTime();
+const isAfterLaunch = today.getTime() >= launchDate.getTime();
+const daysToLaunch = Math.max(0, Math.ceil((launchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+
+// EasyCart URLs – TODO: Ewa wkleja realne URL-e
+const EASYCART_PREORDER_URL = 'https://easl.ink/Z22wp';
+const EASYCART_FULL_URL = 'https://easl.ink/Z22wp';
+const checkoutUrl = isPreorderActive ? EASYCART_PREORDER_URL : EASYCART_FULL_URL;
+const currentPrice = isPreorderActive ? '29 zł' : '48 zł';
+const priceLabel = isPreorderActive ? `Pre-order: ${currentPrice} (do 25.05) · potem 48 zł` : `Cena: ${currentPrice}`;
+---
+
+<section id="ebook" class="relative px-6 py-24 bg-cream overflow-hidden">
+  <!-- Dekoracja -->
+  <div class="blob bg-terra-soft" style="width: 400px; height: 400px; top: 10%; left: -100px; opacity: 0.3;"></div>
+  <div class="blob bg-navy-light" style="width: 350px; height: 350px; bottom: -50px; right: -100px; opacity: 0.2;"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Hero ebooka: okładka + opis + CTA -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
+      <!-- Lewa kolumna – okładka ebooka -->
+      <div class="lg:col-span-5 fade-up">
+        <div class="relative max-w-md mx-auto lg:mx-0">
+          <!-- Decorative frame -->
+          <div class="absolute -inset-3 bg-gradient-to-br from-terra/25 to-navy/20 rounded-3xl rotate-2"></div>
+          <div class="absolute -inset-1 bg-terra/15 rounded-3xl -rotate-1"></div>
+
+          <!-- Cover -->
+          <img
+            src="/images/ebook-cover.png"
+            alt="Ebook „Nie zniknęłaś" – okładka"
+            class="relative w-full rounded-2xl shadow-2xl"
+          />
+
+          <!-- Floating badge – premiera/cena -->
+          <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl px-5 py-3 shadow-xl border border-beige-dark/40 z-10">
+            {isPreorderActive && !isAfterLaunch && (
+              <>
+                <p class="text-xs uppercase tracking-wider text-terra font-semibold">
+                  Pre-order
+                </p>
+                <p class="text-lg font-semibold text-charcoal">
+                  29 zł <span class="text-sm font-normal text-charcoal/50 line-through">48 zł</span>
+                </p>
+              </>
+            )}
+            {isAfterLaunch && (
+              <>
+                <p class="text-xs uppercase tracking-wider text-terra font-semibold">
+                  Cena
+                </p>
+                <p class="text-lg font-semibold text-charcoal">
+                  48 zł
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Prawa kolumna – opis + CTA -->
+      <div class="lg:col-span-7 fade-up delay-200">
+        <!-- Eyebrow -->
+        <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Ebook
+        </p>
+
+        <!-- Headline -->
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
+          „Nie zniknęłaś". <br />
+          <span class="text-terra">7 listów do mamy, która chce iść dalej.</span>
+        </h2>
+
+        <!-- Lead -->
+        <p class="text-lg md:text-xl text-charcoal/75 mb-8 leading-relaxed">
+          Siedem listów dla kobiety, która wraca po macierzyńskim. O tożsamości,
+          o strachu, o warunkach na własnych zasadach. Bez girlboss-narracji,
+          bez „dasz radę".
+        </p>
+
+        <!-- Pre-order info -->
+        {isPreorderActive && !isAfterLaunch && (
+          <div class="mb-8 inline-flex items-center gap-3 px-5 py-3 bg-white rounded-full border border-terra/30 shadow-sm">
+            <span class="inline-block w-2 h-2 rounded-full bg-terra animate-pulse"></span>
+            <p class="text-sm text-charcoal">
+              <strong>Pre-order 29 zł do 25.05</strong> · premiera za {daysToLaunch} dni · potem 48 zł
+            </p>
+          </div>
+        )}
+
+        <!-- CTA EasyCart -->
+        <a
+          href={checkoutUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
+        >
+          <span>{isPreorderActive && !isAfterLaunch ? 'Kup w pre-order · 29 zł' : 'Kup ebook · 48 zł'}</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Zajrzyj do środka – 7 listów (mniejsza ekspozycja) -->
+    <div class="mb-12 max-w-3xl fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Zajrzyj do środka
+      </p>
+      <h3 class="text-2xl md:text-3xl font-semibold text-charcoal leading-tight">
+        Siedem listów. Po jednym na każdy lęk.
+      </h3>
+    </div>
+
+    <!-- Karty z listami -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {letters.map((letter, idx) => (
+        <article class={`group relative bg-white rounded-2xl p-7 card-lift fade-up delay-${(idx % 5) * 100} border border-beige-dark/40`}>
+          <div class="flex items-baseline gap-4 mb-5">
+            <span class="text-4xl font-semibold text-terra/30 leading-none">{letter.n}</span>
+            <h3 class="text-sm uppercase tracking-wider font-semibold text-charcoal">
+              {letter.title}
+            </h3>
+          </div>
+          <p class="text-charcoal/80 leading-relaxed italic relative pl-4 border-l-2 border-terra/40">
+            „{letter.quote}”.
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

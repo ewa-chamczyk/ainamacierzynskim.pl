@@ -1,0 +1,72 @@
+---
+// Final CTA – duży, jeden cel: zapisać
+const launchDate = new Date('2026-05-26T08:00:00');
+const today = new Date();
+const daysToLaunch = Math.max(0, Math.ceil((launchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+---
+
+<section id="zapis" class="relative px-6 py-28 overflow-hidden">
+  <!-- Anchor #mapa-final: ten sam formularz co w sekcji LeadMagnet, ale w stopce -->
+  <a id="mapa-final"></a>
+  <!-- Mocny gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-terra via-terra-dark to-charcoal"></div>
+
+  <!-- Dekoracja -->
+  <div class="blob bg-white" style="width: 600px; height: 600px; top: -200px; right: -100px; opacity: 0.1;"></div>
+  <div class="blob bg-navy-light" style="width: 500px; height: 500px; bottom: -150px; left: -50px; opacity: 0.3;"></div>
+
+  <!-- Pattern -->
+  <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+  <div class="max-w-3xl mx-auto relative z-10 text-center text-white">
+    <!-- Countdown -->
+    <div class="inline-flex items-center gap-3 mb-8 px-5 py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full fade-up">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+      </span>
+      <p class="text-sm font-semibold">
+        Zostało {daysToLaunch} dni do premiery
+      </p>
+    </div>
+
+    <h2 class="text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 fade-up delay-100 leading-tight">
+      Zapisz się <br />
+      i odbierz Mapę.
+    </h2>
+
+    <p class="text-xl md:text-2xl text-white/85 mb-10 fade-up delay-200 max-w-2xl mx-auto leading-relaxed">
+      Po zapisie: Mapa 5 obszarów AI w PDF, cotygodniowy newsletter,
+      pierwsza wiesz o premierze ebooka i pierwszeństwo do kursu.
+    </p>
+
+    <!-- CTA button – prowadzi do landing MailerLite z formularzem -->
+    <a
+      href="https://preview.mailerlite.io/forms/2290800/187811600159213426/share"
+      target="_blank"
+      rel="noopener"
+      class="max-w-lg mx-auto fade-up delay-300 inline-flex items-center justify-center gap-2 w-full px-8 py-5 bg-white hover:bg-cream text-terra-dark font-semibold rounded-2xl shadow-2xl transition-all hover:scale-105 group text-lg"
+    >
+      <span>Pobierz Mapę 5 obszarów AI</span>
+      <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+
+    <!-- Trust badges -->
+    <ul class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-white/75 fade-in delay-400">
+      <li class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        Mapa 5 obszarów AI w PDF
+      </li>
+      <li class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        Newsletter raz w tygodniu
+      </li>
+      <li class="flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        Pierwszeństwo do kursu
+      </li>
+    </ul>
+  </div>
+</section>

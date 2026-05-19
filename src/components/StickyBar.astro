@@ -1,0 +1,107 @@
+---
+// Sticky bottom bar – pojawia się po scrollu, znika gdy user dotrze do #zapis
+---
+
+<div
+  id="sticky-bar"
+  class="fixed bottom-0 inset-x-0 z-50 transform translate-y-full transition-transform duration-300 ease-out pointer-events-none"
+>
+  <div class="bg-charcoal text-white border-t-4 border-terra shadow-2xl">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 py-4 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto">
+      <!-- Tekst -->
+      <div class="flex-1 min-w-0">
+        <p class="text-sm md:text-base font-semibold">
+          Premiera 26 maja · <span class="text-terra-light">zapisz się, pierwsza wiesz</span>
+        </p>
+        <p class="text-xs text-white/60 hidden sm:block">
+          Zero spamu. Wypiszesz się jednym klikiem.
+        </p>
+      </div>
+
+      <!-- Mini formularz -->
+      <form class="flex gap-2 w-full sm:w-auto">
+        <input
+          type="email"
+          placeholder="Twój e-mail"
+          required
+          class="flex-1 sm:w-64 px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-terra text-sm"
+        />
+        <button
+          type="submit"
+          class="px-5 py-2.5 bg-terra hover:bg-terra-dark text-white font-semibold rounded-lg transition-colors text-sm whitespace-nowrap"
+        >
+          Zapisz mnie
+        </button>
+      </form>
+
+      <!-- Close button -->
+      <button
+        id="sticky-close"
+        class="text-white/60 hover:text-white transition-colors pointer-events-auto"
+        aria-label="Zamknij"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('sticky-bar');
+  const closeBtn = document.getElementById('sticky-close');
+  const zapisSection = document.getElementById('zapis');
+  let dismissed = sessionStorage.getItem('sticky-dismissed') === 'true';
+  let shown = false;
+
+  function showBar() {
+    if (!dismissed && !shown && bar) {
+      bar.classList.remove('translate-y-full');
+      bar.classList.add('translate-y-0', 'pointer-events-auto');
+      shown = true;
+    }
+  }
+
+  function hideBar() {
+    if (bar) {
+      bar.classList.add('translate-y-full');
+      bar.classList.remove('translate-y-0', 'pointer-events-auto');
+    }
+  }
+
+  // Pokaż po scroll'u poza hero (700px)
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 700) {
+      showBar();
+    }
+  });
+
+  // Ukryj gdy user jest blisko #zapis section
+  if (zapisSection) {
+    const zapisObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            hideBar();
+          } else if (shown && !dismissed) {
+            // Show bar again when scrolling away from zapis
+            if (window.scrollY > 700) {
+              bar?.classList.remove('translate-y-full');
+              bar?.classList.add('translate-y-0', 'pointer-events-auto');
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    zapisObserver.observe(zapisSection);
+  }
+
+  // Close button
+  closeBtn?.addEventListener('click', () => {
+    dismissed = true;
+    sessionStorage.setItem('sticky-dismissed', 'true');
+    hideBar();
+  });
+</script>

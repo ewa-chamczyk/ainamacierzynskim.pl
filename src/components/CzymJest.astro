@@ -1,0 +1,94 @@
+---
+// CzymJest – sekcja wyjaśniająca czym jest AI na macierzyńskim (po sekcji Problem)
+// Cel: domkniecie narracji „Wiem, że to znasz" → „Oto co znajdziesz tu, żeby z tym wyjść"
+const elements = [
+  {
+    icon: 'space',
+    title: 'Bezpieczna przestrzeń',
+    desc: 'Bez wstydu, że „powinnaś już wiedzieć". Bez technicznego żargonu.',
+  },
+  {
+    icon: 'instagram',
+    title: 'Profil na Instagramie',
+    desc: '@ainamacierzynskim – bieżąca nauka i inspiracja, trzy posty w tygodniu.',
+  },
+  {
+    icon: 'mail',
+    title: 'Cotygodniowy newsletter',
+    desc: 'Oswajamy AI – praktyczny przykład użycia, słownik AI, jedno zastosowanie.',
+  },
+  {
+    icon: 'people',
+    title: 'Społeczność kobiet',
+    desc: 'Takich jak Ty – menedżerek i specjalistek, które wracają po macierzyńskim.',
+  },
+];
+---
+
+<section class="relative px-6 py-24 bg-beige/30 overflow-hidden">
+  <!-- Dekoracja -->
+  <div class="blob bg-terra-soft" style="width: 350px; height: 350px; top: -50px; right: 10%; opacity: 0.3;"></div>
+  <div class="blob bg-moss" style="width: 300px; height: 300px; bottom: -100px; left: -50px; opacity: 0.2;"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <!-- Nagłówek -->
+    <div class="mb-16 max-w-3xl fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Czym jest „AI na macierzyńskim"
+      </p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
+        Miejsce, w którym <br />
+        <span class="text-terra">razem ogarniamy AI</span>.
+      </h2>
+      <p class="text-lg text-charcoal/70 leading-relaxed">
+        Profil, newsletter, ebook i społeczność. Wszystko po polsku, po ludzku, w Twoim tempie –
+        zanim wrócisz do biura.
+      </p>
+    </div>
+
+    <!-- Cztery elementy -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {elements.map((el, idx) => (
+        <article class={`bg-white rounded-2xl p-7 card-lift fade-up delay-${idx * 100} border border-beige-dark/30`}>
+          <div class="flex items-start gap-4">
+            <!-- Ikona terra -->
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-terra/15 flex items-center justify-center">
+              {el.icon === 'space' && (
+                <svg class="w-6 h-6 text-terra" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              )}
+              {el.icon === 'instagram' && (
+                <svg class="w-6 h-6 text-terra" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke-linecap="round" stroke-linejoin="round" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              {el.icon === 'mail' && (
+                <svg class="w-6 h-6 text-terra" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              )}
+              {el.icon === 'people' && (
+                <svg class="w-6 h-6 text-terra" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              )}
+            </div>
+            <!-- Tekst -->
+            <div>
+              <h3 class="text-lg font-semibold text-charcoal mb-2">
+                {el.title}
+              </h3>
+              <p class="text-charcoal/70 leading-relaxed text-sm">
+                {el.desc}
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

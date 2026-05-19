@@ -1,0 +1,173 @@
+---
+// Co dostaniesz – 3 produkty, każdy w swoim kolorze
+---
+
+<section class="relative px-6 py-24 overflow-hidden">
+  <!-- Dekoracja -->
+  <div class="blob bg-navy-light" style="width: 400px; height: 400px; bottom: 10%; left: -150px; opacity: 0.2;"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Nagłówek sekcji -->
+    <div class="mb-16 max-w-3xl fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Co znajdziesz
+      </p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6">
+        Cały ekosystem, <br />
+        <span class="text-terra">każdy element w swoim tempie.</span>
+      </h2>
+      <p class="text-lg text-charcoal/70">
+        Wchodzisz tam, gdzie Cię ciągnie – Instagram, newsletter, ebook, kurs. Albo wszystko razem.
+      </p>
+    </div>
+
+    <!-- Produkty: 4 elementy ekosystemu -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 0. Instagram – moss/cream -->
+      <article class="group relative bg-gradient-to-br from-moss/15 to-beige rounded-3xl p-8 text-charcoal overflow-hidden card-lift fade-up delay-100 border-2 border-moss/30">
+        <span class="big-numeral text-moss">01</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-widest text-moss font-semibold mb-6 flex items-center gap-3">
+            <span class="block w-6 h-px bg-moss/60"></span>
+            Instagram · @ainamacierzynskim
+          </p>
+
+          <h3 class="text-3xl font-semibold mb-2 text-charcoal">
+            Bieżąca nauka i inspiracja.
+          </h3>
+          <p class="text-charcoal/70 text-sm mb-6 italic">
+            Trzy posty w tygodniu. Po polsku, po ludzku.
+          </p>
+
+          <p class="text-charcoal/80 leading-relaxed mb-8 text-sm">
+            Słownik AI dla menedżerek, praktyczne use case'y,
+            historie z powrotu do pracy.
+          </p>
+
+          <div class="pt-6 border-t border-moss/30">
+            <p class="text-3xl font-semibold text-moss mb-1">bezpłatnie</p>
+            <p class="text-xs text-charcoal/60 mb-4">
+              Trzy posty w tygodniu
+            </p>
+            <a href="https://www.instagram.com/ainamacierzynskim/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-moss border-b-2 border-moss/40 hover:border-moss pb-0.5 transition-colors">
+              Obserwuj
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Newsletter – navy -->
+      <article class="group relative bg-gradient-to-br from-navy to-navy-dark rounded-3xl p-8 text-white overflow-hidden card-lift fade-up delay-200">
+        <span class="big-numeral text-white">02</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-widest text-white/80 font-semibold mb-6 flex items-center gap-3">
+            <span class="block w-6 h-px bg-white/60"></span>
+            Newsletter · co tydzień
+          </p>
+
+          <h3 class="text-3xl font-semibold mb-2">
+            Co tydzień jedna lekcja.
+          </h3>
+          <p class="text-white/80 text-sm mb-6 italic">
+            Jeden prompt. Jedno zastosowanie.
+          </p>
+
+          <p class="text-white/90 leading-relaxed mb-8 text-sm">
+            W rytmie życia z dzieckiem, między kawą a drzemką.
+            Bez wstydu, że „powinnaś już wiedzieć".
+            Konkretne, krótkie, użyteczne.
+          </p>
+
+          <div class="pt-6 border-t border-white/20">
+            <p class="text-3xl font-semibold mb-1">bezpłatnie</p>
+            <p class="text-xs text-white/70 mb-4">
+              Jedna lekcja tygodniowo
+            </p>
+            <a href="#zapis" class="inline-flex items-center gap-2 text-sm font-semibold text-white border-b-2 border-white/60 hover:border-white pb-0.5 transition-colors">
+              Zapisz się
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Ebook – terra -->
+      <article class="group relative bg-gradient-to-br from-terra to-terra-dark rounded-3xl p-8 text-white overflow-hidden card-lift fade-up delay-300">
+        <span class="big-numeral text-white">03</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-widest text-white/80 font-semibold mb-6 flex items-center gap-3">
+            <span class="block w-6 h-px bg-white/60"></span>
+            Ebook · premiera 26.05
+          </p>
+
+          <h3 class="text-3xl font-semibold mb-2">
+            Nie zniknęłaś.
+          </h3>
+          <p class="text-white/80 text-sm mb-6 italic">
+            7 listów do siebie sprzed dziecka
+          </p>
+
+          <p class="text-white/90 leading-relaxed mb-8 text-sm">
+            Emocjonalne listy do kobiet wracających do pracy.
+            Bez „daj radę". Bez coachingu.
+            Bez obietnic, że AI naprawi życie.
+          </p>
+
+          <div class="pt-6 border-t border-white/20">
+            <p class="text-3xl font-semibold mb-1">29 / 48 zł</p>
+            <p class="text-xs text-white/70 mb-4">
+              Pre-order 29 zł do 25.05 · potem 48 zł
+            </p>
+            <a href="/nie-zniknelas" class="inline-flex items-center gap-2 text-sm font-semibold text-white border-b-2 border-white/60 hover:border-white pb-0.5 transition-colors">
+              Zobacz ebook
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Kurs – beige/cream z mossowym akcentem -->
+      <article class="group relative bg-gradient-to-br from-beige to-beige-dark rounded-3xl p-8 text-charcoal overflow-hidden card-lift fade-up delay-400 border-2 border-dashed border-terra/40">
+        <span class="big-numeral text-terra">04</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-widest text-terra font-semibold mb-6 flex items-center gap-3">
+            <span class="block w-6 h-px bg-terra/60"></span>
+            Kurs · pierwsza edycja 15.09.2026
+          </p>
+
+          <h3 class="text-3xl font-semibold mb-2">
+            AI przed powrotem do pracy.
+          </h3>
+          <p class="text-charcoal/70 text-sm mb-6 italic">
+            Pięć narzędzi. Cztery tygodnie. Twoja praca.
+          </p>
+
+          <p class="text-charcoal/80 leading-relaxed mb-8 text-sm">
+            Konkretny program dla menedżerek w marketingu, HR-cie,
+            produkcie i komunikacji. Wracasz do biura wiedząc, od czego zacząć,
+            jakich narzędzi używać i co AI w Twojej pracy NIE zrobi.
+          </p>
+
+          <div class="pt-6 border-t border-terra/30">
+            <p class="text-base font-semibold text-terra mb-1">
+              Pierwsza edycja · 15.09.2026
+            </p>
+            <p class="text-xs text-charcoal/60 mb-4">
+              Niższa cena i pierwszeństwo dla zapisanych do newslettera
+            </p>
+            <a href="#zapis" class="inline-flex items-center gap-2 text-sm font-semibold text-terra border-b-2 border-terra/40 hover:border-terra pb-0.5 transition-colors">
+              Wskakuj na waitlistę
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

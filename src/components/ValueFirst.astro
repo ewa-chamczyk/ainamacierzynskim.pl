@@ -1,0 +1,67 @@
+---
+// Value-first – daje wartość zanim sprzedaje. 3 rzeczy które warto wiedzieć.
+const insights = [
+  {
+    n: '01',
+    title: 'AI nie jest Twoim asystentem osobistym.',
+    body: 'Nie ogarnie za Ciebie życia z dzieckiem. Nie uśpi go, nie odpowie na pytania z infolinii ZUS-u. Ale przy każdej decyzji zawodowej – kiedy budujesz biznes, kiedy negocjujesz z klientami, kiedy odpowiadasz na trudnego maila – jest narzędziem, które oddaje Ci czas i pewność. Tyle. I aż tyle.',
+  },
+  {
+    n: '02',
+    title: 'Większość kursów AI nie jest dla Ciebie.',
+    body: 'Są albo dla deweloperów (techniczne, „pip install langchain") albo dla „biznesu" (uniwersalne, abstrakcyjne). Nie ma tam Twojej perspektywy: kobiety, która wraca do pracy po macierzyńskim, między karmieniem a drzemką. Tu robimy konkrety – z tej drugiej strony.',
+  },
+  {
+    n: '03',
+    title: 'Najszybciej uczysz się robiąc, nie czytając.',
+    body: 'Dlatego newsletter to „jedno zastosowanie tygodniowo", nie „30 narzędzi w 5 minut". Czas między drzemkami szanujemy. Lepiej raz na tydzień zrobić coś z AI, niż przeczytać dziesięć artykułów i zamknąć przeglądarkę, bo dziecko właśnie się obudziło.',
+  },
+];
+---
+
+<section class="relative px-6 py-24 bg-beige/30 overflow-hidden">
+  <!-- Dekoracja -->
+  <div class="blob bg-navy-light" style="width: 400px; height: 400px; top: 30%; left: -100px; opacity: 0.2;"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <!-- Nagłówek -->
+    <div class="mb-16 max-w-3xl fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Zanim zaczniesz
+      </p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
+        3 rzeczy o AI, <br />
+        <span class="text-terra">które warto rozumieć.</span>
+      </h2>
+      <p class="text-lg text-charcoal/70">
+        Zanim zapiszesz się, zanim kupisz ebooka, zanim zaczniesz cokolwiek.
+        Te trzy rzeczy zaoszczędzą Ci dużo czasu i frustracji.
+      </p>
+    </div>
+
+    <!-- Insights -->
+    <div class="space-y-12">
+      {insights.map((insight, idx) => (
+        <article class={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 fade-up delay-${idx * 100}`}>
+          <!-- Numer -->
+          <div class="md:col-span-2">
+            <span class="text-6xl md:text-7xl font-semibold text-terra/40 leading-none">
+              {insight.n}
+            </span>
+          </div>
+
+          <!-- Treść -->
+          <div class="md:col-span-10 pt-2">
+            <h3 class="text-2xl md:text-3xl font-semibold text-charcoal mb-4 leading-snug">
+              {insight.title}
+            </h3>
+            <p class="text-lg text-charcoal/75 leading-relaxed">
+              {insight.body}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

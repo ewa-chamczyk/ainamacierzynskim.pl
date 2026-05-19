@@ -1,0 +1,107 @@
+---
+// Hero – cytat researchu w headline, lead magnet primary CTA, pre-order ebooka 29 zł secondary
+// Update: 19.05.2026 – zwężenie do menedżerek + Mapa 5 obszarów + pre-order
+const launchDate = new Date('2026-05-26T08:00:00');
+const preorderEndDate = new Date('2026-05-25T23:59:59');
+const today = new Date();
+const daysToLaunch = Math.max(0, Math.ceil((launchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+const isPreorderActive = today.getTime() <= preorderEndDate.getTime();
+---
+
+<section class="relative min-h-screen flex items-center px-6 py-20 overflow-hidden">
+  <!-- Dekoracyjne blob'y -->
+  <div class="blob bg-terra-soft" style="width: 500px; height: 500px; top: -100px; right: -150px;"></div>
+  <div class="blob bg-navy-light" style="width: 400px; height: 400px; bottom: -100px; left: -100px; opacity: 0.25;"></div>
+
+  <!-- Subtle grid -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(var(--color-charcoal) 1px, transparent 1px), linear-gradient(90deg, var(--color-charcoal) 1px, transparent 1px); background-size: 80px 80px;"></div>
+
+  <div class="max-w-6xl mx-auto w-full relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Lewa kolumna – tekst -->
+      <div class="lg:col-span-7 order-2 lg:order-1">
+        <!-- Countdown badge -->
+        <div class="inline-flex items-center gap-3 mb-8 px-5 py-2.5 bg-white border-2 border-terra rounded-full fade-up shadow-lg shadow-terra/10">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-terra opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-terra"></span>
+          </span>
+          <p class="text-sm font-semibold text-charcoal">
+            Premiera ebooka „Nie zniknęłaś" za <span class="text-terra">{daysToLaunch} dni</span> · 26 maja 2026
+          </p>
+        </div>
+
+        <!-- Headline – cytat researchu klientki, mniejszy rozmiar -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl text-charcoal mb-8 fade-up delay-100 leading-tight">
+          Wypadłaś z obiegu? <br />
+          <span class="text-charcoal/40">Wszyscy biegną z AI?</span> <br />
+          <span class="text-charcoal/40">Ty stoisz?</span> <br />
+          <span class="relative inline-block">
+            <span class="relative z-10 text-terra">Aż do teraz.</span>
+            <span class="absolute inset-x-0 bottom-2 h-4 bg-terra-soft/60 -z-0"></span>
+          </span>
+        </h1>
+
+        <!-- Lead -->
+        <p class="text-xl md:text-2xl text-charcoal/70 mb-10 fade-up delay-200 leading-relaxed">
+          Pomagam <strong class="text-charcoal">menedżerkom i specjalistkom wracającym po macierzyńskim do pracy</strong>
+          ogarnąć AI. Po ludzku, w Twoim tempie.
+        </p>
+
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row gap-4 fade-up delay-300">
+          <!-- Primary: lead magnet Mapa 5 obszarów -->
+          <a
+            href="#mapa"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
+          >
+            <span>Pobierz Mapę 5 obszarów AI</span>
+            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+          <!-- Secondary: pre-order ebooka (29 zł do 25.05, potem 48 zł) -->
+          <a
+            href="/nie-zniknelas"
+            class="inline-flex flex-col items-center justify-center gap-0.5 px-8 py-3 bg-transparent hover:bg-white text-charcoal font-semibold rounded-xl border-2 border-charcoal/15 hover:border-charcoal transition-all"
+          >
+            {isPreorderActive ? (
+              <>
+                <span class="text-base">Pre-order „Nie zniknęłaś"</span>
+                <span class="text-xs font-normal text-terra">29 zł do 25.05 · potem 48 zł</span>
+              </>
+            ) : (
+              <span>Kup ebook „Nie zniknęłaś" · 48 zł</span>
+            )}
+          </a>
+        </div>
+      </div>
+
+      <!-- Prawa kolumna – zdjęcie -->
+      <div class="lg:col-span-5 order-1 lg:order-2 fade-up delay-200">
+        <div class="relative">
+          <!-- Decorative frame -->
+          <div class="absolute -inset-3 bg-gradient-to-br from-terra/20 to-navy/20 rounded-3xl -rotate-2"></div>
+          <div class="absolute -inset-1 bg-terra/10 rounded-3xl rotate-1"></div>
+
+          <!-- Photo – sesja Grzedziński 8261 (vertical portrait, kontakt wzrokowy) -->
+          <img
+            src="/images/ewa-grz-8261-web.jpg"
+            alt="Ewa Chamczyk – ekspertka AI, mama"
+            class="relative w-full aspect-[4/5] object-cover rounded-3xl shadow-2xl"
+          />
+
+          <!-- Floating badge – sygnatura -->
+          <div class="absolute -bottom-4 -left-4 md:-left-8 bg-white rounded-2xl px-5 py-3 shadow-xl border border-beige-dark/40">
+            <p class="text-xs uppercase tracking-wider text-terra font-semibold">
+              Ekspertka AI · mama
+            </p>
+            <p class="text-sm font-semibold text-charcoal">
+              Ewa Chamczyk
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

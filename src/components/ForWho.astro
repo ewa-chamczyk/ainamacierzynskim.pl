@@ -1,0 +1,90 @@
+---
+// 3 persony z różnymi kolorami akcentu + duże numery + hover lift
+---
+
+<section class="relative px-6 py-24 bg-beige/40 overflow-hidden">
+  <!-- Dekoracja w tle -->
+  <div class="blob bg-terra-soft" style="width: 350px; height: 350px; top: 20%; right: -100px; opacity: 0.3;"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Nagłówek sekcji -->
+    <div class="mb-16 max-w-3xl fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Dla kogo
+      </p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6">
+        Czy to jest dla mnie?
+      </h2>
+      <p class="text-lg text-charcoal/70">
+        Trzy historie, w których być może zobaczysz siebie. Każdą znam – od koleżanek,
+        klientek i z własnego doświadczenia.
+      </p>
+    </div>
+
+    <!-- Karty -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Persona 1 – terra accent -->
+      <div class="relative bg-white rounded-3xl p-8 card-lift fade-up delay-100 overflow-hidden border-l-4 border-terra">
+        <span class="big-numeral text-terra">01</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-wider text-terra font-semibold mb-3">
+            Wracam i się boję
+          </p>
+          <h3 class="text-xl font-semibold text-charcoal mb-4 leading-snug">
+            „Wszyscy w zespole już używają AI, a ja stoję z wózkiem".
+          </h3>
+          <p class="text-charcoal/70 leading-relaxed text-sm">
+            Boisz się, że w czasie macierzyńskiego świat odjechał. Że wrócisz
+            do firmy, w której zasady się zmieniły, a Ty zostałaś
+            z pieluchami zamiast laptopa.
+          </p>
+        </div>
+      </div>
+
+      <!-- Persona 2 – navy accent -->
+      <div class="relative bg-white rounded-3xl p-8 card-lift fade-up delay-200 overflow-hidden border-l-4 border-navy">
+        <span class="big-numeral text-navy">02</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-wider text-navy font-semibold mb-3">
+            Mózg w trybie czuwania
+          </p>
+          <h3 class="text-xl font-semibold text-charcoal mb-4 leading-snug">
+            „Tęsknię za sobą sprzed porodu".
+          </h3>
+          <p class="text-charcoal/70 leading-relaxed text-sm">
+            Chcesz kontaktu z czymś rozwojowym, ale nie masz energii
+            na ambitny projekt. Potrzebujesz lekkości, intelektualnego
+            kontaktu i poczucia, że „jeszcze jestem sobą".
+          </p>
+        </div>
+      </div>
+
+      <!-- Persona 3 – moss accent -->
+      <div class="relative bg-white rounded-3xl p-8 card-lift fade-up delay-300 overflow-hidden border-l-4 border-moss">
+        <span class="big-numeral text-moss">03</span>
+
+        <div class="relative z-10">
+          <p class="text-xs uppercase tracking-wider text-moss font-semibold mb-3">
+            Boję się, że nie ogarnę
+          </p>
+          <h3 class="text-xl font-semibold text-charcoal mb-4 leading-snug">
+            „Tyle się zdarzyło w ciągu roku – nie wiem, czy ogarnę".
+          </h3>
+          <p class="text-charcoal/70 leading-relaxed text-sm">
+            ChatGPT, agenci, nowe narzędzia, nowe procesy w zespole.
+            W rok poza biurem AI urosło razy dziesięć. Potrzebujesz
+            mapy, nie kolejnej listy 50 aplikacji do samodzielnego testowania.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dolny akcent -->
+    <p class="mt-12 text-center text-sm text-charcoal/50 italic fade-in delay-400">
+      A może w każdej trochę. To też jest OK.
+    </p>
+  </div>
+</section>

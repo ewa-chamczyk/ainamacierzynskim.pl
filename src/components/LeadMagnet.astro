@@ -1,0 +1,103 @@
+---
+// LeadMagnet – sekcja z Mapą 5 obszarów AI + embed MailerLite formularza
+// Lead magnet darmowy – primary CTA z Hero kieruje tu (#mapa)
+// Forma: MailerLite embedded form, wymaga JS Universal w Layout (sprawdzone)
+---
+
+<section id="mapa" class="relative px-6 py-24 bg-cream overflow-hidden">
+  <!-- Dekoracja -->
+  <div class="blob bg-terra-soft" style="width: 450px; height: 450px; top: -100px; right: -150px; opacity: 0.35;"></div>
+  <div class="blob bg-moss" style="width: 300px; height: 300px; bottom: -50px; left: -100px; opacity: 0.2;"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Lewa kolumna – opis -->
+      <div class="lg:col-span-6 fade-up">
+        <!-- Eyebrow -->
+        <p class="text-sm uppercase tracking-widest text-terra font-semibold mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Zacznij tutaj · za darmo
+        </p>
+
+        <!-- Tytuł nad headline -->
+        <p class="text-base md:text-lg text-charcoal/60 mb-4 font-medium">
+          Gdzie AI naprawdę pomaga w pracy?
+        </p>
+
+        <!-- Headline -->
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
+          Mapa <br />
+          <span class="text-terra">5 obszarów AI</span> <br />
+          <span class="text-charcoal/60 text-3xl md:text-4xl lg:text-5xl">dla menedżerki, która wraca.</span>
+        </h2>
+
+        <!-- Lead -->
+        <p class="text-lg md:text-xl text-charcoal/75 mb-8 leading-relaxed">
+          Pięć konkretów. Pięć gotowych promptów. Pięć czerwonych linii – czego AI tu NIE robi.
+          <strong class="text-charcoal">Sześć minut czytania, które oszczędzą Ci tygodnie błądzenia.</strong>
+        </p>
+
+        <!-- Co znajdziesz w środku -->
+        <ul class="space-y-3 mb-10">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-terra/15 flex items-center justify-center text-terra font-semibold text-xs">01</span>
+            <p class="text-charcoal/85">Pierwsza wersja maila lub dokumentu</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-terra/15 flex items-center justify-center text-terra font-semibold text-xs">02</span>
+            <p class="text-charcoal/85">Research i podsumowania</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-terra/15 flex items-center justify-center text-terra font-semibold text-xs">03</span>
+            <p class="text-charcoal/85">Analiza długich dokumentów</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-terra/15 flex items-center justify-center text-terra font-semibold text-xs">04</span>
+            <p class="text-charcoal/85">Pytania do trudnej rozmowy</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-terra/15 flex items-center justify-center text-terra font-semibold text-xs">05</span>
+            <p class="text-charcoal/85">Tłumaczenie i uproszczenie</p>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Prawa kolumna – formularz MailerLite -->
+      <div class="lg:col-span-6 fade-up delay-200">
+        <div class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-beige-dark/30">
+          <!-- Cover Mapy -->
+          <div class="mb-8 flex justify-center">
+            <div class="relative">
+              <div class="absolute -inset-2 bg-gradient-to-br from-terra/30 to-navy/20 rounded-2xl rotate-2"></div>
+              <img
+                src="/images/mapa-5-obszarow-cover.png"
+                alt="Mapa 5 obszarów AI – PDF cover"
+                class="relative w-32 md:w-40 rounded-xl shadow-xl"
+                onerror="this.style.display='none'"
+              />
+            </div>
+          </div>
+
+          <!-- CTA button – prowadzi do landing MailerLite z formularzem -->
+          <a
+            href="https://preview.mailerlite.io/forms/2290800/187811600159213426/share"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-terra/30 group"
+          >
+            <span>Pobierz Mapę 5 obszarów AI</span>
+            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+          <!-- Mała notka pod formularzem -->
+          <p class="text-xs text-charcoal/50 text-center mt-6">
+            Po zapisie otrzymasz mail z linkiem do PDF (1,5 MB).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

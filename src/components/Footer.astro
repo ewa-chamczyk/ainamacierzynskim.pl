@@ -1,0 +1,69 @@
+---
+// Stopka
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="px-6 py-16 bg-charcoal text-white/80">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+      <!-- Marka -->
+      <div>
+        <p class="text-white font-semibold mb-4">AI na macierzyńskim</p>
+        <p class="text-sm leading-relaxed text-white/60">
+          Spokojny start z AI przed powrotem do pracy.
+          Małe kroki, konkretne zastosowania, zero presji.
+        </p>
+      </div>
+
+      <!-- Kontakt -->
+      <div>
+        <p class="text-white font-semibold mb-4">Kontakt</p>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a
+              href="https://www.instagram.com/ainamacierzynskim/"
+              target="_blank"
+              rel="noopener"
+              class="text-white/60 hover:text-terra-light transition-colors"
+            >Instagram @ainamacierzynskim</a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/ewachamczyk/"
+              target="_blank"
+              rel="noopener"
+              class="text-white/60 hover:text-terra-light transition-colors"
+            >LinkedIn Ewy</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dane -->
+      <div>
+        <p class="text-white font-semibold mb-4">Dane firmy</p>
+        <p class="text-sm text-white/60 leading-relaxed">
+          Duke Art – Ewa Chamczyk<br />
+          NIP: 5482641176<br />
+          Projekt Ewy Chamczyk
+        </p>
+      </div>
+    </div>
+
+    <!-- Dolny pasek -->
+    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-white/50">
+      <p>© {currentYear} Ewa Chamczyk · wszystkie prawa zastrzeżone</p>
+      <ul class="flex gap-6">
+        <li>
+          <a href="/polityka-prywatnosci" class="hover:text-terra-light transition-colors">
+            Polityka prywatności
+          </a>
+        </li>
+        <li>
+          <a href="/regulamin" class="hover:text-terra-light transition-colors">
+            Regulamin
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

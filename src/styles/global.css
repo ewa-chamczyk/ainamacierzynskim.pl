@@ -5,18 +5,48 @@
   --color-terra: #C4704B;
   --color-terra-dark: #B85C3A;
   --color-terra-light: #D4856A;
+  --color-terra-soft: #E8B89E;
 
   /* Drugi akcent — granat ("kobieta zawodowa", odróżnia od mama-marek) */
   --color-navy: #49607A;
   --color-navy-dark: #3A4F66;
+  --color-navy-light: #6B81A0;
+
+  /* Trzeci akcent — mech (subtle natura, dla FAQ/akcentów) */
+  --color-moss: #7A8B6A;
 
   /* Tekst */
   --color-charcoal: #1A1A1A;
 
-  /* Tła — cieplejsze niż w marce osobistej (kremowe, "AI między kawą a drzemką") */
+  /* Tła — cieplejsze niż w marce osobistej */
   --color-cream: #F7F4EF;
   --color-beige: #E9E3DA;
   --color-beige-dark: #D1C6B8;
+
+  /* ═══════════════════════════════════════════════════════ */
+  /* PALETA EBOOKA „Nie zniknęłaś" — używana TYLKO na /nie-zniknelas */
+  /* (zgodna z nie-zniknelas-spec.md + bordo jako primary akcent) */
+  /* ═══════════════════════════════════════════════════════ */
+
+  /* Główny akcent ebooka — głębokie burgundy (zamiast terry) */
+  --color-bordo: #6B1F1F;
+  --color-bordo-dark: #4A1313;
+  --color-bordo-light: #8B3535;
+  --color-bordo-soft: #D4B2B2;
+
+  /* Sekundarny akcent — ciepłe złoto (linie dekoracyjne, numerki listów) */
+  --color-gold: #C9A76C;
+  --color-gold-light: #E0C594;
+
+  /* Tekst ebooka — ciepły antracyt (zamiast czystego charcoal) */
+  --color-anthracite: #2C2416;
+  --color-warm-gray: #6B5D4D;
+  --color-taupe: #9C8E7C;
+
+  /* Tła ebookowe — cieplejsze, bardziej kremowe */
+  --color-cream-warm: #FAF8F5;
+  --color-beige-warm: #F0EBE3;
+  --color-sand: #D4C8B8;
 
   /* Font */
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -34,10 +64,108 @@
     color: var(--color-charcoal);
     line-height: 1.7;
     background-color: var(--color-cream);
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
-    line-height: 1.2;
+    line-height: 1.1;
     font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-terra);
+    color: white;
+  }
+}
+
+@layer utilities {
+  /* Animacje fade-in scroll-triggered */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  .scale-in {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Delays dla sekwencji */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+
+  /* Dekoracyjne blob'y w tle */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Hover lift dla kart */
+  .card-lift {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(196, 112, 75, 0.15);
+  }
+
+  /* Duża dekoracyjna cyfra w tle karty */
+  .big-numeral {
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.08;
+    position: absolute;
+    top: -0.5rem;
+    right: 1rem;
+    pointer-events: none;
+  }
+
+  /* Elegancki scrollbar dla karuzeli stron w /nie-zniknelas */
+  .nz-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-bordo) transparent;
+    scroll-padding-left: 1.5rem;
+    scroll-padding-right: 1.5rem;
+  }
+  .nz-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .nz-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .nz-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-bordo);
+    border-radius: 3px;
+    opacity: 0.6;
+  }
+  .nz-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-bordo-dark);
   }
 }
