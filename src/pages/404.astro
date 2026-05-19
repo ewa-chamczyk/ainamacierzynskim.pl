@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Nie znaleziono strony – AI na macierzyńskim"
+  description="Ta strona nie istnieje. Wróć na stronę główną AI na macierzyńskim."
+>
+  <section class="relative min-h-screen flex items-center justify-center px-6 py-24 bg-cream overflow-hidden">
+    <!-- Dekoracja -->
+    <div class="blob bg-terra-soft" style="width: 450px; height: 450px; top: -100px; right: -120px; opacity: 0.35;"></div>
+    <div class="blob bg-moss" style="width: 300px; height: 300px; bottom: -80px; left: -80px; opacity: 0.2;"></div>
+
+    <div class="max-w-xl mx-auto relative z-10 text-center fade-up">
+      <p class="text-sm uppercase tracking-widest text-terra font-semibold mb-6 inline-flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Błąd 404
+        <span class="block w-8 h-px bg-terra"></span>
+      </p>
+
+      <h1 class="text-5xl md:text-6xl font-semibold text-charcoal mb-6 leading-tight">
+        Tej strony tu nie ma.
+      </h1>
+
+      <p class="text-lg text-charcoal/70 mb-10 leading-relaxed">
+        Może literówka w adresie, może strona zmieniła miejsce.
+        Nic straconego – wróćmy na początek.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-terra/30 group"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span>Strona główna</span>
+        </a>
+        <a
+          href="/nie-zniknelas"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-charcoal border border-beige-dark/60 hover:border-terra hover:text-terra font-medium rounded-xl transition-all"
+        >
+          <span>Ebook „Nie zniknęłaś"</span>
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
