@@ -1,11 +1,6 @@
 ---
-// Hero – cytat researchu w headline, lead magnet primary CTA, pre-order ebooka 29 zł secondary
-// Update: 19.05.2026 – zwężenie do menedżerek + Mapa 5 obszarów + pre-order
-const launchDate = new Date('2026-05-26T08:00:00');
-const preorderEndDate = new Date('2026-05-25T23:59:59');
-const today = new Date();
-const daysToLaunch = Math.max(0, Math.ceil((launchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
-const isPreorderActive = today.getTime() <= preorderEndDate.getTime();
+// Hero – cytat researchu w headline, lead magnet primary CTA, ebook 48 zł secondary
+// Update: 19.05.2026 – zwężenie do menedżerek + Mapa 5 obszarów
 ---
 
 <section class="relative min-h-screen flex items-center px-6 py-20 overflow-hidden">
@@ -27,7 +22,7 @@ const isPreorderActive = today.getTime() <= preorderEndDate.getTime();
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-terra"></span>
           </span>
           <p class="text-sm font-semibold text-charcoal">
-            Premiera ebooka „Nie zniknęłaś" za <span class="text-terra">{daysToLaunch} dni</span> · 26 maja 2026
+            Ebook „Nie zniknęłaś" <span class="text-terra">już dostępny</span>
           </p>
         </div>
 
@@ -60,19 +55,13 @@ const isPreorderActive = today.getTime() <= preorderEndDate.getTime();
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
-          <!-- Secondary: pre-order ebooka (29 zł do 25.05, potem 48 zł) -->
+          <!-- Secondary: ebook „Nie zniknęłaś" (48 zł, regularnie 79 zł) -->
           <a
             href="/nie-zniknelas"
             class="inline-flex flex-col items-center justify-center gap-0.5 px-8 py-3 bg-transparent hover:bg-white text-charcoal font-semibold rounded-xl border-2 border-charcoal/15 hover:border-charcoal transition-all"
           >
-            {isPreorderActive ? (
-              <>
-                <span class="text-base">Pre-order „Nie zniknęłaś"</span>
-                <span class="text-xs font-normal text-terra">29 zł do 25.05 · potem 48 zł</span>
-              </>
-            ) : (
-              <span>Kup ebook „Nie zniknęłaś" · 48 zł</span>
-            )}
+            <span class="text-base">Kup ebook „Nie zniknęłaś"</span>
+            <span class="text-xs font-normal text-terra">48 zł <span class="text-charcoal/40 line-through">79 zł</span></span>
           </a>
         </div>
       </div>

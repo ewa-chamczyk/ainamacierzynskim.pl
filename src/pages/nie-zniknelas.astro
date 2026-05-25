@@ -6,15 +6,7 @@ import Layout from '../layouts/Layout.astro';
 import ScrollProgress from '../components/ScrollProgress.astro';
 import Footer from '../components/Footer.astro';
 
-// Daty
-const launchDate = new Date('2026-05-26T08:00:00');
-const preorderEndDate = new Date('2026-05-25T23:59:59');
-const today = new Date();
-const daysToLaunch = Math.max(0, Math.ceil((launchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
-const isPreorderActive = today < preorderEndDate;
-const currentPrice = isPreorderActive ? '29' : '48';
-
-// EasyCart URL (pre-order)
+// EasyCart URL
 const EASYCART_URL = 'https://easl.ink/Z22wp';
 
 // 7 listów + krótki kontekst pod pull quote
@@ -110,7 +102,7 @@ const faqs = [
   },
   {
     q: 'Kiedy dokładnie dostanę plik?',
-    a: 'Rano 26 maja 2026. Wysyłam linkiem na maila do każdej osoby, która złożyła zamówienie do tego dnia. Sprawdź folder „Oferty" i „Spam", gdyby maila brakowało.',
+    a: 'Od razu po opłaceniu – plik PDF dostajesz linkiem na maila. Sprawdź folder „Oferty" i „Spam", gdyby maila brakowało.',
   },
   {
     q: 'Co z audiobookiem?',
@@ -143,7 +135,7 @@ const wstepBlocks = [
 
 <Layout
   title='„Nie zniknęłaś" – 7 listów do mamy, która chce iść dalej · ebook'
-  description="Ebook dla menedżerek i specjalistek wracających do pracy po macierzyńskim. 7 emocjonalnych listów. Pre-order 29 zł do 25.05.2026, premiera 26 maja."
+  description="Ebook dla menedżerek i specjalistek wracających do pracy po macierzyńskim. 7 emocjonalnych listów. 48 zł, plik PDF od razu po zakupie."
   ogImage="/images/og-nie-zniknelas.jpg"
 >
   <ScrollProgress />
@@ -158,21 +150,12 @@ const wstepBlocks = [
 
     <div class="max-w-6xl mx-auto relative z-10">
       <!-- Mała kotwica zaufania nad nagłówkiem -->
-      {isPreorderActive ? (
-        <div class="mb-8 inline-flex items-center gap-3 px-5 py-2.5 bg-white rounded-full border border-bordo/30 shadow-sm fade-up">
-          <span class="inline-block w-2 h-2 rounded-full bg-bordo animate-pulse"></span>
-          <p class="text-sm text-charcoal font-medium">
-            <span class="text-bordo font-semibold">Pre-order otwarty</span> · zostało {daysToLaunch} {daysToLaunch === 1 ? 'dzień' : daysToLaunch < 5 ? 'dni' : 'dni'} do premiery
-          </p>
-        </div>
-      ) : (
-        <div class="mb-8 inline-flex items-center gap-3 px-5 py-2.5 bg-white rounded-full border border-bordo/30 shadow-sm fade-up">
-          <span class="inline-block w-2 h-2 rounded-full bg-bordo"></span>
-          <p class="text-sm text-charcoal font-medium">
-            <span class="text-bordo font-semibold">Ebook dostępny</span> · premiera 26 maja 2026
-          </p>
-        </div>
-      )}
+      <div class="mb-8 inline-flex items-center gap-3 px-5 py-2.5 bg-white rounded-full border border-bordo/30 shadow-sm fade-up">
+        <span class="inline-block w-2 h-2 rounded-full bg-bordo"></span>
+        <p class="text-sm text-charcoal font-medium">
+          <span class="text-bordo font-semibold">Ebook dostępny</span> · plik PDF od razu po zakupie
+        </p>
+      </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <!-- Lewa kolumna – tekst -->
@@ -204,7 +187,7 @@ const wstepBlocks = [
               rel="noopener"
               class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-bordo hover:bg-bordo-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-bordo/30 group"
             >
-              <span>Kup w pre-orderze · {currentPrice} zł</span>
+              <span>Kup ebooka · 48 zł</span>
               <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -221,12 +204,9 @@ const wstepBlocks = [
           </div>
 
           <!-- Pasek ceny pod CTA -->
-          {isPreorderActive && (
-            <p class="text-sm text-charcoal/60">
-              <span class="text-bordo font-semibold">Pre-order do 25.05 · 29 zł.</span>
-              {' '}Po premierze – 48 zł.
-            </p>
-          )}
+          <p class="text-sm text-charcoal/60">
+            <span class="text-bordo font-semibold">48 zł</span> <span class="line-through">79 zł</span> · plik PDF od razu po zakupie.
+          </p>
         </div>
 
         <!-- Prawa kolumna – okładka -->
@@ -245,11 +225,10 @@ const wstepBlocks = [
             <!-- Plakietka z ceną -->
             <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl px-5 py-4 shadow-xl border border-sand/40 z-10">
               <p class="text-xs uppercase tracking-wider text-bordo font-semibold mb-1">
-                Pre-order
+                Cena
               </p>
               <p class="text-2xl font-semibold text-charcoal">
-                {currentPrice} zł
-                {isPreorderActive && <span class="text-sm font-normal text-charcoal/40 line-through ml-2">48 zł</span>}
+                48 zł <span class="text-sm font-normal text-charcoal/40 line-through ml-2">79 zł</span>
               </p>
             </div>
           </div>
@@ -684,7 +663,7 @@ const wstepBlocks = [
       </div>
 
       <p class="mt-8 text-xs text-charcoal/40 text-center fade-in delay-300">
-        Opinie z testów przedpremierowych. Cytowane za zgodą.
+        Opinie pierwszych czytelniczek. Cytowane za zgodą.
       </p>
     </div>
   </section>
@@ -701,56 +680,34 @@ const wstepBlocks = [
           <span class="block w-8 h-px bg-gold"></span>
         </p>
         <h2 class="text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Tylko {currentPrice} zł w pre-orderze.
+          Tylko 48 zł.
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-up delay-100">
-        <!-- Pre-order -->
-        <div class={`relative bg-gradient-to-br from-bordo to-bordo-dark rounded-3xl p-10 text-white shadow-xl ${!isPreorderActive && 'opacity-50'}`}>
-          {isPreorderActive && (
-            <span class="absolute -top-3 left-8 bg-white text-bordo text-xs uppercase tracking-widest font-bold px-4 py-1.5 rounded-full shadow-md">
-              Aktywne · do 25.05
-            </span>
-          )}
+      <div class="max-w-md mx-auto fade-up delay-100">
+        <div class="relative bg-gradient-to-br from-bordo to-bordo-dark rounded-3xl p-10 text-white shadow-xl text-center">
           <p class="text-sm uppercase tracking-widest text-white/80 font-semibold mb-4">
-            Pre-order
+            Ebook · plik PDF
           </p>
           <p class="text-6xl md:text-7xl font-semibold mb-3">
-            29 <span class="text-3xl font-normal">zł</span>
+            48 <span class="text-3xl font-normal">zł</span>
+            <span class="block text-2xl font-normal text-white/50 line-through mt-2">79 zł</span>
           </p>
           <p class="text-white/85 leading-relaxed mb-6">
-            Składasz zamówienie teraz, dostajesz plik 26 maja rano na maila.
-            Cena niższa o 19 zł, bo doceniam, że jesteś tu wcześnie.
+            Plik PDF od razu po opłaceniu – na każdym urządzeniu.
+            7 listów i postscriptum, do których wracasz, kiedy potrzebujesz.
           </p>
-          {isPreorderActive ? (
-            <a
-              href={EASYCART_URL}
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-white text-bordo hover:bg-cream-warm font-semibold rounded-xl transition-all hover:scale-105"
-            >
-              <span>Kup teraz · 29 zł</span>
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </a>
-          ) : (
-            <p class="text-white/70 text-sm italic">Pre-order zakończony.</p>
-          )}
-        </div>
-
-        <!-- Po premierze -->
-        <div class="relative bg-white rounded-3xl p-10 border-2 border-sand/40 shadow-md">
-          <p class="text-sm uppercase tracking-widest text-charcoal/50 font-semibold mb-4">
-            Po premierze
-          </p>
-          <p class="text-6xl md:text-7xl font-semibold text-charcoal mb-3">
-            48 <span class="text-3xl font-normal text-charcoal/60">zł</span>
-          </p>
-          <p class="text-charcoal/70 leading-relaxed">
-            Dostępne od 26.05. Plik PDF od razu po opłaceniu.
-          </p>
+          <a
+            href={EASYCART_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-white text-bordo hover:bg-cream-warm font-semibold rounded-xl transition-all hover:scale-105"
+          >
+            <span>Kup ebooka · 48 zł</span>
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
@@ -920,14 +877,12 @@ const wstepBlocks = [
       </p>
 
       <h2 class="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-tight fade-up">
-        {isPreorderActive ? 'Jeszcze możesz' : 'Już możesz'} <br />
+        Już możesz <br />
         <span class="italic">w niższej cenie.</span>
       </h2>
 
       <p class="text-xl md:text-2xl text-white/85 mb-12 leading-relaxed max-w-2xl mx-auto fade-up delay-100">
-        {isPreorderActive
-          ? '29 zł do końca 25 maja. Potem 48 zł.'
-          : 'PDF z 7 listami i postscriptum. Wysyłka na maila od razu po opłaceniu.'}
+        48 zł zamiast 79 zł. PDF z 7 listami i postscriptum – na maila od razu po opłaceniu.
       </p>
 
       <a
@@ -936,14 +891,14 @@ const wstepBlocks = [
         rel="noopener"
         class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-bordo hover:bg-cream-warm font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl text-lg fade-up delay-200"
       >
-        <span>Kup ebooka · {currentPrice} zł</span>
+        <span>Kup ebooka · 48 zł</span>
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
       </a>
 
       <p class="mt-8 text-white/70 text-sm fade-in delay-300">
-        Premiera 26 maja 2026 · plik PDF
+        Plik PDF · od razu po opłaceniu
       </p>
     </div>
   </section>
