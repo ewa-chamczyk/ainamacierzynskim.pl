@@ -103,14 +103,14 @@ const CONSENT =
 
       /* FORM */
       .form { margin: 30px 0 12px; display: flex; flex-wrap: wrap; gap: 10px; }
-      .form input[type='email'] {
-        flex: 1 1 240px; min-width: 0;
+      .form .field {
+        flex: 1 1 180px; min-width: 0;
         background: var(--krem); color: var(--wino);
         border: 2px solid transparent; border-radius: 10px; padding: 16px 18px;
         font-family: 'Archivo', sans-serif; font-size: 16px; font-weight: 500;
       }
-      .form input[type='email']::placeholder { color: rgba(74, 23, 33, 0.55); }
-      .form input[type='email']:focus-visible { outline: none; border-color: var(--terakota); }
+      .form .field::placeholder { color: rgba(74, 23, 33, 0.55); }
+      .form .field:focus-visible { outline: none; border-color: var(--terakota); }
       .form button {
         flex: 0 0 auto;
         background: var(--terakota); color: var(--wino-2);
@@ -186,7 +186,8 @@ const CONSENT =
         <div class="cta">
           <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
             <label class="hp" aria-hidden="true">Nie wypełniaj tego pola<input type="text" name="hp_website" tabindex="-1" autocomplete="off" /></label>
-            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" />
+            <input type="text" name="fields[name]" required autocomplete="given-name" placeholder="Imię" aria-label="Twoje imię" class="field" />
+            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" class="field" />
             <input type="hidden" name="anticsrf" value="true" />
             <input type="hidden" name="ml-submit" value="1" />
             <button type="submit">Pobierz Mapę</button>
@@ -237,7 +238,8 @@ const CONSENT =
         <div class="cta">
           <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
             <label class="hp" aria-hidden="true">Nie wypełniaj tego pola<input type="text" name="hp_website" tabindex="-1" autocomplete="off" /></label>
-            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" />
+            <input type="text" name="fields[name]" required autocomplete="given-name" placeholder="Imię" aria-label="Twoje imię" class="field" />
+            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" class="field" />
             <input type="hidden" name="anticsrf" value="true" />
             <input type="hidden" name="ml-submit" value="1" />
             <button type="submit">Pobierz Mapę</button>
