@@ -1,0 +1,123 @@
+---
+// Polityka prywatności – /polityka-prywatnosci
+// Linkowana ze stopki (home, /nie-zniknelas) i z formularza zgód na /mapa.
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Polityka prywatności – AI na macierzyńskim"
+  description="Jak przetwarzam Twoje dane osobowe w serwisie ainamacierzynskim.pl – newsletter, zakup ebooka, Twoje prawa wynikające z RODO."
+>
+  <article class="legal">
+    <div class="legal-wrap">
+      <a href="/" class="back">← Strona główna</a>
+      <h1>Polityka prywatności</h1>
+      <p class="updated">Ostatnia aktualizacja: 16 czerwca 2026</p>
+
+      <h2>1. Administrator danych</h2>
+      <p>
+        Administratorem Twoich danych osobowych jest <strong>Duke Art Ewa Chamczyk</strong>
+        z siedzibą w Warszawie, NIP 5482641176 (dalej: „Administrator").
+        Kontakt w sprawie danych: <a href="mailto:hello@ainamacierzynskim.pl">hello@ainamacierzynskim.pl</a>.
+      </p>
+
+      <h2>2. Jakie dane zbieram i po co</h2>
+      <ul>
+        <li>
+          <strong>Zapis na newsletter / pobranie Mapy:</strong> adres e-mail.
+          Cel: wysłanie „Mapy 5 obszarów AI", prowadzenie newslettera „AI na macierzyńskim" oraz
+          przesyłanie informacji marketingowych o moich produktach i usługach.
+          Podstawa: Twoja zgoda (art. 6 ust. 1 lit. a RODO) oraz art. 10 ustawy o świadczeniu usług
+          drogą elektroniczną i art. 172 Prawa telekomunikacyjnego.
+        </li>
+        <li>
+          <strong>Zakup ebooka:</strong> dane podane w koszyku (imię, adres e-mail, dane do faktury,
+          w tym NIP przy zakupie na firmę). Cel: realizacja umowy i dostarczenie pliku oraz
+          wystawienie faktury. Podstawa: wykonanie umowy (art. 6 ust. 1 lit. b RODO) i obowiązek
+          prawny dotyczący rozliczeń (art. 6 ust. 1 lit. c RODO).
+        </li>
+        <li>
+          <strong>Kontakt</strong> (e-mail, Instagram): dane, które sama podasz w wiadomości.
+          Cel: odpowiedź. Podstawa: prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO).
+        </li>
+      </ul>
+
+      <h2>3. Komu powierzam dane</h2>
+      <p>Korzystam z zaufanych dostawców, którzy przetwarzają dane w moim imieniu:</p>
+      <ul>
+        <li><strong>MailerLite</strong> (UAB „MailerLite", Litwa) – obsługa newslettera i wysyłki e-maili.</li>
+        <li><strong>EasyCart</strong> – obsługa płatności i dostarczenia ebooka.</li>
+        <li><strong>Netlify, Inc.</strong> (USA) – hosting strony.</li>
+        <li>Biuro rachunkowe / dostawca narzędzi do faktur – w zakresie rozliczeń.</li>
+      </ul>
+      <p>
+        Część dostawców może przetwarzać dane poza Europejskim Obszarem Gospodarczym (np. w USA).
+        W takim przypadku odbywa się to na podstawie standardowych klauzul umownych zatwierdzonych
+        przez Komisję Europejską.
+      </p>
+
+      <h2>4. Czcionki Google</h2>
+      <p>
+        Strona używa czcionek Google Fonts ładowanych z serwerów Google. Przy wczytywaniu strony
+        Twój adres IP może zostać przekazany do Google LLC.
+      </p>
+
+      <h2>5. Jak długo przechowuję dane</h2>
+      <ul>
+        <li>Dane z newslettera – do czasu wycofania zgody lub wypisania się.</li>
+        <li>Dane zakupowe i faktury – przez okres wymagany przepisami (m.in. 5 lat podatkowych).</li>
+      </ul>
+
+      <h2>6. Twoje prawa</h2>
+      <p>
+        Masz prawo do dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania,
+        przenoszenia, wniesienia sprzeciwu oraz wycofania zgody w dowolnym momencie – bez wpływu na
+        zgodność z prawem przetwarzania sprzed wycofania. Z newslettera wypiszesz się jednym
+        kliknięciem w stopce każdego e-maila lub pisząc na
+        <a href="mailto:hello@ainamacierzynskim.pl">hello@ainamacierzynskim.pl</a>.
+        Masz też prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, Warszawa).
+      </p>
+
+      <h2>7. Dobrowolność</h2>
+      <p>
+        Podanie danych jest dobrowolne, ale niezbędne do zapisu na newsletter lub zakupu ebooka.
+      </p>
+
+      <h2>8. Pliki cookies</h2>
+      <p>
+        Strona nie używa własnych cookies marketingowych ani analitycznych. Narzędzia, z których
+        korzystam (MailerLite, EasyCart), mogą zapisywać własne pliki cookies niezbędne do działania
+        formularzy i koszyka. Cookies możesz w każdej chwili wyłączyć lub usunąć w ustawieniach przeglądarki.
+      </p>
+
+      <h2>9. Zmiany polityki</h2>
+      <p>
+        Politykę mogę aktualizować – aktualna wersja jest zawsze dostępna na tej stronie.
+        W sprawach nieuregulowanych obowiązują przepisy RODO i prawa polskiego.
+      </p>
+
+      <p class="legal-foot">
+        Pytania? Napisz: <a href="mailto:hello@ainamacierzynskim.pl">hello@ainamacierzynskim.pl</a> ·
+        Zobacz też <a href="/regulamin">Regulamin</a>.
+      </p>
+    </div>
+  </article>
+  <Footer />
+</Layout>
+
+<style>
+  .legal { background: var(--color-cream, #f7f4ef); padding: 80px 24px 40px; }
+  .legal-wrap { max-width: 760px; margin: 0 auto; color: var(--color-charcoal, #2b2b2b); }
+  .back { display: inline-block; margin-bottom: 28px; font-size: 14px; color: #c4704b; text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  .legal h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 600; line-height: 1.1; margin-bottom: 10px; }
+  .legal .updated { font-size: 14px; opacity: 0.55; margin-bottom: 40px; }
+  .legal h2 { font-size: 20px; font-weight: 600; margin: 36px 0 12px; }
+  .legal p { line-height: 1.7; margin-bottom: 14px; opacity: 0.85; }
+  .legal ul { margin: 0 0 14px; padding-left: 22px; }
+  .legal li { line-height: 1.7; margin-bottom: 10px; opacity: 0.85; }
+  .legal a { color: #c4704b; }
+  .legal strong { font-weight: 600; opacity: 1; }
+  .legal-foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(43,43,43,0.12); font-size: 15px; }
+</style>

@@ -15,6 +15,10 @@ const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 // Endpoint zapisu MailerLite — identyczny jak w hostowanym formularzu lead magnetu.
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/187811600159213426/subscribe';
+
+// Treść zgody pod formularzem — ta sama pod oboma (Mapa + newsletter + zgoda marketingowa + dokumenty).
+const CONSENT =
+  'Zapisując się, dostajesz Mapę (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" – 1&nbsp;lekcja + 1&nbsp;prompt tygodniowo – oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
 ---
 
 <!doctype html>
@@ -188,7 +192,7 @@ const ML_ENDPOINT =
             <button type="submit">Pobierz Mapę</button>
           </form>
           <p class="form-status" role="status" aria-live="polite" hidden></p>
-          <p class="micro">Zapisując się, dostajesz Mapę i&nbsp;mój cotygodniowy newsletter (1&nbsp;lekcja + 1&nbsp;prompt). Zero spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a></p>
+          <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Mapa już leci.</p>
             <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
@@ -239,7 +243,7 @@ const ML_ENDPOINT =
             <button type="submit">Pobierz Mapę</button>
           </form>
           <p class="form-status" role="status" aria-live="polite" hidden></p>
-          <p class="micro">Zero spamu. Tylko konkret.</p>
+          <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Mapa już leci.</p>
             <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
