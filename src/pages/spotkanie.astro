@@ -10,10 +10,10 @@ const description =
 const canonical = 'https://ainamacierzynskim.pl/spotkanie';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// TODO(EWA/ML): po utworzeniu w MailerLite formularza dodającego do grup
-// `magnes-checklista` + `ai-na-macierzynskim-newsletter`, wstaw ID formularza w miejsce FORM_ID_CHECKLISTA.
+// Formularz MailerLite 192268160305464829 (embedded „Lead magnet - Checklista pierwsze spotkanie")
+// dodaje do grup `magnes-checklista` + `ai-na-macierzynskim-newsletter`. Konto ML 2290800.
 const ML_ENDPOINT =
-  'https://assets.mailerlite.com/jsonp/2290800/forms/FORM_ID_CHECKLISTA/subscribe';
+  'https://assets.mailerlite.com/jsonp/2290800/forms/192268160305464829/subscribe';
 
 // TODO(EWA): wklej ID piksela Meta (np. '1234567890'). Pusty = piksel się nie ładuje.
 const META_PIXEL_ID = '';
@@ -255,7 +255,7 @@ const pixelSnippet = META_PIXEL_ID
     <script is:inline>
       (function () {
         var ENDPOINT =
-          'https://assets.mailerlite.com/jsonp/2290800/forms/FORM_ID_CHECKLISTA/subscribe';
+          'https://assets.mailerlite.com/jsonp/2290800/forms/192268160305464829/subscribe';
         var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
         function setStatus(el, msg) { if (!el) return; el.textContent = msg; el.hidden = false; }
