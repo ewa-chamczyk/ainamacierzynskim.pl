@@ -1,0 +1,100 @@
+---
+// Nav.astro — globalne górne menu (sticky). Renderowane przez Layout.astro na stronach
+// „głównego świata": /, /nie-zniknelas, /gabinet-ai, /polityka-prywatnosci, /regulamin, /404.
+// Landingi standalone (/mapa, /spotkanie, /mapa-dziekuje) są poza Layout i menu NIE mają — świadomie.
+const links = [
+  { label: 'O projekcie', href: '/#o-projekcie' },
+  { label: 'Gabinet AI', href: '/gabinet-ai' },
+  { label: 'Ebook', href: '/nie-zniknelas' },
+  { label: 'Newsletter', href: '/#mapa' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige-dark/30">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+    <!-- Wordmark -->
+    <a
+      href="/"
+      class="font-display font-black text-base md:text-lg tracking-tight text-wine whitespace-nowrap hover:opacity-80 transition-opacity"
+    >
+      <span class="text-terra">AI</span> na macierzyńskim
+    </a>
+
+    <!-- Linki desktop -->
+    <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="text-wine/80 hover:text-terra transition-colors">{l.label}</a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA desktop -->
+    <a
+      href="/gabinet-ai"
+      class="hidden lg:inline-flex items-center px-5 py-2.5 bg-terra hover:bg-terra-dark text-white text-sm font-semibold rounded-lg transition-colors whitespace-nowrap"
+    >
+      Umów wizytę
+    </a>
+
+    <!-- Hamburger mobile -->
+    <button
+      id="nav-toggle"
+      class="lg:hidden text-wine p-2 -mr-2"
+      aria-label="Otwórz menu"
+      aria-expanded="false"
+      aria-controls="nav-mobile"
+    >
+      <svg id="nav-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="nav-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Panel mobile -->
+  <div id="nav-mobile" class="lg:hidden hidden border-t border-beige-dark/30 bg-cream">
+    <ul class="max-w-6xl mx-auto px-6 py-4 space-y-1">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="block py-2.5 text-wine/90 hover:text-terra font-medium transition-colors">{l.label}</a>
+        </li>
+      ))}
+      <li class="pt-3">
+        <a
+          href="/gabinet-ai"
+          class="block text-center px-5 py-3 bg-terra hover:bg-terra-dark text-white font-semibold rounded-lg transition-colors"
+        >
+          Umów wizytę
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('nav-mobile');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+
+  function setOpen(open: boolean) {
+    if (!panel) return;
+    panel.classList.toggle('hidden', !open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(panel?.classList.contains('hidden') ?? false);
+  });
+
+  // Zamknij po kliknięciu w link (mobile)
+  panel?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => setOpen(false))
+  );
+</script>

@@ -1,0 +1,256 @@
+---
+// Strona „Gabinet AI" — konsultacja 1:1 (60 min) · URL: /gabinet-ai
+// Na Layout.astro → dostaje globalne menu. Działa też jako samodzielny landing pod reklamę.
+// Rezerwacja: inline embed Cal.com (event `konsultacja-1-1-60-min`), forwardQueryParams=true (UTM-y wpadają do rezerwacji).
+//
+// UWAGA: copy poniżej to PLACEHOLDER w stylu ANM (oparty na opisie konsultacji z nurture maila #3).
+// Do podmiany, gdy Ewa prześle finalną wersję. Sekcje i embed zostają.
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+// Publiczny link Cal (fallback, gdyby widżet się nie załadował / bez JS)
+const CAL_FALLBACK = 'https://cal.com/ainamacierzynskim/konsultacja-1-1-60-min';
+const IG_DM = 'https://ig.me/m/ainamacierzynskim';
+
+const dlaKogo = [
+  'Wracasz do pracy w ciągu najbliższych tygodni i wiesz, że zespół już jedzie z AI.',
+  'Nie chcesz kursu „AI od zera dla wszystkich" – chcesz AI ustawione pod Twoją robotę.',
+  'Masz mało czasu i wolisz jedną konkretną godzinę niż dziesięć godzin tutoriali.',
+];
+
+const coWynosisz = [
+  {
+    title: 'Setup pod Twoje 3 zadania',
+    desc: 'Bierzemy Twoje trzy najczęstsze zadania – briefy, raporty, statusy – i ustawiamy AI dokładnie pod nie. Z gotowymi promptami do skopiowania.',
+  },
+  {
+    title: 'Plan pierwszego tygodnia',
+    desc: 'Wychodzisz z planem, co zrobić w pierwszym tygodniu po powrocie, żeby nie zacząć od zera i nie utonąć.',
+  },
+  {
+    title: 'Notatki po spotkaniu',
+    desc: 'Dostajesz spisane ustalenia i prompty, żebyś miała do czego wrócić – nie musisz pamiętać wszystkiego z godziny.',
+  },
+];
+
+const jakDziala = [
+  { n: '01', title: 'Rezerwujesz termin', desc: 'Wybierasz wolny slot w kalendarzu poniżej. Zajmuje minutę.' },
+  { n: '02', title: 'Piszesz, czym się zajmujesz', desc: 'Przed spotkaniem dostajesz krótki formularz – dwa–trzy zdania o Twojej pracy. Dzięki temu nie tracimy godziny na wstęp.' },
+  { n: '03', title: 'Spotykamy się 1:1', desc: 'Godzina online, tylko Ty i ja. Pracujemy na Twoich realnych zadaniach. Wychodzisz z setupem i planem.' },
+];
+---
+
+<Layout
+  title="Gabinet AI – konsultacja 1:1 z AI przed powrotem do pracy"
+  description="Godzina 1:1 z Ewą Chamczyk. Wychodzisz z setupem AI pod swoje 3 najczęstsze zadania i planem pierwszego tygodnia po powrocie z macierzyńskiego. Zarezerwuj termin."
+>
+  <!-- ============ HERO ============ -->
+  <section class="relative px-6 pt-20 pb-24 overflow-hidden">
+    <div class="blob bg-terra-soft" style="width: 460px; height: 460px; top: -120px; right: -140px;"></div>
+    <div class="blob bg-navy-light" style="width: 360px; height: 360px; bottom: -140px; left: -120px; opacity: 0.22;"></div>
+
+    <div class="max-w-3xl mx-auto relative z-10 text-center">
+      <p class="eyebrow mb-6 flex items-center justify-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Gabinet AI · konsultacja 1:1
+        <span class="block w-8 h-px bg-terra"></span>
+      </p>
+
+      <h1 class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.05] tracking-tight">
+        <span class="font-black">Godzina ze mną.</span><br />
+        <em class="font-serif italic font-semibold text-terra">Wychodzisz z setupem AI</em>
+        <span class="font-black">pod swoją pracę.</span>
+      </h1>
+
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-wine/60 mb-8">
+        60 minut · 1:1 · online
+      </p>
+
+      <p class="text-lg md:text-xl text-wine/75 leading-relaxed mb-10">
+        Bez kursu „AI od zera dla wszystkich". Siadamy nad Twoimi trzema najczęstszymi zadaniami –
+        briefy, raporty, spotkania statusowe – i ustawiamy AI dokładnie pod nie. Po godzinie masz
+        gotowy setup i plan pierwszego tygodnia po powrocie.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#rezerwacja"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
+        >
+          <span>Umów wizytę</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        <a
+          href="#jak"
+          class="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-white text-wine font-semibold rounded-xl border-2 border-wine/15 hover:border-wine/40 transition-all"
+        >
+          Jak to działa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DLA KOGO ============ -->
+  <section class="relative px-6 py-20 bg-beige/30 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="mb-12 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Dla kogo
+        </p>
+        <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight">
+          To jest dla Ciebie, jeśli…
+        </h2>
+      </div>
+      <ul class="space-y-4">
+        {dlaKogo.map((item) => (
+          <li class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30 card-lift">
+            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <p class="text-wine/80 leading-relaxed">{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CO WYNOSISZ ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Co wynosisz z tej godziny
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">
+          Konkret, nie teoria.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {coWynosisz.map((el) => (
+          <article class="bg-white rounded-2xl p-7 border border-beige-dark/30 card-lift">
+            <div class="w-12 h-12 rounded-xl bg-terra/15 flex items-center justify-center mb-5">
+              <span class="w-2.5 h-2.5 rounded-full bg-terra"></span>
+            </div>
+            <h3 class="text-lg font-semibold text-wine mb-2">{el.title}</h3>
+            <p class="text-wine/70 leading-relaxed text-sm">{el.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JAK TO DZIAŁA ============ -->
+  <section id="jak" class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 420px; height: 420px; top: -160px; right: -80px; opacity: 0.28;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3" style="color: var(--color-terra-light);">
+          <span class="block w-8 h-px bg-terra-light"></span>
+          Jak to działa
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+          Trzy kroki, zero komplikacji.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {jakDziala.map((step) => (
+          <div>
+            <p class="font-serif italic text-5xl text-terra-light/70 mb-4">{step.n}</p>
+            <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
+            <p class="text-cream/70 leading-relaxed text-sm">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KTO PROWADZI ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-4">
+          <div class="relative max-w-xs mx-auto md:mx-0">
+            <div class="absolute -inset-2 bg-terra/15 rounded-3xl rotate-2"></div>
+            <img
+              src="/images/ewa-grz-8225-web.jpg"
+              alt="Ewa Chamczyk"
+              class="relative w-full aspect-[4/5] object-cover rounded-2xl shadow-xl"
+            />
+          </div>
+        </div>
+        <div class="md:col-span-8">
+          <p class="eyebrow mb-4 flex items-center gap-3">
+            <span class="block w-8 h-px bg-terra"></span>
+            Kto prowadzi
+          </p>
+          <h2 class="text-2xl md:text-3xl font-semibold text-wine mb-5 leading-tight">
+            Ewa Chamczyk
+          </h2>
+          <p class="text-wine/80 leading-relaxed mb-4">
+            Mama, doktor nauk o kulturze i sztuce, Founder &amp; CEO AI&nbsp;Tact. Była VP of Product
+            w&nbsp;CampusAI. Trzy lata pracy z&nbsp;AI – zanim stało się modne. Wiem, jak wygląda powrót
+            do pracy, gdy świat technologii przyspieszył beze mnie, bo sama przez to przeszłam.
+          </p>
+          <p class="text-wine/80 leading-relaxed">
+            Nie uczę „AI dla wszystkich". Uczę mamy menedżerki ogarniać AI pod ich konkretną robotę –
+            po ludzku, w&nbsp;Twoim tempie.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REZERWACJA (Cal.com inline) ============ -->
+  <section id="rezerwacja" class="relative px-6 py-24 bg-beige/30 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="mb-10 text-center max-w-2xl mx-auto">
+        <p class="eyebrow mb-4 flex items-center justify-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Rezerwacja
+          <span class="block w-8 h-px bg-terra"></span>
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight mb-4">
+          Wybierz termin
+        </h2>
+        <p class="text-wine/70 leading-relaxed">
+          Wolne terminy widać w kalendarzu poniżej. Nie ma pasującego?
+          <a href={IG_DM} target="_blank" rel="noopener" class="text-terra font-semibold hover:text-terra-dark underline underline-offset-2">Napisz do mnie</a>.
+        </p>
+      </div>
+
+      <!-- Cal inline embed -->
+      <div class="bg-white rounded-2xl border border-beige-dark/30 shadow-lg p-2 md:p-4">
+        <div style="width:100%;min-height:640px" id="my-cal-inline-konsultacja-1-1-60-min"></div>
+      </div>
+
+      <p class="text-center text-sm text-wine/50 mt-5">
+        Kalendarz się nie ładuje?
+        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Otwórz rezerwację w nowym oknie</a>.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<!-- Cal.com inline embed – kod dostarczony przez Ewę. is:inline = Astro nie bundluje, skrypt wykonuje się w przeglądarce. -->
+<script is:inline>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "konsultacja-1-1-60-min", {origin:"https://app.cal.com"});
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+
+  Cal.ns["konsultacja-1-1-60-min"]("inline", {
+    elementOrSelector:"#my-cal-inline-konsultacja-1-1-60-min",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+    calLink: "ainamacierzynskim/konsultacja-1-1-60-min",
+  });
+
+  Cal.ns["konsultacja-1-1-60-min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#4A1721"},"dark":{"cal-brand":"#F2E9DD"}},"hideEventTypeDetails":false,"layout":"month_view"});
+</script>

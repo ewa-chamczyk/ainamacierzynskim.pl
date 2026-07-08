@@ -1,13 +1,15 @@
 ---
 import '../styles/global.css';
+import Nav from '../components/Nav.astro';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  showNav?: boolean;
 }
 
-const { title, description, ogImage = '/images/og-home.jpg' } = Astro.props;
+const { title, description, ogImage = '/images/og-home.jpg', showNav = true } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 ---
@@ -59,6 +61,7 @@ const ogImageURL = new URL(ogImage, Astro.site);
     </script>
   </head>
   <body class="bg-cream text-charcoal">
+    {showNav && <Nav />}
     <main>
       <slot />
     </main>
