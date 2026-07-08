@@ -109,7 +109,7 @@ const faq = [
       <div class="flex justify-center">
         <a
           href="#rezerwacja"
-          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
         >
           <span>Umów wizytę</span>
           <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -277,21 +277,24 @@ const faq = [
   </section>
 
   <!-- ============ REZERWACJA (Cal.com inline) ============ -->
-  <section id="rezerwacja" class="relative px-6 py-24 bg-beige/30 overflow-hidden">
+  <section id="rezerwacja" class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 420px; height: 420px; bottom: -160px; right: -100px; opacity: 0.25;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
     <div class="max-w-4xl mx-auto relative z-10">
       <div class="mb-8 text-center max-w-2xl mx-auto">
-        <p class="eyebrow mb-4 flex items-center justify-center gap-3">
-          <span class="block w-8 h-px bg-terra"></span>
+        <p class="eyebrow mb-4 flex items-center justify-center gap-3" style="color: var(--color-terra-light);">
+          <span class="block w-8 h-px bg-terra-light"></span>
           Rezerwacja
-          <span class="block w-8 h-px bg-terra"></span>
+          <span class="block w-8 h-px bg-terra-light"></span>
         </p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight mb-5">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-cream leading-tight mb-5">
           Jak zarezerwować godzinę
         </h2>
-        <p class="text-2xl font-semibold text-terra mb-4">
-          497 zł <span class="text-wine/60 text-lg font-normal">· godzina online (Zoom)</span>
+        <p class="text-2xl font-semibold text-terra-light mb-4">
+          497 zł <span class="text-cream/60 text-lg font-normal">· godzina online (Zoom)</span>
         </p>
-        <p class="text-wine/70 leading-relaxed">
+        <p class="text-cream/75 leading-relaxed">
           Gabinet otwieram w&nbsp;kameralnych oknach – kilka miejsc w&nbsp;miesiącu, żeby każda dostała
           pełne przygotowanie. Wybierz termin poniżej. Przed sesją dostajesz krótką ankietę – rola, trzy
           zadania, narzędzia Twojej firmy – żebym przygotowała spotkanie pod&nbsp;Ciebie.
@@ -299,15 +302,15 @@ const faq = [
       </div>
 
       <!-- Cal inline embed -->
-      <div class="bg-white rounded-2xl border border-beige-dark/30 shadow-lg p-2 md:p-4">
+      <div class="bg-white rounded-2xl border border-beige-dark/30 shadow-2xl p-2 md:p-4">
         <div style="width:100%;min-height:640px" id="my-cal-inline-konsultacja-1-1-60-min"></div>
       </div>
 
-      <p class="text-center text-sm text-wine/50 mt-5">
+      <p class="text-center text-sm text-cream/55 mt-5">
         Kalendarz się nie&nbsp;ładuje?
-        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Otwórz rezerwację w&nbsp;nowym oknie</a>.
+        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-cream/80 hover:text-terra-light underline underline-offset-2">Otwórz rezerwację w&nbsp;nowym oknie</a>.
         Masz pytanie przed rezerwacją?
-        <a href={IG_DM} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Napisz do&nbsp;mnie</a>.
+        <a href={IG_DM} target="_blank" rel="noopener" class="text-cream/80 hover:text-terra-light underline underline-offset-2">Napisz do&nbsp;mnie</a>.
       </p>
     </div>
   </section>
@@ -352,7 +355,7 @@ const faq = [
       </p>
       <a
         href="#rezerwacja"
-        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 group"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 group"
       >
         <span>Umów wizytę</span>
         <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">

@@ -11,11 +11,12 @@
   --color-wine-dark: #381018;     /* hover */
   --color-wine-soft: #6B2330;     /* light variant */
 
-  /* Akcent F1 (terakota) – wersja mocniejsza (newsletter / logo ANM) */
-  --color-terra: #D97339;
-  --color-terra-dark: #B85B27;
-  --color-terra-light: #E29260;
-  --color-terra-soft: #EFB594;
+  /* Akcent marki ANM – brzoskwinia #EEA679 (design system: krem + brzoskwinia, filary zarzucone).
+     Alias „terra" zostaje dla zgodności wstecznej komponentów; przyciski mają ciemny (winny) tekst. */
+  --color-terra: #EEA679;
+  --color-terra-dark: #D88458;
+  --color-terra-light: #F2BE9C;
+  --color-terra-soft: #F7D8C1;
 
   /* ── F2 Praktyka z AI (butelkowa zieleń) ── */
   --color-forest: #1F3A2E;
