@@ -1,48 +1,88 @@
 ---
-// Strona „Gabinet AI" — konsultacja 1:1 (60 min) · URL: /gabinet-ai
-// Na Layout.astro → dostaje globalne menu. Działa też jako samodzielny landing pod reklamę.
-// Rezerwacja: inline embed Cal.com (event `konsultacja-1-1-60-min`), forwardQueryParams=true (UTM-y wpadają do rezerwacji).
-//
-// UWAGA: copy poniżej to PLACEHOLDER w stylu ANM (oparty na opisie konsultacji z nurture maila #3).
-// Do podmiany, gdy Ewa prześle finalną wersję. Sekcje i embed zostają.
+// Strona „Gabinet AI" — konsultacja 1:1 (497 zł, godzina online) · URL: /gabinet-ai
+// Na Layout.astro → globalne menu, paleta wino (decyzja Ewy 08.07: zostawiamy menu + wino).
+// Copy: 05_Produkty/Gabinet AI/gabinet-ai-landing-copy.md (v1.0). CTA adaptowane na rezerwację Cal.com
+// (Ewa wybrała kalendarz na stronie zamiast lejka DM POWRÓT). Cal event `konsultacja-1-1-60-min`.
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 
-// Publiczny link Cal (fallback, gdyby widżet się nie załadował / bez JS)
 const CAL_FALLBACK = 'https://cal.com/ainamacierzynskim/konsultacja-1-1-60-min';
 const IG_DM = 'https://ig.me/m/ainamacierzynskim';
 
+const znaszTo = [
+  'Wracasz za kilka tygodni i wiesz, że na pierwszym spotkaniu ktoś rzuci nazwę narzędzia, a Ty kiwniesz głową, jakbyś wiedziała, o co chodzi.',
+  'Próbowałaś ChatGPT między drzemkami, z dziesięcioma otwartymi zakładkami – i odłożyłaś to z myślą, że wszyscy pojechali dalej bez Ciebie.',
+  'Masz dość szkoleń, które pokazują funkcje, a we wtorek i tak nie wiesz, jak użyć tego na swoim raporcie.',
+];
+
+const jakWyglada = [
+  {
+    n: '01',
+    title: 'Zanim się spotkamy',
+    desc: 'Wypełniasz krótką ankietę – rola, trzy zadania, które zabierają Ci najwięcej czasu, narzędzia Twojej firmy. Siadam z tym wcześniej i przygotowuję sesję pod Ciebie. Wchodzisz na spotkanie, na którym nie tłumaczę „czym jest prompt" – od pierwszej minuty jesteśmy przy Twojej pracy.',
+  },
+  {
+    n: '02',
+    title: 'Godzina 1:1',
+    desc: 'Pracujemy na Twoim ekranie i na Twoich zadaniach – to Ty wszystko robisz, ja prowadzę i podpowiadam. Po godzinie w historii Twojego czatu zostają gotowe, działające rozmowy z AI, których po prostu używasz dalej.',
+  },
+  {
+    n: '03',
+    title: 'Twoja ściąga i biblioteka',
+    desc: 'Twój setup, Twoje prompty i Skillsy, zasady bezpieczeństwa i plan dalszego rozwoju. Otrzymujesz ode mnie dokument dostosowany do Twoich potrzeb, żebyś miała wszystko w jednym miejscu.',
+  },
+  {
+    n: '04',
+    title: 'Tydzień później',
+    desc: 'Wracam do Ciebie z jednym pytaniem: co ruszyło, a co nie. Jeśli któryś prompt nie dowozi – poprawiamy. Żadnego „mam nadzieję, że się podobało". Chcę wiedzieć, że tego używasz.',
+  },
+];
+
+const coMasz = [
+  { title: 'Setup gotowy do pracy', desc: 'Jedno narzędzie dobrane i ustawione pod Twoją rolę, nie pięć naraz.' },
+  { title: 'Twoje prompty i Skillsy', desc: 'Działające na Twoich zadaniach, zebrane w jednym dokumencie.' },
+  { title: 'Jasne zasady bezpieczeństwa', desc: 'Co wolno wrzucić do AI w firmie, a czego nie, bez ryzyka wobec NDA.' },
+  { title: 'Plan dalszego rozwoju', desc: 'Od czego zacząć w pierwszym tygodniu, po jednym zadaniu dziennie.' },
+  { title: 'Tydzień na dopięcie', desc: 'Kontakt po sesji, żeby poprawić to, co nie ruszyło.' },
+];
+
 const dlaKogo = [
-  'Wracasz do pracy w ciągu najbliższych tygodni i wiesz, że zespół już jedzie z AI.',
-  'Nie chcesz kursu „AI od zera dla wszystkich" – chcesz AI ustawione pod Twoją robotę.',
-  'Masz mało czasu i wolisz jedną konkretną godzinę niż dziesięć godzin tutoriali.',
+  'wracasz do pracy po macierzyńskim i czujesz, że świat AI Cię wyprzedził,',
+  'masz dość ogólnych szkoleń i chcesz to ustawione pod swoją rolę, nie „dla wszystkich",',
+  'wolisz godzinę z kimś, kto wie, niż dziesięć wieczorów z dwudziestoma zakładkami.',
 ];
 
-const coWynosisz = [
+const faq = [
   {
-    title: 'Setup pod Twoje 3 zadania',
-    desc: 'Bierzemy Twoje trzy najczęstsze zadania – briefy, raporty, statusy – i ustawiamy AI dokładnie pod nie. Z gotowymi promptami do skopiowania.',
+    q: 'Skąd mam wiedzieć, że rozumiesz moją rolę?',
+    a: 'Byłam menedżerką – VP of Product – i prowadziłam zespoły. Wiem, jak wygląda raport dla zarządu, follow-up po spotkaniu i tydzień, w którym wszystko na raz. Pracujemy na Twoich zadaniach, nie na przykładach z internetu.',
   },
   {
-    title: 'Plan pierwszego tygodnia',
-    desc: 'Wychodzisz z planem, co zrobić w pierwszym tygodniu po powrocie, żeby nie zacząć od zera i nie utonąć.',
+    q: '497 zł – a jeśli nie wyjdę z niczym konkretnym?',
+    a: 'Wychodzisz z gotowym setupem, swoimi promptami i planem – wszystko powstaje na Twoich realnych zadaniach podczas sesji. Do doby dostajesz to spisane w jednym dokumencie, a po tygodniu wracam sprawdzić, czy działa.',
   },
   {
-    title: 'Notatki po spotkaniu',
-    desc: 'Dostajesz spisane ustalenia i prompty, żebyś miała do czego wrócić – nie musisz pamiętać wszystkiego z godziny.',
+    q: 'Nie znam się na AI. Czy dam radę?',
+    a: 'Nie zaczynamy od zera i nie musisz nic umieć wcześniej. Nie tłumaczę teorii – pokazuję, jak użyć AI do tego, co i tak robisz co tydzień. Spokojnie, po ludzku, bez wstydu.',
   },
-];
-
-const jakDziala = [
-  { n: '01', title: 'Rezerwujesz termin', desc: 'Wybierasz wolny slot w kalendarzu poniżej. Zajmuje minutę.' },
-  { n: '02', title: 'Piszesz, czym się zajmujesz', desc: 'Przed spotkaniem dostajesz krótki formularz – dwa–trzy zdania o Twojej pracy. Dzięki temu nie tracimy godziny na wstęp.' },
-  { n: '03', title: 'Spotykamy się 1:1', desc: 'Godzina online, tylko Ty i ja. Pracujemy na Twoich realnych zadaniach. Wychodzisz z setupem i planem.' },
+  {
+    q: 'Mam małe dziecko i mało czasu.',
+    a: 'Dlatego to jedna godzina online, do której przygotowuję się za Ciebie. Plan po sesji rozkładam na krótkie kroki – jedno zadanie dziennie, po 15 minut, na prawdziwej pracy.',
+  },
+  {
+    q: 'Czy moja firma pozwala na AI? Co z danymi i NDA?',
+    a: 'Ustalamy zasady pod Twoją firmę: co możesz wkleić, co dopiero po anonimizacji, a czego nigdy. Wychodzisz z jasną listą, nie z wykładem o RODO.',
+  },
+  {
+    q: 'Co dzieje się po godzinie?',
+    a: 'Dostajesz ściągę do doby i kontakt po tygodniu. A jeśli będziesz chciała iść dalej – jesienią otwieram kurs, który przechodzi przez wszystkie obszary. Bez nacisku.',
+  },
 ];
 ---
 
 <Layout
-  title="Gabinet AI – konsultacja 1:1 z AI przed powrotem do pracy"
-  description="Godzina 1:1 z Ewą Chamczyk. Wychodzisz z setupem AI pod swoje 3 najczęstsze zadania i planem pierwszego tygodnia po powrocie z macierzyńskiego. Zarezerwuj termin."
+  title="Gabinet AI – konsultacja 1:1 z AI dla menedżerki po macierzyńskim | Ewa Chamczyk"
+  description="Prywatna godzina 1:1, po której AI jest ustawione pod Twoje zadania. Ze ściągą, biblioteką promptów i tygodniem na dopięcie. 497 zł."
 >
   <!-- ============ HERO ============ -->
   <section class="relative px-6 pt-20 pb-24 overflow-hidden">
@@ -56,23 +96,17 @@ const jakDziala = [
         <span class="block w-8 h-px bg-terra"></span>
       </p>
 
-      <h1 class="text-4xl md:text-5xl lg:text-6xl mb-6 leading-[1.05] tracking-tight">
-        <span class="font-black">Godzina ze mną.</span><br />
-        <em class="font-serif italic font-semibold text-terra">Wychodzisz z setupem AI</em>
-        <span class="font-black">pod swoją pracę.</span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl mb-7 leading-[1.05] tracking-tight">
+        <span class="font-black">Godzina jeden na&nbsp;jeden,<br />po&nbsp;której</span>
+        <em class="font-serif italic font-semibold text-terra"> AI działa pod&nbsp;Twoje zadania</em>.
       </h1>
 
-      <p class="font-mono text-xs uppercase tracking-[0.18em] text-wine/60 mb-8">
-        60 minut · 1:1 · online
+      <p class="text-lg md:text-xl text-wine/75 leading-relaxed mb-8 max-w-2xl mx-auto">
+        Prywatna konsultacja dla menedżerki wracającej po&nbsp;macierzyńskim. Pracujemy na&nbsp;Twoich
+        zadaniach – wychodzisz ze&nbsp;ściągą, biblioteką promptów i&nbsp;tygodniem na&nbsp;dopięcie.
       </p>
 
-      <p class="text-lg md:text-xl text-wine/75 leading-relaxed mb-10">
-        Bez kursu „AI od zera dla wszystkich". Siadamy nad Twoimi trzema najczęstszymi zadaniami –
-        briefy, raporty, spotkania statusowe – i ustawiamy AI dokładnie pod nie. Po godzinie masz
-        gotowy setup i plan pierwszego tygodnia po powrocie.
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="flex justify-center">
         <a
           href="#rezerwacja"
           class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
@@ -82,95 +116,120 @@ const jakDziala = [
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
-        <a
-          href="#jak"
-          class="inline-flex items-center justify-center px-8 py-4 bg-transparent hover:bg-white text-wine font-semibold rounded-xl border-2 border-wine/15 hover:border-wine/40 transition-all"
-        >
-          Jak to działa
-        </a>
       </div>
+
+      <p class="font-mono text-xs uppercase tracking-[0.16em] text-wine/55 mt-6">
+        Godzina online · 497 zł · kilka miejsc w&nbsp;miesiącu
+      </p>
     </div>
   </section>
 
-  <!-- ============ DLA KOGO ============ -->
+  <!-- ============ ZNASZ TO? ============ -->
   <section class="relative px-6 py-20 bg-beige/30 overflow-hidden">
     <div class="max-w-4xl mx-auto relative z-10">
-      <div class="mb-12 max-w-2xl">
-        <p class="eyebrow mb-4 flex items-center gap-3">
-          <span class="block w-8 h-px bg-terra"></span>
-          Dla kogo
-        </p>
-        <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight">
-          To jest dla Ciebie, jeśli…
-        </h2>
-      </div>
+      <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight mb-10">Znasz to?</h2>
       <ul class="space-y-4">
-        {dlaKogo.map((item) => (
-          <li class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30 card-lift">
-            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
+        {znaszTo.map((item) => (
+          <li class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30">
+            <span class="w-2 h-2 rounded-full bg-terra flex-shrink-0 mt-2.5"></span>
             <p class="text-wine/80 leading-relaxed">{item}</p>
           </li>
         ))}
       </ul>
+      <p class="text-2xl md:text-3xl font-serif italic text-terra mt-10 leading-snug">
+        Gabinet AI to godzina, po&nbsp;której to się kończy.
+      </p>
     </div>
   </section>
 
-  <!-- ============ CO WYNOSISZ ============ -->
+  <!-- ============ CZYM JEST ============ -->
   <section class="relative px-6 py-24 overflow-hidden">
-    <div class="max-w-5xl mx-auto relative z-10">
-      <div class="mb-14 max-w-2xl">
-        <p class="eyebrow mb-4 flex items-center gap-3">
-          <span class="block w-8 h-px bg-terra"></span>
-          Co wynosisz z tej godziny
-        </p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">
-          Konkret, nie teoria.
-        </h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {coWynosisz.map((el) => (
-          <article class="bg-white rounded-2xl p-7 border border-beige-dark/30 card-lift">
-            <div class="w-12 h-12 rounded-xl bg-terra/15 flex items-center justify-center mb-5">
-              <span class="w-2.5 h-2.5 rounded-full bg-terra"></span>
-            </div>
-            <h3 class="text-lg font-semibold text-wine mb-2">{el.title}</h3>
-            <p class="text-wine/70 leading-relaxed text-sm">{el.desc}</p>
-          </article>
-        ))}
-      </div>
+    <div class="max-w-3xl mx-auto relative z-10">
+      <p class="eyebrow mb-5 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        Czym jest Gabinet AI
+      </p>
+      <p class="text-xl md:text-2xl text-wine/85 leading-relaxed font-light">
+        To nie webinar dla stu osób ani nagranie do&nbsp;odhaczenia – umawiasz się ze&nbsp;mną jeden
+        na&nbsp;jeden. Przez godzinę pracujemy tylko na&nbsp;Twoich zadaniach: tym mailu, który piszesz
+        40&nbsp;minut, tym raporcie dla zarządu, tym follow-upie po&nbsp;spotkaniu, na&nbsp;który nigdy
+        nie&nbsp;ma czasu. Wychodzisz z&nbsp;AI ustawionym pod&nbsp;Twoją pracę i&nbsp;z&nbsp;kimś, kto
+        tydzień później sprawdzi, czy to działa.
+      </p>
     </div>
   </section>
 
-  <!-- ============ JAK TO DZIAŁA ============ -->
-  <section id="jak" class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+  <!-- ============ JAK TO WYGLĄDA ============ -->
+  <section class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
     <div class="blob bg-terra" style="width: 420px; height: 420px; top: -160px; right: -80px; opacity: 0.28;"></div>
     <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
 
-    <div class="max-w-4xl mx-auto relative z-10">
+    <div class="max-w-5xl mx-auto relative z-10">
       <div class="mb-14 max-w-2xl">
         <p class="eyebrow mb-4 flex items-center gap-3" style="color: var(--color-terra-light);">
           <span class="block w-8 h-px bg-terra-light"></span>
-          Jak to działa
+          Jak to wygląda
         </p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
-          Trzy kroki, zero komplikacji.
-        </h2>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">Cztery części, jedna godzina.</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {jakDziala.map((step) => (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+        {jakWyglada.map((step) => (
           <div>
-            <p class="font-serif italic text-5xl text-terra-light/70 mb-4">{step.n}</p>
+            <p class="font-serif italic text-5xl text-terra-light/70 mb-3">{step.n}</p>
             <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
-            <p class="text-cream/70 leading-relaxed text-sm">{step.desc}</p>
+            <p class="text-cream/75 leading-relaxed">{step.desc}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ============ KTO PROWADZI ============ -->
+  <!-- ============ CO MASZ PO GABINECIE ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Co masz po Gabinecie
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">Konkret, nie teoria.</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {coMasz.map((el) => (
+          <article class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30 card-lift">
+            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <h3 class="font-semibold text-wine mb-1">{el.title}</h3>
+              <p class="text-wine/70 leading-relaxed text-sm">{el.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DLA KOGO ============ -->
+  <section class="relative px-6 py-20 bg-beige/30 overflow-hidden">
+    <div class="max-w-3xl mx-auto relative z-10">
+      <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight mb-8">
+        Gabinet AI jest dla Ciebie, jeśli
+      </h2>
+      <ul class="space-y-4">
+        {dlaKogo.map((item) => (
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <p class="text-lg text-wine/80 leading-relaxed">{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ DLACZEGO JA ============ -->
   <section class="relative px-6 py-24 overflow-hidden">
     <div class="max-w-4xl mx-auto relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
@@ -187,21 +246,32 @@ const jakDziala = [
         <div class="md:col-span-8">
           <p class="eyebrow mb-4 flex items-center gap-3">
             <span class="block w-8 h-px bg-terra"></span>
-            Kto prowadzi
+            Dlaczego ja
           </p>
-          <h2 class="text-2xl md:text-3xl font-semibold text-wine mb-5 leading-tight">
-            Ewa Chamczyk
-          </h2>
-          <p class="text-wine/80 leading-relaxed mb-4">
-            Mama, doktor nauk o kulturze i sztuce, Founder &amp; CEO AI&nbsp;Tact. Była VP of Product
-            w&nbsp;CampusAI. Trzy lata pracy z&nbsp;AI – zanim stało się modne. Wiem, jak wygląda powrót
-            do pracy, gdy świat technologii przyspieszył beze mnie, bo sama przez to przeszłam.
-          </p>
-          <p class="text-wine/80 leading-relaxed">
-            Nie uczę „AI dla wszystkich". Uczę mamy menedżerki ogarniać AI pod ich konkretną robotę –
-            po ludzku, w&nbsp;Twoim tempie.
+          <h2 class="text-2xl md:text-3xl font-semibold text-wine mb-5 leading-tight">Ewa Chamczyk</h2>
+          <p class="text-wine/80 leading-relaxed text-lg">
+            Byłam menedżerką – VP of Product, Director of Community Programs i&nbsp;kierowniczką działu.
+            Dziś prowadzę własne firmy i&nbsp;tworzę „AI na&nbsp;macierzyńskim". Sama jestem
+            na&nbsp;macierzyńskim, więc znam tę pracę i&nbsp;ten moment od&nbsp;środka: i&nbsp;to, jak
+            wygląda raport dla zarządu po&nbsp;godzinach, i&nbsp;to, jak nauczyć się czegokolwiek między
+            karmieniem a&nbsp;praniem.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WIĘCEJ NIŻ KURS ============ -->
+  <section class="relative px-6 py-20 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="bg-wine text-cream rounded-3xl px-8 py-12 md:px-14 md:py-14 relative overflow-hidden">
+        <div class="blob bg-terra" style="width: 300px; height: 300px; top: -120px; right: -80px; opacity: 0.3;"></div>
+        <p class="eyebrow mb-4" style="color: var(--color-terra-light);">Więcej niż kurs</p>
+        <p class="text-xl md:text-2xl leading-relaxed font-light relative z-10">
+          Na szkoleniu poznajesz narzędzia. W&nbsp;Gabinecie wychodzisz z&nbsp;AI już ustawionym
+          pod&nbsp;swoje zadania – z&nbsp;tygodniem na&nbsp;dopięcie, żeby weszło w&nbsp;nawyk.
+          <em class="font-serif italic text-terra-light">Godzina, która oszczędza Ci miesiące błądzenia w&nbsp;pojedynkę.</em>
+        </p>
       </div>
     </div>
   </section>
@@ -209,18 +279,22 @@ const jakDziala = [
   <!-- ============ REZERWACJA (Cal.com inline) ============ -->
   <section id="rezerwacja" class="relative px-6 py-24 bg-beige/30 overflow-hidden">
     <div class="max-w-4xl mx-auto relative z-10">
-      <div class="mb-10 text-center max-w-2xl mx-auto">
+      <div class="mb-8 text-center max-w-2xl mx-auto">
         <p class="eyebrow mb-4 flex items-center justify-center gap-3">
           <span class="block w-8 h-px bg-terra"></span>
           Rezerwacja
           <span class="block w-8 h-px bg-terra"></span>
         </p>
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight mb-4">
-          Wybierz termin
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight mb-5">
+          Jak zarezerwować godzinę
         </h2>
+        <p class="text-2xl font-semibold text-terra mb-4">
+          497 zł <span class="text-wine/60 text-lg font-normal">· godzina online (Zoom)</span>
+        </p>
         <p class="text-wine/70 leading-relaxed">
-          Wolne terminy widać w kalendarzu poniżej. Nie ma pasującego?
-          <a href={IG_DM} target="_blank" rel="noopener" class="text-terra font-semibold hover:text-terra-dark underline underline-offset-2">Napisz do mnie</a>.
+          Gabinet otwieram w&nbsp;kameralnych oknach – kilka miejsc w&nbsp;miesiącu, żeby każda dostała
+          pełne przygotowanie. Wybierz termin poniżej. Przed sesją dostajesz krótką ankietę – rola, trzy
+          zadania, narzędzia Twojej firmy – żebym przygotowała spotkanie pod&nbsp;Ciebie.
         </p>
       </div>
 
@@ -230,9 +304,61 @@ const jakDziala = [
       </div>
 
       <p class="text-center text-sm text-wine/50 mt-5">
-        Kalendarz się nie ładuje?
-        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Otwórz rezerwację w nowym oknie</a>.
+        Kalendarz się nie&nbsp;ładuje?
+        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Otwórz rezerwację w&nbsp;nowym oknie</a>.
+        Masz pytanie przed rezerwacją?
+        <a href={IG_DM} target="_blank" rel="noopener" class="text-wine/70 hover:text-terra underline underline-offset-2">Napisz do&nbsp;mnie</a>.
       </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-3xl mx-auto relative z-10">
+      <div class="mb-12">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          Pytania i obawy
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">Zanim się zapiszesz</h2>
+      </div>
+      <div class="space-y-4">
+        {faq.map((item) => (
+          <details class="group bg-white rounded-2xl border border-beige-dark/30 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 font-semibold text-wine">
+              <span>{item.q}</span>
+              <svg class="w-5 h-5 text-terra flex-shrink-0 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="px-6 pb-6 text-wine/75 leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOMKNIĘCIE ============ -->
+  <section class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 460px; height: 460px; top: -160px; left: -120px; opacity: 0.28;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <div class="max-w-3xl mx-auto relative z-10 text-center">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6">
+        Godzina teraz zamiast <em class="font-serif italic text-terra-light">miesięcy nadrabiania</em> później.
+      </h2>
+      <p class="text-cream/75 leading-relaxed text-lg mb-9 max-w-xl mx-auto">
+        Kilka miejsc w&nbsp;miesiącu. Jeśli czujesz, że to dla Ciebie – wybierz termin i&nbsp;zaczynamy.
+      </p>
+      <a
+        href="#rezerwacja"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-white font-semibold rounded-xl transition-all hover:scale-105 group"
+      >
+        <span>Umów wizytę</span>
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
     </div>
   </section>
 
