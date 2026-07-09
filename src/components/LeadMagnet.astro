@@ -65,15 +65,26 @@ const dostajesz = [
       <!-- Prawa kolumna – Mapa + CTA -->
       <div class="lg:col-span-6 fade-up delay-200">
         <div class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-beige-dark/30">
-          <!-- Cover Mapy -->
-          <div class="mb-6 flex justify-center">
-            <div class="relative">
-              <div class="absolute -inset-2 bg-gradient-to-br from-terra/30 to-navy/20 rounded-2xl rotate-2"></div>
+          <!-- Mapa w tablecie + podgląd newslettera obok -->
+          <div class="mb-7 flex items-center justify-center gap-3">
+            <!-- Mapa 5 obszarów w mock-upie tabletu -->
+            <div class="w-[48%] max-w-[210px] shrink-0 bg-white rounded-[1.5rem] p-2.5 shadow-xl border border-beige-dark/40 -rotate-2">
+              <div class="rounded-[1.1rem] overflow-hidden bg-cream ring-1 ring-black/5">
+                <img
+                  src="/images/mapa-5-obszarow-cover.png"
+                  alt="Mapa 5 obszarów AI – PDF"
+                  class="w-full block"
+                  onerror="this.style.display='none'"
+                />
+              </div>
+            </div>
+            <!-- Podgląd newslettera obok -->
+            <div class="w-[45%] max-w-[190px] shrink-0 rounded-xl overflow-hidden shadow-lg border border-beige-dark/30 rotate-2">
               <img
-                src="/images/mapa-5-obszarow-cover.png"
-                alt="Mapa 5 obszarów AI – PDF cover"
-                class="relative w-32 md:w-40 rounded-xl shadow-xl"
-                onerror="this.style.display='none'"
+                src="/images/newsletter-preview.png"
+                alt="Podgląd newslettera „AI na macierzyńskim""
+                class="w-full block"
+                loading="lazy"
               />
             </div>
           </div>
@@ -97,26 +108,6 @@ const dostajesz = [
             Po zapisie dostajesz mail z linkiem do PDF (1,5 MB). Wypiszesz się jednym klikiem.
           </p>
         </div>
-      </div>
-    </div>
-
-    <!-- Podgląd newslettera -->
-    <div class="mt-16 text-center fade-up">
-      <p class="text-sm uppercase tracking-widest text-terra font-semibold mb-6 inline-flex items-center gap-3">
-        <span class="block w-8 h-px bg-terra"></span>
-        Tak wygląda jedno wydanie
-        <span class="block w-8 h-px bg-terra"></span>
-      </p>
-      <div class="max-w-sm mx-auto">
-        <div class="rounded-2xl overflow-hidden shadow-2xl border border-beige-dark/40">
-          <img
-            src="/images/newsletter-preview.png"
-            alt="Podgląd newslettera „AI na macierzyńskim" – wydanie #1"
-            class="w-full block"
-            loading="lazy"
-          />
-        </div>
-        <p class="text-xs text-charcoal/50 mt-4">Wydanie #1 · jedna lekcja, jeden prompt, jeden news</p>
       </div>
     </div>
   </div>
