@@ -180,7 +180,7 @@
   .delay-400 { transition-delay: 400ms; }
   .delay-500 { transition-delay: 500ms; }
 
-  /* Dekoracyjne blob'y w tle */
+  /* Dekoracyjne blob'y w tle – z delikatnym dryfem, żeby tło „żyło" */
   .blob {
     position: absolute;
     border-radius: 50%;
@@ -188,6 +188,37 @@
     opacity: 0.4;
     z-index: 0;
     pointer-events: none;
+    animation: blobDrift 20s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  .blob:nth-of-type(2n) {
+    animation-duration: 28s;
+    animation-direction: alternate-reverse;
+  }
+  .blob:nth-of-type(3n) {
+    animation-duration: 24s;
+    animation-delay: -6s;
+  }
+  @keyframes blobDrift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(28px, -22px) scale(1.09); }
+  }
+
+  /* Delikatne unoszenie – opcjonalny akcent dla wizualnych elementów */
+  @keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+  }
+  .float-soft { animation: floatSoft 6.5s ease-in-out infinite; }
+
+  /* Mniej ruchu dla osób, które tak wolą (dostępność) */
+  @media (prefers-reduced-motion: reduce) {
+    .blob,
+    .blob:nth-of-type(2n),
+    .blob:nth-of-type(3n),
+    .float-soft {
+      animation: none !important;
+    }
   }
 
   /* Hover lift dla kart — cień w tonacji wina */
