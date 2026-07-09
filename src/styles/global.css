@@ -201,7 +201,7 @@
   }
   @keyframes blobDrift {
     from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(28px, -22px) scale(1.09); }
+    to   { transform: translate(42px, -32px) scale(1.14); }
   }
 
   /* Delikatne unoszenie – opcjonalny akcent dla wizualnych elementów */
