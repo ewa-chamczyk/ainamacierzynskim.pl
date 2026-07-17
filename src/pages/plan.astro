@@ -1,0 +1,355 @@
+---
+// Landing page lead magnetu „Plan dnia z Claude" — URL: /plan
+// Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
+// JEDNO zadanie: zapis (imię + e-mail) po prompt „Plan dnia z Claude". Zero linków wychodzących, zero menu.
+// Formularz spięty z MailerLite (konto 2290800) → grupa `freebie-plan` → automation dostarczająca PDF.
+// Strona standalone (własny <head>), świadomie poza Layout.astro (inny świat marki).
+
+const title = 'Plan dnia z Claude – AI na macierzyńskim';
+const description =
+  'Gotowy prompt, który zamienia „zaplanuj mi dzień" w realny plan – pod Twój czas, priorytety i drzemki maluszka. Pobierz za darmo.';
+const canonical = 'https://ainamacierzynskim.pl/plan';
+const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
+
+// Endpoint zapisu MailerLite — formularz dedykowany dla freebie „Plan dnia z Claude"
+// (grupa `freebie-plan`). ID formularza uzupełniane po utworzeniu formularza w panelu ML.
+const ML_ENDPOINT =
+  'https://assets.mailerlite.com/jsonp/2290800/forms/193234786236499325/subscribe';
+
+// Treść zgody pod formularzem — spójna z /mapa (freebie + newsletter + zgoda marketingowa + dokumenty).
+const CONSENT =
+  'Zapisując się, dostajesz prompt „Plan dnia z&nbsp;Claude" (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" – 1&nbsp;lekcja + 1&nbsp;prompt tygodniowo – oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="AI na macierzyńskim" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+
+    <style is:global>
+      :root {
+        --wino: #4a1721;
+        --wino-2: #3c121b;
+        --terakota: #D97339;
+        --krem: #f2e9dd;
+        --krem-dim: rgba(242, 233, 221, 0.72);
+        --error: #f3b3a0;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      /* atrybut hidden musi wygrać z .form{display:flex} i innymi regułami display */
+      [hidden] { display: none !important; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--wino);
+        color: var(--krem);
+        font-family: 'Archivo', sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+      .label {
+        font-family: 'IBM Plex Mono', monospace; font-weight: 500;
+        font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+        color: var(--terakota);
+      }
+      .ghost {
+        position: absolute; right: -4vw; bottom: -6vh;
+        font-family: 'Fraunces', serif; font-style: italic; font-weight: 600;
+        font-size: 62vw; line-height: 0.7; color: var(--krem); opacity: 0.06;
+        pointer-events: none; z-index: 1; user-select: none;
+      }
+
+      /* HERO */
+      .hero { padding: 64px 0 56px; position: relative; }
+      h1 {
+        font-family: 'Archivo', sans-serif; font-weight: 900;
+        font-size: clamp(40px, 8vw, 68px); line-height: 1.02; letter-spacing: -0.03em;
+        margin: 18px 0 18px;
+      }
+      h1 em { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; color: var(--terakota); }
+      .sub { font-size: clamp(17px, 2.6vw, 20px); color: var(--krem-dim); max-width: 540px; }
+
+      /* FORM */
+      .form { margin: 30px 0 12px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .form .field {
+        flex: 1 1 180px; min-width: 0;
+        background: var(--krem); color: var(--wino);
+        border: 2px solid transparent; border-radius: 10px; padding: 16px 18px;
+        font-family: 'Archivo', sans-serif; font-size: 16px; font-weight: 500;
+      }
+      .form .field::placeholder { color: rgba(74, 23, 33, 0.55); }
+      .form .field:focus-visible { outline: none; border-color: var(--terakota); }
+      .form button {
+        flex: 0 0 auto;
+        background: var(--terakota); color: var(--wino-2);
+        border: none; border-radius: 10px; padding: 16px 26px;
+        font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 16px;
+        cursor: pointer; transition: transform 0.12s ease, opacity 0.12s ease;
+      }
+      .form button:hover { transform: translateY(-2px); }
+      .form button:disabled { opacity: 0.65; cursor: progress; transform: none; }
+      /* honeypot — niewidoczny dla ludzi, łapie boty */
+      .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+      .micro { font-size: 13.5px; color: var(--krem-dim); max-width: 520px; }
+      .micro a { color: var(--terakota); }
+      .form-status { margin: 4px 0 12px; font-size: 14.5px; font-weight: 600; color: var(--error); max-width: 520px; }
+
+      /* THANK YOU */
+      .thankyou {
+        margin: 30px 0 12px; max-width: 540px;
+        border: 1px solid rgba(242, 233, 221, 0.18); border-radius: 14px;
+        padding: 22px 24px; background: rgba(242, 233, 221, 0.04);
+      }
+      .thankyou:focus-visible { outline: 2px solid var(--terakota); outline-offset: 3px; }
+      .thankyou-h { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+      .thankyou-h em { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; color: var(--terakota); }
+      .thankyou p:last-child { color: var(--krem-dim); font-size: 16px; }
+
+      /* SECTIONS */
+      section { padding: 46px 0; border-top: 1px solid rgba(242, 233, 221, 0.12); }
+      h2 {
+        font-family: 'Archivo', sans-serif; font-weight: 800;
+        font-size: clamp(24px, 4.2vw, 32px); letter-spacing: -0.02em; margin-bottom: 22px;
+      }
+      h2 em { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; color: var(--terakota); }
+      ul { list-style: none; display: grid; gap: 14px; }
+      li { position: relative; padding-left: 30px; font-size: 17px; color: var(--krem); }
+      li::before { content: '→'; position: absolute; left: 0; top: 0; color: var(--terakota); font-weight: 800; }
+
+      /* BIO */
+      .bio { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+      .bio .avatar {
+        width: 84px; height: 84px; border-radius: 50%; flex: 0 0 auto;
+        background: linear-gradient(135deg, var(--terakota), #b9683f);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Fraunces', serif; font-style: italic; font-weight: 600;
+        font-size: 34px; color: var(--wino-2);
+      }
+      .bio p { font-size: 17px; color: var(--krem-dim); max-width: 520px; }
+      .bio strong { color: var(--krem); font-weight: 800; }
+
+      /* CLOSER */
+      .closer { text-align: left; }
+      .closer h2 { margin-bottom: 24px; }
+
+      footer { padding: 40px 0 56px; text-align: center; }
+      .handle { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px; letter-spacing: 0.08em; color: var(--krem-dim); }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .form button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ghost" aria-hidden="true">P</div>
+
+    <header class="hero">
+      <div class="wrap">
+        <span class="label">Plan dnia z Claude</span>
+        <h1>Zaplanuj dzień, który <em>naprawdę</em> działa</h1>
+        <p class="sub">Gotowy prompt, który zamienia „zaplanuj mi dzień" w&nbsp;realny plan – pod Twój czas, priorytety i&nbsp;drzemki maluszka.</p>
+
+        <div class="cta">
+          <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
+            <label class="hp" aria-hidden="true">Nie wypełniaj tego pola<input type="text" name="hp_website" tabindex="-1" autocomplete="off" /></label>
+            <input type="text" name="fields[name]" required autocomplete="given-name" placeholder="Imię" aria-label="Twoje imię" class="field" />
+            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" class="field" />
+            <input type="hidden" name="anticsrf" value="true" />
+            <input type="hidden" name="ml-submit" value="1" />
+            <button type="submit">Pobierz prompt</button>
+          </form>
+          <p class="form-status" role="status" aria-live="polite" hidden></p>
+          <p class="micro" set:html={CONSENT}></p>
+          <div class="thankyou" hidden tabindex="-1">
+            <p class="thankyou-h"><em>Gotowe.</em> Prompt już leci.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <h2>Co znajdziesz w&nbsp;<em>środku</em></h2>
+        <ul>
+          <li>gotowy prompt na plan dnia – kopiujesz i&nbsp;podmieniasz nawiasy</li>
+          <li>zasadę, dzięki której AI układa realny plan, nie listę życzeń</li>
+          <li>jak dopasować go pod Twój czas, priorytety i&nbsp;przerwy z&nbsp;maluszkiem</li>
+          <li>1 strona, zero żargonu</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>To dla Ciebie, <em>jeśli</em></h2>
+        <ul>
+          <li>dyktujesz AI „zaplanuj mi dzień" i&nbsp;dostajesz plan dla wszystkich i&nbsp;dla nikogo</li>
+          <li>masz za dużo w&nbsp;głowie i&nbsp;wieczorem nie wiesz, od&nbsp;czego zacząć rano</li>
+          <li>chcesz plan pod realny dzień z&nbsp;dzieckiem, nie idealny grafik</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap bio">
+        <div class="avatar" aria-hidden="true">E</div>
+        <p><strong>Ewa Chamczyk.</strong> Mama, PhD, 3&nbsp;lata w&nbsp;AI (NASK, CampusAI, AI&nbsp;Tact). Uczę mamy wracające do pracy ogarniać AI – po&nbsp;ludzku, w&nbsp;Twoim tempie.</p>
+      </div>
+    </section>
+
+    <section class="closer">
+      <div class="wrap">
+        <h2>Jeden prompt, <em>spokojniejszy</em> poranek.</h2>
+        <div class="cta">
+          <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
+            <label class="hp" aria-hidden="true">Nie wypełniaj tego pola<input type="text" name="hp_website" tabindex="-1" autocomplete="off" /></label>
+            <input type="text" name="fields[name]" required autocomplete="given-name" placeholder="Imię" aria-label="Twoje imię" class="field" />
+            <input type="email" name="fields[email]" required autocomplete="email" placeholder="Twój e-mail" aria-label="Twój adres e-mail" class="field" />
+            <input type="hidden" name="anticsrf" value="true" />
+            <input type="hidden" name="ml-submit" value="1" />
+            <button type="submit">Pobierz prompt</button>
+          </form>
+          <p class="form-status" role="status" aria-live="polite" hidden></p>
+          <p class="micro" set:html={CONSENT}></p>
+          <div class="thankyou" hidden tabindex="-1">
+            <p class="thankyou-h"><em>Gotowe.</em> Prompt już leci.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span class="handle">@ai.na.macierzynskim</span>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        var ENDPOINT =
+          'https://assets.mailerlite.com/jsonp/2290800/forms/193234786236499325/subscribe';
+        var EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+        function setStatus(el, msg) {
+          if (!el) return;
+          el.textContent = msg;
+          el.hidden = false;
+        }
+        function clearStatus(el) {
+          if (!el) return;
+          el.textContent = '';
+          el.hidden = true;
+        }
+        function showThankYou(cta) {
+          var form = cta.querySelector('form');
+          var micro = cta.querySelector('.micro');
+          var status = cta.querySelector('.form-status');
+          var ty = cta.querySelector('.thankyou');
+          if (form) form.hidden = true;
+          if (micro) micro.hidden = true;
+          clearStatus(status);
+          if (ty) {
+            ty.hidden = false;
+            try { ty.focus(); } catch (e) {}
+          }
+        }
+        function firstError(data) {
+          try {
+            var f = data.errors.fields;
+            for (var k in f) { if (f[k] && f[k][0]) return f[k][0]; }
+          } catch (e) {}
+          return '';
+        }
+
+        var forms = document.querySelectorAll('form[data-ml-form]');
+        Array.prototype.forEach.call(forms, function (form) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var cta = form.closest('.cta');
+            var status = cta.querySelector('.form-status');
+            var btn = form.querySelector('button[type="submit"]');
+            var emailInput = form.querySelector('input[type="email"]');
+            var hp = form.querySelector('input[name="hp_website"]');
+
+            // bot: honeypot wypełniony → udajemy sukces, nic nie wysyłamy
+            if (hp && hp.value) { showThankYou(cta); return; }
+
+            var email = (emailInput.value || '').trim();
+            if (!EMAIL_RE.test(email)) {
+              setStatus(status, 'Podaj poprawny adres e-mail.');
+              emailInput.focus();
+              return;
+            }
+
+            clearStatus(status);
+            var original = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Wysyłam…';
+
+            var fd = new FormData(form);
+            fd.delete('hp_website');
+
+            fetch(ENDPOINT, {
+              method: 'POST',
+              body: fd,
+              headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            })
+              .then(function (res) {
+                return res.json().catch(function () { return { success: res.ok }; });
+              })
+              .then(function (data) {
+                if (data && data.success) {
+                  showThankYou(cta);
+                } else {
+                  var err = firstError(data);
+                  if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';
+                  setStatus(status, err || 'Coś nie zadziałało. Spróbuj jeszcze raz.');
+                  btn.disabled = false;
+                  btn.textContent = original;
+                }
+              })
+              .catch(function () {
+                setStatus(status, 'Brak połączenia. Spróbuj jeszcze raz za chwilę.');
+                btn.disabled = false;
+                btn.textContent = original;
+              });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
