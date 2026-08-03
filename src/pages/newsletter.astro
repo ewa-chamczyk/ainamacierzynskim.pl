@@ -64,7 +64,7 @@ const CONSENT =
     <style is:global>
       :root {
         --bordo: #6b1f1f;
-        --bordo-hi: #7d2828;
+        --bordo-mid: #571a1d;
         --wino: #4a1721;
         --wino-2: #3c121b;
         --krem: #f2e9dd;
@@ -78,12 +78,12 @@ const CONSENT =
       [hidden] { display: none !important; }
       html { scroll-behavior: smooth; }
       body {
-        /* gradient bordo → wino, żeby tło nie było płaskie */
+        /* głębokie bordo → wino (bez jasnej czerwieni) + wyraźniejsze poświaty brzoskwiniowe */
         background:
-          radial-gradient(900px 520px at 82% -8%, rgba(238, 166, 121, 0.20), transparent 62%),
-          radial-gradient(760px 480px at -10% 34%, rgba(216, 132, 88, 0.14), transparent 60%),
-          radial-gradient(700px 600px at 60% 108%, rgba(238, 166, 121, 0.12), transparent 62%),
-          linear-gradient(168deg, var(--bordo-hi) 0%, var(--bordo) 40%, var(--wino) 100%);
+          radial-gradient(620px 420px at 88% -6%, rgba(238, 166, 121, 0.30), transparent 64%),
+          radial-gradient(520px 380px at -6% 30%, rgba(216, 132, 88, 0.20), transparent 62%),
+          radial-gradient(560px 460px at 72% 103%, rgba(238, 166, 121, 0.17), transparent 64%),
+          linear-gradient(170deg, var(--bordo) 0%, var(--bordo-mid) 46%, var(--wino-2) 100%);
         background-attachment: fixed;
         color: var(--krem);
         font-family: 'Archivo', sans-serif;
@@ -155,7 +155,8 @@ const CONSENT =
       .thankyou p:last-child { color: var(--krem-dim); font-size: 16px; }
 
       /* SECTIONS */
-      section { padding: 46px 0; border-top: 1px solid rgba(242, 233, 221, 0.14); }
+      /* akcent pomarańczowy zamiast kremowej kreski – rozdziela sekcje i ociepla tło */
+      section { padding: 46px 0; border-top: 1px solid rgba(238, 166, 121, 0.22); }
       h2 {
         font-family: 'Archivo', sans-serif; font-weight: 800;
         font-size: clamp(24px, 4.2vw, 32px); letter-spacing: -0.02em; margin-bottom: 22px;
@@ -244,7 +245,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Jesteś na liście.</em></p>
-            <p>Pierwsza wiadomość leci do&nbsp;Ciebie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty". Kolejne przychodzą w&nbsp;czwartki wieczorem.</p>
+            <p>Za chwilę dostaniesz ode mnie krótkie potwierdzenie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty". Pierwsze pełne wydanie czeka Cię w&nbsp;najbliższy czwartek wieczorem.</p>
           </div>
         </div>
       </div>
@@ -266,19 +267,19 @@ const CONSENT =
     <section>
       <div class="wrap">
         <h2>Tak to <em>wygląda</em></h2>
-        <p class="lead-2">Dwa ostatnie wydania – żeby nie zapisywać się w&nbsp;ciemno.</p>
+        <p class="lead-2">Dwa wydania z&nbsp;archiwum – żeby nie zapisywać się w&nbsp;ciemno.</p>
         <div class="peek">
           <figure>
             <div class="shot">
-              <img src="/images/newsletter-wydanie-09.png" alt="Newsletter „AI na macierzyńskim", wydanie 9 – Prompt to nie zaklęcie" loading="lazy" width="1320" height="1860" />
+              <img src="/images/newsletter-wydanie-04.png" alt="Newsletter „AI na macierzyńskim", wydanie 4 – Sprawdź, zanim wyślesz" loading="lazy" width="1320" height="1860" />
             </div>
-            <figcaption>Wydanie #9 · Prompt to nie zaklęcie</figcaption>
+            <figcaption>Wydanie #4 · Sprawdź, zanim wyślesz</figcaption>
           </figure>
           <figure>
             <div class="shot">
-              <img src="/images/newsletter-wydanie-10.png" alt="Newsletter „AI na macierzyńskim", wydanie 10 – Spotkanie bez zgubionych ustaleń" loading="lazy" width="1320" height="1860" />
+              <img src="/images/newsletter-wydanie-06.png" alt="Newsletter „AI na macierzyńskim", wydanie 6 – Najpierw zadanie, potem narzędzie" loading="lazy" width="1320" height="1860" />
             </div>
-            <figcaption>Wydanie #10 · Spotkanie bez ustaleń</figcaption>
+            <figcaption>Wydanie #6 · Najpierw zadanie</figcaption>
           </figure>
         </div>
       </div>
@@ -307,7 +308,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Jesteś na liście.</em></p>
-            <p>Pierwsza wiadomość leci do&nbsp;Ciebie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty". Kolejne przychodzą w&nbsp;czwartki wieczorem.</p>
+            <p>Za chwilę dostaniesz ode mnie krótkie potwierdzenie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty". Pierwsze pełne wydanie czeka Cię w&nbsp;najbliższy czwartek wieczorem.</p>
           </div>
         </div>
       </div>
