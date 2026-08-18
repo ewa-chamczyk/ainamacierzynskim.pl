@@ -1,18 +1,56 @@
 ---
-// Problem section – bóle klientki, szybko, mocno
-const problems = [
-  'Wszyscy w pracy mówią o AI, a Ty nie wiesz, czy ChatGPT to skrót, czy nazwa firmy.',
-  'Macierzyński miał być przerwą – okazał się czarną dziurą zawodową.',
-  'Otwierasz LinkedIn i widzisz, że koleżanka „automatyzuje workflow z AI". Ty zamykasz LinkedIn.',
-  'Kursy AI mają 12 modułów po 3 godziny. A Ty masz 15 minut, jak dziecko śpi.',
-  'Chciałabyś zacząć, ale nie wiesz GDZIE – więc nie zaczynasz wcale.',
-  'Boisz się, że jak wrócisz, to będziesz wyglądać jak ktoś z poprzedniej epoki.',
-];
+// Problem section – bóle klientki, szybko, mocno. Dwujęzyczny (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    ghost: 'z',
+    eyebrow: 'Brzmi znajomo?',
+    h1: 'Wiem,',
+    h2: 'że to',
+    h3: 'znasz.',
+    problems: [
+      'Wszyscy w pracy mówią o AI, a Ty nie wiesz, czy ChatGPT to skrót, czy nazwa firmy.',
+      'Macierzyński miał być przerwą – okazał się czarną dziurą zawodową.',
+      'Otwierasz LinkedIn i widzisz, że koleżanka „automatyzuje workflow z AI". Ty zamykasz LinkedIn.',
+      'Kursy AI mają 12 modułów po 3 godziny. A Ty masz 15 minut, jak dziecko śpi.',
+      'Chciałabyś zacząć, ale nie wiesz GDZIE – więc nie zaczynasz wcale.',
+      'Boisz się, że jak wrócisz, to będziesz wyglądać jak ktoś z poprzedniej epoki.',
+    ],
+    afterLead: 'Jeśli choć jedno z tych zdań jest Ci bliskie – to',
+    afterStrong: 'nie jest Twoja wina',
+    afterTail: '. Właśnie dlatego powstała ta przestrzeń.',
+    goodNews: 'Dobra wiadomość:',
+    lines: ['Nie musisz tego ogarniać sama.', 'Nie musisz tego ogarniać teraz.', 'Nie musisz tego ogarniać wszystkiego naraz.'],
+  },
+  en: {
+    ghost: 'k',
+    eyebrow: 'Sound familiar?',
+    h1: 'I know',
+    h2: 'this',
+    h3: 'feeling.',
+    problems: [
+      'Everyone at work talks about AI, and you are not sure whether ChatGPT is an acronym or a company.',
+      'Maternity leave was meant to be a pause. It turned into a professional black hole.',
+      'You open LinkedIn, see a friend „automating her workflow with AI", and close LinkedIn.',
+      'AI courses come in 12 modules, three hours each. You have 15 minutes, while the baby sleeps.',
+      'You would like to start, but you have no idea WHERE – so you never start at all.',
+      'You are afraid that when you go back, you will look like someone from a previous era.',
+    ],
+    afterLead: 'If even one of those lines sounds like you, then',
+    afterStrong: 'it is not your fault',
+    afterTail: '. That is exactly why this place exists.',
+    goodNews: 'The good news:',
+    lines: ['You do not have to figure this out alone.', 'You do not have to figure it out right now.', 'You do not have to figure all of it out at once.'],
+  },
+}[lang];
 ---
 
 <section class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
   <!-- Ghost litera w tle -->
-  <span class="ghost-letter" style="font-size: 26rem; bottom: -2rem; right: -3rem; color: var(--color-terra);">z</span>
+  <span class="ghost-letter" style="font-size: 26rem; bottom: -2rem; right: -3rem; color: var(--color-terra);">{content.ghost}</span>
 
   <!-- Dekoracja -->
   <div class="blob bg-terra" style="width: 600px; height: 600px; top: -200px; left: 30%; opacity: 0.18;"></div>
@@ -22,17 +60,17 @@ const problems = [
     <div class="mb-16 max-w-3xl fade-up">
       <p class="font-mono text-xs tracking-[0.22em] uppercase text-terra mb-6 flex items-center gap-3">
         <span class="block w-8 h-px bg-terra"></span>
-        Brzmi znajomo?
+        {content.eyebrow}
       </p>
       <h2 class="text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-        <span class="font-black">Wiem,</span><br />
-        <span class="font-black">że to</span> <em class="text-terra font-serif italic font-semibold">znasz.</em>
+        <span class="font-black">{content.h1}</span><br />
+        <span class="font-black">{content.h2}</span> <em class="text-terra font-serif italic font-semibold">{content.h3}</em>
       </h2>
     </div>
 
     <!-- Lista problemów -->
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-12">
-      {problems.map((problem, idx) => (
+      {content.problems.map((problem, idx) => (
         <li class={`flex items-start gap-4 fade-up delay-${(idx % 5) * 100}`}>
           <span class="flex-shrink-0 w-10 h-10 rounded-full bg-terra/15 flex items-center justify-center text-terra-light font-semibold text-sm">
             0{idx + 1}
@@ -47,18 +85,17 @@ const problems = [
     <!-- Tekst pod punktami: identyfikacja + powod istnienia konta -->
     <div class="border-t border-white/15 pt-10 fade-up max-w-3xl">
       <p class="text-lg md:text-xl text-white/85 leading-relaxed">
-        Jeśli choć jedno z tych zdań jest Ci bliskie – to <strong class="text-white">nie jest Twoja wina</strong>.
-        Właśnie dlatego powstała ta przestrzeń.
+        {content.afterLead} <strong class="text-white">{content.afterStrong}</strong>{content.afterTail}
       </p>
     </div>
 
     <!-- Transition do solution -->
     <div class="pt-12 fade-up">
       <p class="text-2xl md:text-3xl text-white leading-tight max-w-3xl">
-        <span class="text-terra-light">Dobra wiadomość:</span><br />
-        Nie musisz tego ogarniać sama. <br />
-        Nie musisz tego ogarniać teraz. <br />
-        Nie musisz tego ogarniać wszystkiego naraz.
+        <span class="text-terra-light">{content.goodNews}</span><br />
+        {content.lines[0]} <br />
+        {content.lines[1]} <br />
+        {content.lines[2]}
       </p>
     </div>
   </div>

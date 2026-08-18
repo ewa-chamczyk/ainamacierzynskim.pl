@@ -1,6 +1,42 @@
 ---
-// Stopka
+// Stopka. Dwujęzyczna (prop `lang`).
+// Dokumenty prawne (polityka, regulamin) zostają po polsku — to dokumenty wiążące prawnie,
+// tłumaczenie robocze wprowadzałoby niejasność. W EN oznaczamy je dopiskiem.
+import { path, type Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
 const currentYear = new Date().getFullYear();
+
+const content = {
+  pl: {
+    tagline: 'Spokojny start z AI przed powrotem do pracy. Małe kroki, konkretne zastosowania, zero presji.',
+    offer: 'Oferta',
+    gabinet: 'Gabinet AI · konsultacja 1:1',
+    ebook: 'Ebook „Nie zniknęłaś"',
+    newsletter: 'Newsletter',
+    contact: 'Kontakt',
+    linkedin: 'LinkedIn Ewy',
+    company: 'Dane firmy',
+    rights: 'wszystkie prawa zastrzeżone',
+    privacy: 'Polityka prywatności',
+    terms: 'Regulamin',
+    plNote: '',
+  },
+  en: {
+    tagline: 'A calm start with AI before you go back to work. Small steps, concrete use cases, zero pressure.',
+    offer: 'Offer',
+    gabinet: 'AI Clinic · 1:1 session',
+    ebook: 'Ebook „Nie zniknęłaś"',
+    newsletter: 'Newsletter',
+    contact: 'Contact',
+    linkedin: 'Ewa on LinkedIn',
+    company: 'Company details',
+    rights: 'all rights reserved',
+    privacy: 'Privacy policy',
+    terms: 'Terms',
+    plNote: ' (PL)',
+  },
+}[lang];
 ---
 
 <footer class="px-6 py-16 bg-charcoal text-white/80">
@@ -10,30 +46,29 @@ const currentYear = new Date().getFullYear();
       <div>
         <p class="text-white font-semibold mb-4">AI na macierzyńskim</p>
         <p class="text-sm leading-relaxed text-white/60">
-          Spokojny start z AI przed powrotem do pracy.
-          Małe kroki, konkretne zastosowania, zero presji.
+          {content.tagline}
         </p>
       </div>
 
       <!-- Oferta -->
       <div>
-        <p class="text-white font-semibold mb-4">Oferta</p>
+        <p class="text-white font-semibold mb-4">{content.offer}</p>
         <ul class="space-y-2 text-sm">
           <li>
-            <a href="/gabinet-ai" class="text-white/60 hover:text-terra-light transition-colors">Gabinet AI · konsultacja 1:1</a>
+            <a href={path('/gabinet-ai', lang)} class="text-white/60 hover:text-terra-light transition-colors">{content.gabinet}</a>
           </li>
           <li>
-            <a href="/nie-zniknelas" class="text-white/60 hover:text-terra-light transition-colors">Ebook „Nie zniknęłaś"</a>
+            <a href="/nie-zniknelas" class="text-white/60 hover:text-terra-light transition-colors">{content.ebook}{content.plNote}</a>
           </li>
           <li>
-            <a href="/#mapa" class="text-white/60 hover:text-terra-light transition-colors">Newsletter</a>
+            <a href={path('/newsletter', lang)} class="text-white/60 hover:text-terra-light transition-colors">{content.newsletter}{content.plNote}</a>
           </li>
         </ul>
       </div>
 
       <!-- Kontakt -->
       <div>
-        <p class="text-white font-semibold mb-4">Kontakt</p>
+        <p class="text-white font-semibold mb-4">{content.contact}</p>
         <ul class="space-y-2 text-sm">
           <li>
             <a
@@ -49,14 +84,14 @@ const currentYear = new Date().getFullYear();
               target="_blank"
               rel="noopener"
               class="text-white/60 hover:text-terra-light transition-colors"
-            >LinkedIn Ewy</a>
+            >{content.linkedin}</a>
           </li>
         </ul>
       </div>
 
       <!-- Dane -->
       <div>
-        <p class="text-white font-semibold mb-4">Dane firmy</p>
+        <p class="text-white font-semibold mb-4">{content.company}</p>
         <p class="text-sm text-white/60 leading-relaxed">
           Duke Art – Ewa Chamczyk<br />
           NIP: 5482641176<br />
@@ -67,16 +102,16 @@ const currentYear = new Date().getFullYear();
 
     <!-- Dolny pasek -->
     <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-white/50">
-      <p>© {currentYear} Ewa Chamczyk · wszystkie prawa zastrzeżone</p>
+      <p>© {currentYear} Ewa Chamczyk · {content.rights}</p>
       <ul class="flex gap-6">
         <li>
           <a href="/polityka-prywatnosci" class="hover:text-terra-light transition-colors">
-            Polityka prywatności
+            {content.privacy}{content.plNote}
           </a>
         </li>
         <li>
           <a href="/regulamin" class="hover:text-terra-light transition-colors">
-            Regulamin
+            {content.terms}{content.plNote}
           </a>
         </li>
       </ul>

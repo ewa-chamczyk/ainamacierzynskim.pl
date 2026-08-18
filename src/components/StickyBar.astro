@@ -1,5 +1,27 @@
 ---
-// Sticky bottom bar – pojawia się po scrollu, znika gdy user dotrze do #zapis
+// Sticky bottom bar – pojawia się po scrollu, znika gdy user dotrze do #zapis. Dwujęzyczny (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    mainA: 'Odbierz Mapę 5 obszarów AI · ',
+    mainB: 'zapisz się, pierwsza wiesz',
+    sub: 'Zero spamu. Wypiszesz się jednym klikiem.',
+    cta: 'Pobierz Mapę',
+    href: '/mapa',
+    close: 'Zamknij',
+  },
+  en: {
+    mainA: 'One lesson about AI a week · ',
+    mainB: 'straight to your inbox',
+    sub: 'No spam. Unsubscribe in one click. Written in Polish.',
+    cta: 'Sign up',
+    href: '/en/newsletter',
+    close: 'Close',
+  },
+}[lang];
 ---
 
 <div
@@ -11,26 +33,26 @@
       <!-- Tekst -->
       <div class="flex-1 min-w-0">
         <p class="text-sm md:text-base font-semibold">
-          Odbierz Mapę 5 obszarów AI · <span class="text-terra-light">zapisz się, pierwsza wiesz</span>
+          {content.mainA}<span class="text-terra-light">{content.mainB}</span>
         </p>
         <p class="text-xs text-white/60 hidden sm:block">
-          Zero spamu. Wypiszesz się jednym klikiem.
+          {content.sub}
         </p>
       </div>
 
-      <!-- CTA → dedykowany landing zapisu /mapa -->
+      <!-- CTA → dedykowany landing zapisu -->
       <a
-        href="/mapa"
+        href={content.href}
         class="px-6 py-2.5 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-lg transition-colors text-sm whitespace-nowrap w-full sm:w-auto text-center"
       >
-        Pobierz Mapę
+        {content.cta}
       </a>
 
       <!-- Close button -->
       <button
         id="sticky-close"
         class="text-white/60 hover:text-white transition-colors pointer-events-auto"
-        aria-label="Zamknij"
+        aria-label={content.close}
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -62,14 +84,12 @@
     }
   }
 
-  // Pokaż po scroll'u poza hero (700px)
   window.addEventListener('scroll', () => {
     if (window.scrollY > 700) {
       showBar();
     }
   });
 
-  // Ukryj gdy user jest blisko #zapis section
   if (zapisSection) {
     const zapisObserver = new IntersectionObserver(
       (entries) => {
@@ -77,7 +97,6 @@
           if (entry.isIntersecting) {
             hideBar();
           } else if (shown && !dismissed) {
-            // Show bar again when scrolling away from zapis
             if (window.scrollY > 700) {
               bar?.classList.remove('translate-y-full');
               bar?.classList.add('translate-y-0', 'pointer-events-auto');
@@ -90,7 +109,6 @@
     zapisObserver.observe(zapisSection);
   }
 
-  // Close button
   closeBtn?.addEventListener('click', () => {
     dismissed = true;
     sessionStorage.setItem('sticky-dismissed', 'true');

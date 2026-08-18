@@ -1,19 +1,34 @@
 ---
 // Nav.astro — globalne górne menu (sticky). Renderowane przez Layout.astro na stronach
 // „głównego świata": /, /nie-zniknelas, /gabinet-ai, /polityka-prywatnosci, /regulamin, /404.
-// Landingi standalone (/mapa, /spotkanie, /mapa-dziekuje) są poza Layout i menu NIE mają — świadomie.
+// Landingi standalone (/mapa, /spotkanie, /newsletter…) są poza Layout i menu NIE mają — świadomie.
+// Dwujęzyczność: prop `lang` wybiera etykiety i prefiksuje linki (/en/...).
+import { useTranslations, altPath, path, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'pl' } = Astro.props;
+const t = useTranslations(lang);
+const plNote = t('lang.note.pl');
+
+// Ebook „Nie zniknęłaś" jest po polsku — w wersji EN oznaczamy to wprost,
+// żeby nikt nie kupił książki w języku, którego nie zna.
 const links = [
-  { label: 'Gabinet AI', href: '/gabinet-ai' },
-  { label: 'Ebook', href: '/nie-zniknelas' },
-  { label: 'Newsletter', href: '/#mapa' },
+  { label: t('nav.gabinet'), href: path('/gabinet-ai', lang), note: '' },
+  { label: t('nav.ebook'), href: '/nie-zniknelas', note: plNote },
+  { label: t('nav.newsletter'), href: path('/newsletter', lang), note: plNote },
 ];
+
+const switchTo: Lang = lang === 'pl' ? 'en' : 'pl';
+const switchHref = altPath(Astro.url.pathname, switchTo);
 ---
 
 <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige-dark/30">
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
     <!-- Wordmark -->
     <a
-      href="/"
+      href={path('/', lang)}
       class="font-display font-black text-base md:text-lg tracking-tight text-wine whitespace-nowrap hover:opacity-80 transition-opacity"
     >
       AI na <span class="font-serif italic font-semibold text-terra">macierzyńskim</span>
@@ -23,34 +38,65 @@ const links = [
     <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
       {links.map((l) => (
         <li>
-          <a href={l.href} class="text-wine/80 hover:text-terra transition-colors">{l.label}</a>
+          <a href={l.href} class="text-wine/80 hover:text-terra transition-colors">
+            {l.label}
+            {l.note && <span class="ml-1 text-xs text-wine/45 font-normal">({l.note})</span>}
+          </a>
         </li>
       ))}
     </ul>
 
-    <!-- CTA desktop -->
-    <a
-      href="/gabinet-ai"
-      class="hidden lg:inline-flex items-center px-5 py-2.5 bg-terra hover:bg-terra-dark text-wine text-sm font-semibold rounded-lg transition-colors whitespace-nowrap"
-    >
-      Umów wizytę
-    </a>
+    <div class="hidden lg:flex items-center gap-3">
+      <!-- CTA desktop -->
+      <a
+        href={path('/gabinet-ai', lang)}
+        class="inline-flex items-center px-5 py-2.5 bg-terra hover:bg-terra-dark text-wine text-sm font-semibold rounded-lg transition-colors whitespace-nowrap"
+      >
+        {t('nav.cta')}
+      </a>
 
-    <!-- Hamburger mobile -->
-    <button
-      id="nav-toggle"
-      class="lg:hidden text-wine p-2 -mr-2"
-      aria-label="Otwórz menu"
-      aria-expanded="false"
-      aria-controls="nav-mobile"
-    >
-      <svg id="nav-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <svg id="nav-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </button>
+      <!-- Przełącznik języka (prawa strona) -->
+      <a
+        href={switchHref}
+        hreflang={switchTo}
+        aria-label={t('nav.switchAria')}
+        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-wine/20 text-wine/75 text-xs font-semibold uppercase tracking-wider hover:border-terra hover:text-terra transition-colors whitespace-nowrap"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18" stroke-linecap="round" />
+        </svg>
+        {switchTo === 'en' ? 'EN' : 'PL'}
+      </a>
+    </div>
+
+    <!-- Mobile: przełącznik + hamburger -->
+    <div class="lg:hidden flex items-center gap-1">
+      <a
+        href={switchHref}
+        hreflang={switchTo}
+        aria-label={t('nav.switchAria')}
+        class="px-2.5 py-1.5 rounded-lg border border-wine/20 text-wine/75 text-xs font-semibold uppercase tracking-wider hover:border-terra hover:text-terra transition-colors"
+      >
+        {switchTo === 'en' ? 'EN' : 'PL'}
+      </a>
+      <button
+        id="nav-toggle"
+        class="text-wine p-2 -mr-2"
+        aria-label={t('nav.open')}
+        data-label-open={t('nav.open')}
+        data-label-close={t('nav.close')}
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <svg id="nav-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="nav-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- Panel mobile -->
@@ -58,15 +104,18 @@ const links = [
     <ul class="max-w-6xl mx-auto px-6 py-4 space-y-1">
       {links.map((l) => (
         <li>
-          <a href={l.href} class="block py-2.5 text-wine/90 hover:text-terra font-medium transition-colors">{l.label}</a>
+          <a href={l.href} class="block py-2.5 text-wine/90 hover:text-terra font-medium transition-colors">
+            {l.label}
+            {l.note && <span class="ml-1 text-xs text-wine/45 font-normal">({l.note})</span>}
+          </a>
         </li>
       ))}
       <li class="pt-3">
         <a
-          href="/gabinet-ai"
+          href={path('/gabinet-ai', lang)}
           class="block text-center px-5 py-3 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-lg transition-colors"
         >
-          Umów wizytę
+          {t('nav.cta')}
         </a>
       </li>
     </ul>
@@ -83,7 +132,8 @@ const links = [
     if (!panel) return;
     panel.classList.toggle('hidden', !open);
     toggle?.setAttribute('aria-expanded', String(open));
-    toggle?.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    const label = open ? toggle?.dataset.labelClose : toggle?.dataset.labelOpen;
+    if (label) toggle?.setAttribute('aria-label', label);
     iconOpen?.classList.toggle('hidden', open);
     iconClose?.classList.toggle('hidden', !open);
   }

@@ -1,35 +1,42 @@
 ---
-// FAQ – accordion. <details>/<summary> dla zero-JS approach.
-const faqs = [
-  {
-    q: 'Muszę coś umieć z AI, zanim się zapiszę?',
-    a: 'Nie. Wręcz przeciwnie – to miejsce jest właśnie dla tych, które nie wiedzą, od czego zacząć. Nie zrobię z Ciebie ekspertki. Pokażę Ci, co warto wiedzieć, żebyś wracała do pracy z większym spokojem.',
+// FAQ – accordion. <details>/<summary> dla zero-JS approach. Dwujęzyczny (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    eyebrow: 'Najczęściej pytasz',
+    title: 'FAQ',
+    more: 'Masz inne pytanie?',
+    ig: 'Napisz do mnie na Instagramie',
+    faqs: [
+      { q: 'Muszę coś umieć z AI, zanim się zapiszę?', a: 'Nie. Wręcz przeciwnie – to miejsce jest właśnie dla tych, które nie wiedzą, od czego zacząć. Nie zrobię z Ciebie ekspertki. Pokażę Ci, co warto wiedzieć, żebyś wracała do pracy z większym spokojem.' },
+      { q: 'Co dostanę w newsletterze?', a: 'Jedną lekcję tygodniowo. Jeden konkretny prompt. Jedno realne zastosowanie. W rytmie życia z dzieckiem – bo o to chodzi. Plus na start: Mapa 5 obszarów AI – PDF z pięcioma gotowymi promptami.' },
+      { q: 'Czy newsletter jest płatny?', a: 'Newsletter jest bezpłatny i taki pozostaje. Płatne są tylko produkty – ebook i kurs. Newsletter to miejsce, w którym poznajesz markę bez ryzyka.' },
+      { q: 'Czym jest ebook „Nie zniknęłaś"?', a: '7 emocjonalnych listów do mam wracających do pracy. Nie o AI – o powrocie do siebie zawodowo. Bez „daj radę", bez coachingu, bez obietnicy, że „wszystko się ułoży".' },
+      { q: 'Kiedy będzie kurs?', a: 'Pracuję nad pierwszą edycją kursu „AI przed powrotem do pracy". Datę podam najpierw w newsletterze – zapisane mają pierwszeństwo i niższą cenę za pierwszą edycję.' },
+      { q: 'Faktura?', a: 'Tak. Każdy zakup = automatyczna faktura VAT. Jeśli kupujesz na firmę – wpisz NIP w checkoucie. Jeśli prywatnie – dostaniesz fakturę uproszczoną.' },
+      { q: 'Co zrobisz z moim e-mailem?', a: 'Nic poza tym, na co się umówimy. Newsletter raz w tygodniu, ewentualnie informacja o premierach produktów. Bez sprzedawania danych, bez spamu, bez „specjalnych ofert partnerów". Wypisujesz się jednym klikiem w każdej chwili.' },
+    ],
   },
-  {
-    q: 'Co dostanę w newsletterze?',
-    a: 'Jedną lekcję tygodniowo. Jeden konkretny prompt. Jedno realne zastosowanie. W rytmie życia z dzieckiem – bo o to chodzi. Plus na start: Mapa 5 obszarów AI – PDF z pięcioma gotowymi promptami.',
+  en: {
+    eyebrow: 'You often ask',
+    title: 'FAQ',
+    more: 'Got another question?',
+    ig: 'Message me on Instagram',
+    faqs: [
+      { q: 'Do I need to know anything about AI first?', a: 'No. Quite the opposite – this place is for those who have no idea where to start. I will not turn you into an expert. I will show you what is worth knowing so you go back to work feeling calmer.' },
+      { q: 'What language is everything in?', a: 'The website is available in English, and 1:1 sessions in the AI Clinic run in Polish or English – your choice. The newsletter and the ebook are written in Polish.' },
+      { q: 'What do I get in the newsletter?', a: 'One lesson a week. One specific prompt. One real use case. In the rhythm of life with a child – that is the whole point. Note: the newsletter is written in Polish.' },
+      { q: 'Is the newsletter paid?', a: 'The newsletter is free and it stays that way. Only the products are paid – the ebook and the course. The newsletter is where you get to know the brand at no risk.' },
+      { q: 'What is the ebook „Nie zniknęłaś"?', a: 'Seven honest letters to mothers going back to work. Not about AI – about coming back to yourself professionally. No pep talk, no coaching, no promise that everything will work out. Written in Polish.' },
+      { q: 'When is the course?', a: 'I am working on the first edition of „AI before going back to work". I will announce the date in the newsletter first – subscribers get priority and a lower price for the first edition.' },
+      { q: 'Can I get an invoice?', a: 'Yes. Every purchase generates a VAT invoice automatically. Buying as a company – enter your tax ID at checkout. Buying privately – you get a simplified invoice.' },
+      { q: 'What will you do with my email?', a: 'Nothing beyond what we agreed. The newsletter once a week, plus the occasional note about a product launch. No selling data, no spam, no „special partner offers". You can unsubscribe in one click at any time.' },
+    ],
   },
-  {
-    q: 'Czy newsletter jest płatny?',
-    a: 'Newsletter jest bezpłatny i taki pozostaje. Płatne są tylko produkty – ebook i kurs. Newsletter to miejsce, w którym poznajesz markę bez ryzyka.',
-  },
-  {
-    q: 'Czym jest ebook „Nie zniknęłaś"?',
-    a: '7 emocjonalnych listów do mam wracających do pracy. Nie o AI – o powrocie do siebie zawodowo. Bez „daj radę", bez coachingu, bez obietnicy, że „wszystko się ułoży".',
-  },
-  {
-    q: 'Kiedy będzie kurs?',
-    a: 'Pracuję nad pierwszą edycją kursu „AI przed powrotem do pracy". Datę podam najpierw w newsletterze – zapisane mają pierwszeństwo i niższą cenę za pierwszą edycję.',
-  },
-  {
-    q: 'Faktura?',
-    a: 'Tak. Każdy zakup = automatyczna faktura VAT. Jeśli kupujesz na firmę – wpisz NIP w checkoucie. Jeśli prywatnie – dostaniesz fakturę uproszczoną.',
-  },
-  {
-    q: 'Co zrobisz z moim e-mailem?',
-    a: 'Nic poza tym, na co się umówimy. Newsletter raz w tygodniu, ewentualnie informacja o premierach produktów. Bez sprzedawania danych, bez spamu, bez „specjalnych ofert partnerów". Wypisujesz się jednym klikiem w każdej chwili.',
-  },
-];
+}[lang];
 ---
 
 <section class="relative px-6 py-24 bg-cream overflow-hidden">
@@ -41,18 +48,18 @@ const faqs = [
     <div class="mb-16 text-center fade-up">
       <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center justify-center gap-3">
         <span class="block w-8 h-px bg-terra"></span>
-        Najczęściej pytasz
+        {content.eyebrow}
         <span class="block w-8 h-px bg-terra"></span>
       </p>
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal">
-        FAQ
+        {content.title}
       </h2>
     </div>
 
     <!-- Lista FAQ -->
     <div class="space-y-4">
       {
-        faqs.map((faq, idx) => (
+        content.faqs.map((faq, idx) => (
           <details
             class={`group bg-white rounded-2xl border border-beige-dark/40 overflow-hidden card-lift fade-up delay-${(idx % 5) * 100}`}
           >
@@ -81,7 +88,7 @@ const faqs = [
     <!-- Bottom CTA -->
     <div class="mt-16 text-center fade-up">
       <p class="text-charcoal/60 text-sm mb-4">
-        Masz inne pytanie?
+        {content.more}
       </p>
       <a
         href="https://ig.me/m/ai.na.macierzynskim"
@@ -89,7 +96,7 @@ const faqs = [
         rel="noopener"
         class="inline-flex items-center gap-2 text-terra hover:text-terra-dark font-medium transition-colors"
       >
-        Napisz do mnie na Instagramie
+        {content.ig}
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>

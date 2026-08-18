@@ -1,0 +1,38 @@
+---
+// Home.astro — kolejność sekcji strony głównej. JEDEN plik dla obu języków:
+// /index.astro i /en/index.astro renderują to samo, różnią się tylko propem `lang`.
+// Dzięki temu zmiana układu strony głównej trafia od razu do obu wersji.
+import ScrollProgress from './ScrollProgress.astro';
+import Hero from './Hero.astro';
+import Problem from './Problem.astro';
+import CzymJest from './CzymJest.astro';
+import LeadMagnet from './LeadMagnet.astro';
+import ValueFirst from './ValueFirst.astro';
+import ForWho from './ForWho.astro';
+import Gabinet from './Gabinet.astro';
+import EbookPreview from './EbookPreview.astro';
+import About from './About.astro';
+import FAQ from './FAQ.astro';
+import FinalCTA from './FinalCTA.astro';
+import Footer from './Footer.astro';
+import StickyBar from './StickyBar.astro';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+---
+
+<ScrollProgress />
+<Hero lang={lang} />
+<Problem lang={lang} />
+<CzymJest lang={lang} />
+<ValueFirst lang={lang} />
+<LeadMagnet lang={lang} />
+<ForWho lang={lang} />
+<Gabinet lang={lang} />
+<EbookPreview lang={lang} />
+<About lang={lang} />
+<FAQ lang={lang} />
+<FinalCTA lang={lang} />
+<Footer lang={lang} />
+<StickyBar lang={lang} />

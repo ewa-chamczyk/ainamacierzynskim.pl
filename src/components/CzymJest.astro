@@ -1,28 +1,35 @@
 ---
-// CzymJest – sekcja wyjaśniająca czym jest AI na macierzyńskim (po sekcji Problem)
-// Cel: domkniecie narracji „Wiem, że to znasz" → „Oto co znajdziesz tu, żeby z tym wyjść"
-const elements = [
-  {
-    icon: 'space',
-    title: 'Bezpieczna przestrzeń',
-    desc: 'Bez wstydu, że „powinnaś już wiedzieć". Bez technicznego żargonu.',
+// CzymJest – sekcja wyjaśniająca czym jest AI na macierzyńskim (po sekcji Problem). Dwujęzyczna (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    eyebrow: 'Czym jest „AI na macierzyńskim"',
+    h2a: 'Miejsce, w którym',
+    h2b: 'razem ogarniamy AI',
+    lead: 'Profil, newsletter, ebook i społeczność. Wszystko po polsku, po ludzku, w Twoim tempie – zanim wrócisz do biura.',
+    elements: [
+      { icon: 'space', title: 'Bezpieczna przestrzeń', desc: 'Bez wstydu, że „powinnaś już wiedzieć". Bez technicznego żargonu.' },
+      { icon: 'instagram', title: 'Profil na Instagramie', desc: '@ai.na.macierzynskim – bieżąca nauka i inspiracja, trzy posty w tygodniu.' },
+      { icon: 'mail', title: 'Cotygodniowy newsletter', desc: 'Oswajamy AI – praktyczny przykład użycia, słownik AI, jedno zastosowanie.' },
+      { icon: 'people', title: 'Społeczność kobiet', desc: 'Takich jak Ty – mam, które wracają do pracy po macierzyńskim.' },
+    ],
   },
-  {
-    icon: 'instagram',
-    title: 'Profil na Instagramie',
-    desc: '@ai.na.macierzynskim – bieżąca nauka i inspiracja, trzy posty w tygodniu.',
+  en: {
+    eyebrow: 'What „AI na macierzyńskim" is',
+    h2a: 'A place where we',
+    h2b: 'figure out AI together',
+    lead: 'A profile, a newsletter, an ebook and a community. Human language, your own pace – before you go back to the office. The written content is in Polish; 1:1 sessions run in Polish or English.',
+    elements: [
+      { icon: 'space', title: 'A safe space', desc: 'No shame about what „you should already know". No technical jargon.' },
+      { icon: 'instagram', title: 'Instagram profile', desc: '@ai.na.macierzynskim – learning and inspiration, three posts a week.' },
+      { icon: 'mail', title: 'Weekly newsletter', desc: 'One practical use case, one piece of AI vocabulary, one thing to try. In Polish.' },
+      { icon: 'people', title: 'A community of women', desc: 'Just like you – mothers going back to work after maternity leave.' },
+    ],
   },
-  {
-    icon: 'mail',
-    title: 'Cotygodniowy newsletter',
-    desc: 'Oswajamy AI – praktyczny przykład użycia, słownik AI, jedno zastosowanie.',
-  },
-  {
-    icon: 'people',
-    title: 'Społeczność kobiet',
-    desc: 'Takich jak Ty – mam, które wracają do pracy po macierzyńskim.',
-  },
-];
+}[lang];
 ---
 
 <section id="o-projekcie" class="relative px-6 py-24 bg-beige/30 overflow-hidden">
@@ -35,21 +42,20 @@ const elements = [
     <div class="mb-16 max-w-3xl fade-up">
       <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
         <span class="block w-8 h-px bg-terra"></span>
-        Czym jest „AI na macierzyńskim"
+        {content.eyebrow}
       </p>
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
-        Miejsce, w którym <br />
-        <span class="text-terra">razem ogarniamy AI</span>.
+        {content.h2a} <br />
+        <span class="text-terra">{content.h2b}</span>.
       </h2>
       <p class="text-lg text-charcoal/70 leading-relaxed">
-        Profil, newsletter, ebook i społeczność. Wszystko po polsku, po ludzku, w Twoim tempie –
-        zanim wrócisz do biura.
+        {content.lead}
       </p>
     </div>
 
     <!-- Cztery elementy -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {elements.map((el, idx) => (
+      {content.elements.map((el, idx) => (
         <article class={`bg-white rounded-2xl p-7 card-lift fade-up delay-${idx * 100} border border-beige-dark/30`}>
           <div class="flex items-start gap-4">
             <!-- Ikona terra -->

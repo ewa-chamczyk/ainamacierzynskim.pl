@@ -1,6 +1,29 @@
 ---
 // Teaser ebooka „Nie zniknęłaś" na home — okładka + opis + CTA do /nie-zniknelas.
-// Bez ceny na home (badge/pastylka/cena z przycisku zdjęte) i bez kart z listami — pełna oferta i cena na /nie-zniknelas.
+// Bez ceny na home — pełna oferta i cena na /nie-zniknelas.
+// EN: ebook jest napisany po polsku, więc oznaczamy to wprost przy CTA.
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    eyebrow: 'Ebook',
+    h2a: '„Nie zniknęłaś".',
+    h2b: '7 listów do mamy, która chce iść dalej.',
+    lead: 'Siedem listów dla kobiety, która wraca po macierzyńskim. O tożsamości, o strachu, o warunkach na własnych zasadach. Bez girlboss-narracji, bez „dasz radę".',
+    cta: 'Poznaj ebook',
+    note: '',
+  },
+  en: {
+    eyebrow: 'Ebook',
+    h2a: '„Nie zniknęłaś" (You have not disappeared).',
+    h2b: 'Seven letters to a mother who wants to move forward.',
+    lead: 'Seven letters for a woman going back to work after maternity leave. About identity, about fear, about setting your own terms. No girlboss narrative, no „you have got this".',
+    cta: 'See the ebook',
+    note: 'The ebook is written in Polish.',
+  },
+}[lang];
 ---
 
 <section id="ebook" class="relative px-6 py-24 bg-cream overflow-hidden">
@@ -31,32 +54,31 @@
         <!-- Eyebrow -->
         <p class="text-sm uppercase tracking-widest text-terra font-medium mb-4 flex items-center gap-3">
           <span class="block w-8 h-px bg-terra"></span>
-          Ebook
+          {content.eyebrow}
         </p>
 
         <!-- Headline -->
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-charcoal mb-6 leading-tight">
-          „Nie zniknęłaś". <br />
-          <span class="text-terra">7 listów do mamy, która chce iść dalej.</span>
+          {content.h2a} <br />
+          <span class="text-terra">{content.h2b}</span>
         </h2>
 
         <!-- Lead -->
         <p class="text-lg md:text-xl text-charcoal/75 mb-8 leading-relaxed">
-          Siedem listów dla kobiety, która wraca po macierzyńskim. O tożsamości,
-          o strachu, o warunkach na własnych zasadach. Bez girlboss-narracji,
-          bez „dasz radę".
+          {content.lead}
         </p>
 
-        <!-- CTA → landing page ebooka -->
+        <!-- CTA → landing page ebooka (zawsze PL: książka jest po polsku) -->
         <a
           href="/nie-zniknelas"
           class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
         >
-          <span>Poznaj ebook</span>
+          <span>{content.cta}</span>
           <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
+        {content.note && <p class="mt-3 text-sm text-charcoal/55">{content.note}</p>}
       </div>
     </div>
   </div>

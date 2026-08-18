@@ -1,6 +1,29 @@
 ---
-// Hero – cytat researchu w headline, lead magnet primary CTA, ebook 48 zł secondary
-// Update: 19.05.2026 – zwężenie do menedżerek + Mapa 5 obszarów
+// Hero – headline + lead + jedno CTA (newsletter). Dwujęzyczny (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    l1: 'Wypadłaś', l2: 'z obiegu?', l3: 'Wszyscy biegną z AI?', l4: 'Ty stoisz?', l5: 'Aż do teraz.',
+    leadA: 'Pomagam',
+    leadStrong: 'mamom wracającym do pracy po macierzyńskim',
+    leadB: 'ogarnąć AI. Po ludzku, w Twoim tempie.',
+    cta: 'Zapisz się · odbierz Mapę',
+    badge: 'Ekspertka AI · mama',
+    alt: 'Ewa Chamczyk – ekspertka AI, mama',
+  },
+  en: {
+    l1: 'Out of', l2: 'the loop?', l3: 'Everyone racing with AI?', l4: 'And you stand still?', l5: 'Until now.',
+    leadA: 'I help',
+    leadStrong: 'mothers going back to work after maternity leave',
+    leadB: 'get to grips with AI. In plain language, at your own pace.',
+    cta: 'Join the newsletter',
+    badge: 'AI expert · mother',
+    alt: 'Ewa Chamczyk – AI expert and mother',
+  },
+}[lang];
 ---
 
 <section class="relative min-h-screen flex items-center px-6 py-20 overflow-hidden">
@@ -17,26 +40,26 @@
       <div class="lg:col-span-7 order-2 lg:order-1">
         <!-- Headline – mix-font: Archivo Black + Fraunces italic akcent w terakocie -->
         <h1 class="text-5xl md:text-6xl lg:text-7xl mb-8 fade-up delay-100 leading-[1.02] tracking-tight">
-          <span class="font-black">Wypadłaś</span><br />
-          <em class="font-serif italic font-semibold text-terra">z&nbsp;obiegu?</em><br />
-          <span class="font-black text-wine/35">Wszyscy biegną z&nbsp;AI?</span><br />
-          <span class="font-black text-wine/35">Ty stoisz?</span><br />
-          <em class="font-serif italic font-semibold text-terra">Aż do teraz.</em>
+          <span class="font-black">{content.l1}</span><br />
+          <em class="font-serif italic font-semibold text-terra">{content.l2}</em><br />
+          <span class="font-black text-wine/35">{content.l3}</span><br />
+          <span class="font-black text-wine/35">{content.l4}</span><br />
+          <em class="font-serif italic font-semibold text-terra">{content.l5}</em>
         </h1>
 
         <!-- Lead -->
         <p class="text-xl md:text-2xl text-wine/75 mb-10 fade-up delay-200 leading-relaxed">
-          Pomagam <strong class="text-wine">mamom wracającym do pracy po macierzyńskim</strong>
-          ogarnąć AI. Po ludzku, w&nbsp;Twoim tempie.
+          {content.leadA} <strong class="text-wine">{content.leadStrong}</strong>
+          {content.leadB}
         </p>
 
-        <!-- CTA – jedno działanie: darmowa Mapa (newsletter). Ebook żyje w sekcji niżej + w menu. -->
+        <!-- CTA – jedno działanie: newsletter. Ebook żyje w sekcji niżej + w menu. -->
         <div class="fade-up delay-300">
           <a
             href="#mapa"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
           >
-            <span>Zapisz się · odbierz Mapę</span>
+            <span>{content.cta}</span>
             <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -54,14 +77,14 @@
           <!-- Photo – sesja Grzedziński 8261 (vertical portrait, kontakt wzrokowy) -->
           <img
             src="/images/ewa-grz-8261-web.jpg"
-            alt="Ewa Chamczyk – ekspertka AI, mama"
+            alt={content.alt}
             class="relative w-full aspect-[4/5] object-cover rounded-3xl shadow-2xl"
           />
 
           <!-- Floating badge – sygnatura -->
           <div class="absolute -bottom-4 -left-4 md:-left-8 bg-white rounded-2xl px-5 py-3 shadow-xl border border-beige-dark/40">
             <p class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-terra">
-              Ekspertka AI · mama
+              {content.badge}
             </p>
             <p class="text-sm font-semibold text-wine mt-1">
               Ewa Chamczyk

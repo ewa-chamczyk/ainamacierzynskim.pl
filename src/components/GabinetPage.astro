@@ -1,0 +1,431 @@
+---
+// GabinetPage.astro — treść strony „Gabinet AI" (konsultacja 1:1, 497 zł, godzina online).
+// JEDEN układ dla obu języków; prop `lang` wybiera treść. Strony /gabinet-ai i /en/gabinet-ai
+// są cienkimi opakowaniami na ten komponent.
+import Footer from './Footer.astro';
+import type { Lang } from '../i18n/ui';
+
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const CAL_FALLBACK = 'https://cal.com/ainamacierzynskim/konsultacja-1-1-60-min';
+const IG_DM = 'https://ig.me/m/ai.na.macierzynskim';
+
+const content = {
+  pl: {
+    eyebrow: 'Gabinet AI · konsultacja 1:1',
+    h1a: 'Godzina jeden na&nbsp;jeden,<br />po&nbsp;której',
+    h1em: 'AI działa pod&nbsp;Twoje zadania',
+    heroLead: 'Prywatna konsultacja dla mamy wracającej do pracy po&nbsp;macierzyńskim. Pracujemy na&nbsp;Twoich zadaniach – wychodzisz ze&nbsp;ściągą, biblioteką promptów i&nbsp;tygodniem na&nbsp;dopięcie.',
+    cta: 'Umów wizytę',
+    znaszToTitle: 'Znasz to?',
+    znaszTo: [
+      'Wracasz za kilka tygodni i wiesz, że na pierwszym spotkaniu ktoś rzuci nazwę narzędzia, a Ty kiwniesz głową, jakbyś wiedziała, o co chodzi.',
+      'Próbowałaś używać ChatGPT do podstawowych zadań, ale poznanie bardziej zaawansowanych funkcji odłożyłaś na później. A teraz stresujesz się, że wszyscy pojechali dalej bez Ciebie.',
+      'Masz dość szkoleń, które pokazują funkcje, a we wtorek i tak nie wiesz, jak użyć tego na swoim raporcie.',
+      'Spędziłaś ostatni rok zajmując się Małym Człowiekiem i boisz się, że dzisiaj z AI korzysta się zupełnie inaczej niż przed Twoim macierzyńskim.',
+    ],
+    znaszToOutro: 'Gabinet AI to godzina, po&nbsp;której to się kończy.',
+    czymEyebrow: 'Czym jest Gabinet AI',
+    czymTitle: 'Twoja godzina. Twoja praca.',
+    czymBody: 'To nie webinar dla stu osób ani nagranie do&nbsp;odhaczenia – umawiasz się ze&nbsp;mną jeden na&nbsp;jeden. Przez godzinę pracujemy tylko na&nbsp;Twoich zadaniach: tym mailu, który piszesz 40&nbsp;minut, tym raporcie dla zarządu, tym follow-upie po&nbsp;spotkaniu, na&nbsp;który nigdy nie&nbsp;ma czasu. Wychodzisz z&nbsp;AI ustawionym pod&nbsp;Twoją pracę i&nbsp;z&nbsp;kimś, kto tydzień później sprawdzi, czy to działa.',
+    jakEyebrow: 'Jak to wygląda',
+    jakTitle: 'Cztery części, jedna godzina.',
+    jakWyglada: [
+      { n: '01', title: 'Zanim się spotkamy', desc: 'Wypełniasz krótką ankietę – rola, trzy zadania, które zabierają Ci najwięcej czasu, narzędzia Twojej firmy. Siadam z tym wcześniej i przygotowuję sesję pod Ciebie. Wchodzisz na spotkanie, na którym nie tłumaczę „czym jest prompt" – od pierwszej minuty jesteśmy przy Twojej pracy.' },
+      { n: '02', title: 'Godzina 1:1', desc: 'Pracujemy na Twoim ekranie i na Twoich zadaniach – to Ty wszystko robisz, ja prowadzę i podpowiadam. Po godzinie w historii Twojego czatu zostają gotowe, działające rozmowy z AI, których po prostu używasz dalej.' },
+      { n: '03', title: 'Twoja ściąga i biblioteka', desc: 'Twój setup, Twoje prompty i Skillsy, zasady bezpieczeństwa i plan dalszego rozwoju. Otrzymujesz ode mnie dokument dostosowany do Twoich potrzeb, żebyś miała wszystko w jednym miejscu.' },
+      { n: '04', title: 'Tydzień później', desc: 'Wracam do Ciebie z jednym pytaniem: co ruszyło, a co nie. Jeśli któryś prompt nie dowozi – poprawiamy. Żadnego „mam nadzieję, że się podobało". Chcę wiedzieć, że tego używasz.' },
+    ],
+    coEyebrow: 'Co zyskujesz',
+    coTitle: 'Konkret, nie teoria.',
+    coMasz: [
+      { title: 'Setup gotowy do pracy', desc: 'Narzędzia dobrane i ustawione pod Twoją rolę.' },
+      { title: 'Indywidualny przewodnik pracy z AI', desc: 'Dokument zawierający podsumowanie naszego spotkania, jasne wskazówki, rekomendacje, prompty i Skillsy – dopasowany do Twoich potrzeb.' },
+      { title: 'Jasne zasady bezpieczeństwa', desc: 'Co wolno wrzucić do AI w firmie, a czego nie, bez ryzyka wobec NDA.' },
+      { title: 'Plan dalszego rozwoju', desc: 'Od czego zacząć w pierwszym tygodniu, po jednym zadaniu dziennie.' },
+      { title: 'Tydzień na dopięcie', desc: 'Kontakt po sesji, żeby poprawić to, co nie ruszyło.' },
+    ],
+    dlaKogoTitle: 'Gabinet AI jest dla Ciebie, jeśli',
+    dlaKogo: [
+      'wracasz do pracy po macierzyńskim i czujesz, że świat AI Cię wyprzedził,',
+      'masz dość ogólnych szkoleń i chcesz to ustawione pod swoją rolę, nie „dla wszystkich",',
+      'wolisz godzinę z kimś, kto wie, niż dziesięć wieczorów ze szkoleniem online.',
+    ],
+    dlaczegoEyebrow: 'Dlaczego ja',
+    dlaczegoBody: 'Byłam menedżerką – VP of Product, Director of Community Programs i&nbsp;kierowniczką działu. Dziś prowadzę własne firmy i&nbsp;tworzę „AI na&nbsp;macierzyńskim". Sama jestem na&nbsp;macierzyńskim, więc znam ten moment od&nbsp;środka: i&nbsp;to, jak wygląda raport dla zarządu po&nbsp;godzinach, i&nbsp;to, jak nauczyć się czegokolwiek między karmieniem a&nbsp;praniem.',
+    wiecejEyebrow: 'Więcej niż kurs',
+    wiecejBody: 'Na szkoleniu poznajesz narzędzia. W&nbsp;Gabinecie wychodzisz z&nbsp;AI już ustawionym pod&nbsp;swoje zadania – z&nbsp;tygodniem na&nbsp;dopięcie, żeby weszło w&nbsp;nawyk.',
+    wiecejEm: 'Godzina, która oszczędza Ci miesiące błądzenia w&nbsp;pojedynkę.',
+    rezTitle: 'Zarezerwuj spotkanie',
+    rezLead: 'Gabinet otwieram w&nbsp;kameralnych oknach – kilka miejsc w&nbsp;miesiącu, żeby każda osoba dostała moje pełne przygotowanie. Wybierz termin poniżej i&nbsp;wypełnij krótką ankietę, żebym przygotowała spotkanie pod&nbsp;Ciebie. Wszystko w&nbsp;jednym kroku.',
+    calFail: 'Kalendarz się nie&nbsp;ładuje?',
+    calOpen: 'Otwórz rezerwację w&nbsp;nowym oknie',
+    calAsk: 'Masz pytanie przed rezerwacją?',
+    calWrite: 'Napisz do&nbsp;mnie',
+    faqEyebrow: 'Pytania i obawy',
+    faqTitle: 'Zanim się zapiszesz',
+    faq: [
+      { q: 'Skąd mam wiedzieć, że rozumiesz moją rolę?', a: 'Byłam menedżerką – VP of Product – i prowadziłam zespoły. Wiem, jak wygląda raport dla zarządu, follow-up po spotkaniu i tydzień, w którym wszystko na raz. Pracujemy na Twoich zadaniach, nie na przykładach z internetu.' },
+      { q: '497 zł – a jeśli nie wyjdę z niczym konkretnym?', a: 'Wychodzisz z gotowym setupem, swoimi promptami i planem – wszystko powstaje na Twoich realnych zadaniach podczas sesji. Do doby dostajesz to spisane w jednym dokumencie, a po tygodniu wracam sprawdzić, czy działa.' },
+      { q: 'Nie znam się na AI. Czy dam radę?', a: 'Nie zaczynamy od zera i nie musisz nic umieć wcześniej. Nie tłumaczę teorii – pokazuję, jak użyć AI do tego, co i tak robisz co tydzień. Spokojnie, po ludzku, bez wstydu.' },
+      { q: 'Mam małe dziecko i mało czasu.', a: 'Dlatego to jedna godzina online, do której przygotowuję się za Ciebie. Plan po sesji rozkładam na krótkie kroki – jedno zadanie dziennie, po 15 minut, na prawdziwej pracy.' },
+      { q: 'Czy moja firma pozwala na AI? Co z danymi i NDA?', a: 'Ustalamy zasady pod Twoją firmę: co możesz wkleić, co dopiero po anonimizacji, a czego nigdy. Wychodzisz z jasną listą, nie z wykładem o RODO.' },
+      { q: 'W jakim języku prowadzisz sesje?', a: 'Po polsku albo po angielsku – jak Ci wygodniej. Wybierz przy rezerwacji, ściągę po sesji dostaniesz w tym samym języku.' },
+      { q: 'Co dzieje się po godzinie?', a: 'Dostajesz ściągę do doby i kontakt po tygodniu. A jeśli będziesz chciała iść dalej – przygotowuję kurs, który przechodzi przez wszystkie obszary. Bez nacisku.' },
+    ],
+    endA: 'Godzina teraz zamiast',
+    endEm: 'miesięcy nadrabiania',
+    endB: 'później.',
+    endLead: 'Kilka miejsc w&nbsp;miesiącu. Jeśli czujesz, że to dla Ciebie – wybierz termin i&nbsp;zaczynamy.',
+  },
+  en: {
+    eyebrow: 'AI Clinic · 1:1 session',
+    h1a: 'One hour, one to one,<br />after which',
+    h1em: 'AI works around your tasks',
+    heroLead: 'A private session for a mother going back to work. We work on your real tasks – you leave with a cheat sheet, a prompt library and a week of follow-up. <strong>Sessions run in Polish or English.</strong>',
+    cta: 'Book a session',
+    znaszToTitle: 'Sound familiar?',
+    znaszTo: [
+      'You go back in a few weeks, and you know that in the first meeting someone will drop a tool name and you will nod as if you knew what it was.',
+      'You tried ChatGPT for basic things, but put off learning the more advanced parts. Now you are anxious that everyone moved on without you.',
+      'You are tired of training that demos features, and on Tuesday you still do not know how to use it on your own report.',
+      'You spent the last year with a very small human and you are afraid AI is used completely differently than before your leave.',
+    ],
+    znaszToOutro: 'The AI Clinic is the hour where that ends.',
+    czymEyebrow: 'What the AI Clinic is',
+    czymTitle: 'Your hour. Your work.',
+    czymBody: 'This is not a webinar for a hundred people or a recording to tick off – you and I meet one to one. For an hour we work only on your tasks: the email that takes you 40&nbsp;minutes, the board report, the follow-up after a meeting that never gets written. You leave with AI set up around your work, and with someone who checks a week later whether it actually works.',
+    jakEyebrow: 'How it works',
+    jakTitle: 'Four parts, one hour.',
+    jakWyglada: [
+      { n: '01', title: 'Before we meet', desc: 'You fill in a short questionnaire – your role, the three tasks that eat the most time, the tools your company uses. I go through it beforehand and build the session around you. You arrive at a meeting where I do not explain „what a prompt is" – from minute one we are inside your work.' },
+      { n: '02', title: 'One hour, 1:1', desc: 'We work on your screen and your tasks – you do everything, I guide and prompt. After an hour your chat history holds real, working conversations with AI that you simply keep using.' },
+      { n: '03', title: 'Your cheat sheet and library', desc: 'Your setup, your prompts and Skills, safety rules and a plan for what comes next. You get a document tailored to you, so everything lives in one place.' },
+      { n: '04', title: 'A week later', desc: 'I come back with one question: what moved and what did not. If a prompt underdelivers, we fix it. No „hope you enjoyed it". I want to know you are using this.' },
+    ],
+    coEyebrow: 'What you get',
+    coTitle: 'Specifics, not theory.',
+    coMasz: [
+      { title: 'A setup ready for work', desc: 'Tools chosen and configured for your role.' },
+      { title: 'Your own AI guide', desc: 'A document with a summary of our session, clear guidance, recommendations, prompts and Skills – tailored to you.' },
+      { title: 'Clear safety rules', desc: 'What you may put into AI at work and what you may not, without risking your NDA.' },
+      { title: 'A plan for what comes next', desc: 'Where to begin in week one, one task a day.' },
+      { title: 'A week of follow-up', desc: 'Contact after the session to fix whatever did not move.' },
+    ],
+    dlaKogoTitle: 'The AI Clinic is for you if',
+    dlaKogo: [
+      'you are going back to work after maternity leave and feel the AI world moved past you,',
+      'you are done with generic training and want this set up for your role, not „for everyone",',
+      'you would rather spend an hour with someone who knows than ten evenings on an online course.',
+    ],
+    dlaczegoEyebrow: 'Why me',
+    dlaczegoBody: 'I was a manager – VP of Product, Director of Community Programs and a department head. Today I run my own companies and build „AI na&nbsp;macierzyńskim". I am on maternity leave myself, so I know this moment from the inside: both what a board report after hours looks like, and how hard it is to learn anything between a feed and the laundry.',
+    wiecejEyebrow: 'More than a course',
+    wiecejBody: 'A training course shows you the tools. In the Clinic you leave with AI already set up around your own tasks – with a week of follow-up so it becomes a habit.',
+    wiecejEm: 'An hour that saves you months of figuring it out alone.',
+    rezTitle: 'Book your session',
+    rezLead: 'I open the Clinic in small windows – a few slots a month, so every person gets my full preparation. Pick a time below and fill in the short questionnaire so I can prepare the session for you. All in one step. <strong>Choose Polish or English when you book.</strong>',
+    calFail: 'Calendar not loading?',
+    calOpen: 'Open the booking page in a new window',
+    calAsk: 'Question before booking?',
+    calWrite: 'Message me',
+    faqEyebrow: 'Questions and doubts',
+    faqTitle: 'Before you book',
+    faq: [
+      { q: 'What language is the session in?', a: 'Polish or English – whichever suits you. Choose when you book, and you get the cheat sheet afterwards in the same language.' },
+      { q: 'How do I know you understand my role?', a: 'I was a manager – VP of Product – and I led teams. I know what a board report looks like, what a follow-up after a meeting takes, and what a week with everything at once feels like. We work on your tasks, not on examples from the internet.' },
+      { q: 'PLN 497 – what if I leave with nothing concrete?', a: 'You leave with a working setup, your own prompts and a plan – all built on your real tasks during the session. Within a day you get it written up in one document, and after a week I check back whether it works.' },
+      { q: 'I do not know AI. Will I manage?', a: 'We do not start from zero and you do not need to know anything in advance. I do not teach theory – I show you how to use AI for what you already do every week. Calmly, in plain language, without embarrassment.' },
+      { q: 'I have a small child and very little time.', a: 'That is exactly why it is one hour online that I prepare for on your behalf. The plan afterwards breaks into short steps – one task a day, 15 minutes, on real work.' },
+      { q: 'Does my company allow AI? What about data and NDAs?', a: 'We set rules for your company: what you can paste, what needs anonymising first, and what never goes in. You leave with a clear list, not a lecture on GDPR.' },
+      { q: 'What happens after the hour?', a: 'You get the cheat sheet within a day and contact after a week. And if you want to go further, I am preparing a course that covers every area. No pressure.' },
+    ],
+    endA: 'An hour now instead of',
+    endEm: 'months of catching up',
+    endB: 'later.',
+    endLead: 'A few slots a month. If this feels like yours – pick a time and we start.',
+  },
+}[lang];
+
+const c = content;
+---
+
+  <!-- ============ HERO ============ -->
+  <section class="relative px-6 pt-20 pb-24 overflow-hidden">
+    <div class="blob bg-terra-soft" style="width: 460px; height: 460px; top: -120px; right: -140px;"></div>
+    <div class="blob bg-navy-light" style="width: 360px; height: 360px; bottom: -140px; left: -120px; opacity: 0.22;"></div>
+
+    <div class="max-w-3xl mx-auto relative z-10 fade-up text-center">
+      <p class="eyebrow mb-6 flex items-center justify-center gap-3" style="color: var(--color-wine);">
+        <span class="block w-8 h-px bg-terra"></span>
+        {c.eyebrow}
+        <span class="block w-8 h-px bg-terra"></span>
+      </p>
+
+      <h1 class="text-4xl md:text-5xl lg:text-6xl mb-7 leading-[1.05] tracking-tight">
+        <span class="font-black" set:html={c.h1a} />
+        <em class="font-serif italic font-semibold text-terra"> <Fragment set:html={c.h1em} /></em>.
+      </h1>
+
+      <p class="text-lg md:text-xl text-wine/75 leading-relaxed mb-8 max-w-2xl mx-auto">
+        <Fragment set:html={c.heroLead} />
+      </p>
+
+      <div class="flex justify-center">
+        <a
+          href="#rezerwacja"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-terra/30 group"
+        >
+          <span>{c.cta}</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ ZNASZ TO? ============ -->
+  <section class="relative px-6 py-20 bg-beige/60 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10 fade-up">
+      <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight mb-10">{c.znaszToTitle}</h2>
+      <ul class="space-y-4">
+        {c.znaszTo.map((item) => (
+          <li class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30">
+            <span class="w-2 h-2 rounded-full bg-terra flex-shrink-0 mt-2.5"></span>
+            <p class="text-wine/80 leading-relaxed">{item}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="text-2xl md:text-3xl font-serif italic text-terra mt-10 leading-snug">
+        <Fragment set:html={c.znaszToOutro} />
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ CZYM JEST ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-3xl mx-auto relative z-10 fade-up">
+      <p class="eyebrow mb-4 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        {c.czymEyebrow}
+      </p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight mb-6">
+        {c.czymTitle}
+      </h2>
+      <p class="text-xl md:text-2xl text-wine/85 leading-relaxed font-light">
+        <Fragment set:html={c.czymBody} />
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ JAK TO WYGLĄDA ============ -->
+  <section class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 420px; height: 420px; top: -160px; right: -80px; opacity: 0.28;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10 fade-up">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3" style="color: var(--color-terra-light);">
+          <span class="block w-8 h-px bg-terra-light"></span>
+          {c.jakEyebrow}
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">{c.jakTitle}</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+        {c.jakWyglada.map((step) => (
+          <div>
+            <p class="font-serif italic text-5xl text-terra-light/70 mb-3">{step.n}</p>
+            <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
+            <p class="text-cream/75 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CO MASZ PO GABINECIE ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-5xl mx-auto relative z-10 fade-up">
+      <div class="mb-14 max-w-2xl">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          {c.coEyebrow}
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">{c.coTitle}</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {c.coMasz.map((el) => (
+          <article class="flex items-start gap-4 bg-white rounded-2xl p-6 border border-beige-dark/30 card-lift">
+            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <h3 class="font-semibold text-wine mb-1">{el.title}</h3>
+              <p class="text-wine/70 leading-relaxed text-sm">{el.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DLA KOGO ============ -->
+  <section class="relative px-6 py-20 bg-beige/60 overflow-hidden">
+    <div class="max-w-3xl mx-auto relative z-10 fade-up">
+      <h2 class="text-3xl md:text-4xl font-semibold text-wine leading-tight mb-8">
+        {c.dlaKogoTitle}
+      </h2>
+      <ul class="space-y-4">
+        {c.dlaKogo.map((item) => (
+          <li class="flex items-start gap-4">
+            <svg class="w-6 h-6 text-terra flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <p class="text-lg text-wine/80 leading-relaxed">{item}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ DLACZEGO JA ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10 fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-4">
+          <div class="relative max-w-xs mx-auto md:mx-0">
+            <div class="absolute -inset-2 bg-terra/15 rounded-3xl rotate-2"></div>
+            <img
+              src="/images/ewa-grz-8225-web.jpg"
+              alt="Ewa Chamczyk"
+              class="relative w-full aspect-[4/5] object-cover rounded-2xl shadow-xl"
+            />
+          </div>
+        </div>
+        <div class="md:col-span-8">
+          <p class="eyebrow mb-4 flex items-center gap-3">
+            <span class="block w-8 h-px bg-terra"></span>
+            {c.dlaczegoEyebrow}
+          </p>
+          <h2 class="text-2xl md:text-3xl font-semibold text-wine mb-5 leading-tight">Ewa Chamczyk</h2>
+          <p class="text-wine/80 leading-relaxed text-lg">
+            <Fragment set:html={c.dlaczegoBody} />
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WIĘCEJ NIŻ KURS ============ -->
+  <section class="relative px-6 py-20 bg-beige/60 overflow-hidden">
+    <div class="max-w-4xl mx-auto relative z-10 fade-up">
+      <div class="bg-wine text-cream rounded-3xl px-8 py-12 md:px-14 md:py-14 relative overflow-hidden">
+        <div class="blob bg-terra" style="width: 300px; height: 300px; top: -120px; right: -80px; opacity: 0.3;"></div>
+        <p class="eyebrow mb-4" style="color: var(--color-terra-light);">{c.wiecejEyebrow}</p>
+        <p class="text-xl md:text-2xl leading-relaxed font-light relative z-10">
+          <Fragment set:html={c.wiecejBody} />
+          <em class="font-serif italic text-terra-light"><Fragment set:html={c.wiecejEm} /></em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REZERWACJA (Cal.com inline) ============ -->
+  <section id="rezerwacja" class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 420px; height: 420px; bottom: -160px; right: -100px; opacity: 0.25;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10 fade-up">
+      <div class="mb-8 text-center max-w-2xl mx-auto">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-cream leading-tight mb-5">
+          {c.rezTitle}
+        </h2>
+        <p class="text-cream/75 leading-relaxed">
+          <Fragment set:html={c.rezLead} />
+        </p>
+      </div>
+
+      <!-- Cal inline embed -->
+      <div class="bg-white rounded-2xl border border-beige-dark/30 shadow-2xl p-2 md:p-4">
+        <div style="width:100%;min-height:640px" id="my-cal-inline-konsultacja-1-1-60-min"></div>
+      </div>
+
+      <p class="text-center text-sm text-cream/55 mt-5">
+        <Fragment set:html={c.calFail} />
+        <a href={CAL_FALLBACK} target="_blank" rel="noopener" class="text-cream/80 hover:text-terra-light underline underline-offset-2"><Fragment set:html={c.calOpen} /></a>.
+        <Fragment set:html={c.calAsk} />
+        <a href={IG_DM} target="_blank" rel="noopener" class="text-cream/80 hover:text-terra-light underline underline-offset-2"><Fragment set:html={c.calWrite} /></a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="relative px-6 py-24 overflow-hidden">
+    <div class="max-w-3xl mx-auto relative z-10 fade-up">
+      <div class="mb-12">
+        <p class="eyebrow mb-4 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          {c.faqEyebrow}
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold text-wine leading-tight">{c.faqTitle}</h2>
+      </div>
+      <div class="space-y-4">
+        {c.faq.map((item) => (
+          <details class="group bg-white rounded-2xl border border-beige-dark/30 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 font-semibold text-wine">
+              <span>{item.q}</span>
+              <svg class="w-5 h-5 text-terra flex-shrink-0 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </summary>
+            <p class="px-6 pb-6 text-wine/75 leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOMKNIĘCIE ============ -->
+  <section class="relative px-6 py-24 bg-wine text-cream overflow-hidden">
+    <div class="blob bg-terra" style="width: 460px; height: 460px; top: -160px; left: -120px; opacity: 0.28;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+    <div class="max-w-3xl mx-auto relative z-10 fade-up text-center">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6">
+        <Fragment set:html={c.endA} /> <em class="font-serif italic text-terra-light">{c.endEm}</em> <Fragment set:html={c.endB} />
+      </h2>
+      <p class="text-cream/75 leading-relaxed text-lg mb-9 max-w-xl mx-auto">
+        <Fragment set:html={c.endLead} />
+      </p>
+      <a
+        href="#rezerwacja"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 group"
+      >
+        <span>Umów wizytę</span>
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+<!-- Cal.com inline embed – kod dostarczony przez Ewę. is:inline = Astro nie bundluje, skrypt wykonuje się w przeglądarce. -->
+<script is:inline>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "konsultacja-1-1-60-min", {origin:"https://app.cal.com"});
+  Cal.config = Cal.config || {};
+  Cal.config.forwardQueryParams = true;
+
+  Cal.ns["konsultacja-1-1-60-min"]("inline", {
+    elementOrSelector:"#my-cal-inline-konsultacja-1-1-60-min",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+    calLink: "ainamacierzynskim/konsultacja-1-1-60-min",
+  });
+
+  Cal.ns["konsultacja-1-1-60-min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#4A1721"},"dark":{"cal-brand":"#F2E9DD"}},"hideEventTypeDetails":false,"layout":"month_view"});
+</script>

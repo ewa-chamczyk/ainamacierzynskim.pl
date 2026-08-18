@@ -1,5 +1,29 @@
 ---
-// Intermezzo wizualne – sekcja bio na bordowym tle, wyróżniki brzoskwiniowe
+// Intermezzo wizualne – sekcja bio na bordowym tle, wyróżniki brzoskwiniowe. Dwujęzyczny (prop `lang`).
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const content = {
+  pl: {
+    eyebrow: 'Kto za tym stoi',
+    leadA: 'Od trzech lat pomagam ludziom wejść w świat AI – to mój zawód, biznes i codzienność. Zaczęłam',
+    leadEm: 'długo przed macierzyńskim',
+    leadB: '.',
+    second: 'Zamiast wracać na dawnych zasadach, postawiłam na swoje: buduję AI Tact i Oficyna Lab.',
+    credentials: 'Mama · doktor nauk o kulturze i sztuce · Co-Founder & CEO AI Tact. Była VP of Product i Co-Founder & Head of AI Books w CampusAI. Stypendystka Fulbrighta na Columbia University. Członkini Grupy Roboczej ds. AI przy Ministerstwie Cyfryzacji. Od 15 lat buduje produkty od zera.',
+    more: 'Więcej o mnie na ewachamczyk.pl',
+  },
+  en: {
+    eyebrow: 'Who is behind this',
+    leadA: 'For three years I have been helping people step into AI – it is my job, my business and my everyday life. I started',
+    leadEm: 'long before maternity leave',
+    leadB: '.',
+    second: 'Instead of going back on the old terms, I bet on my own: I am building AI Tact and Oficyna Lab.',
+    credentials: 'Mother · PhD in culture and art studies · Co-Founder & CEO of AI Tact. Former VP of Product and Co-Founder & Head of AI Books at CampusAI. Fulbright scholar at Columbia University. Member of the AI Working Group at the Polish Ministry of Digital Affairs. Building products from scratch for 15 years.',
+    more: 'More about me at ewachamczyk.pl',
+  },
+}[lang];
 ---
 
 <section class="relative px-6 py-24 bg-bordo text-white overflow-hidden">
@@ -27,7 +51,7 @@
 
         <p class="text-sm uppercase tracking-widest text-terra font-medium mb-6 flex items-center gap-3">
           <span class="block w-8 h-px bg-terra"></span>
-          Kto za tym stoi
+          {content.eyebrow}
         </p>
 
         <h2 class="text-5xl md:text-6xl lg:text-7xl font-semibold leading-none">
@@ -38,22 +62,17 @@
       <!-- Prawa kolumna – bio -->
       <div class="lg:col-span-7 space-y-6 fade-up delay-200">
         <p class="text-xl md:text-2xl leading-relaxed font-light">
-          Od trzech lat pomagam ludziom wejść w świat AI – to mój zawód, biznes i codzienność.
-          Zaczęłam <em class="text-terra">długo przed macierzyńskim</em>.
+          {content.leadA} <em class="text-terra">{content.leadEm}</em>{content.leadB}
         </p>
 
         <p class="text-white/80 leading-relaxed">
-          Zamiast wracać na dawnych zasadach, postawiłam na swoje: buduję AI Tact i Oficyna Lab.
+          {content.second}
         </p>
 
         <!-- Mini-bio z autorytetem -->
         <div class="pt-8 border-t border-white/15">
           <p class="text-sm text-white/60 leading-relaxed">
-            Mama · doktor nauk o kulturze i sztuce · Co-Founder &amp; CEO AI Tact.
-            Była VP of Product i Co-Founder &amp; Head of AI Books w CampusAI.
-            Stypendystka Fulbrighta na Columbia University.
-            Członkini Grupy Roboczej ds. AI przy Ministerstwie Cyfryzacji.
-            Od 15 lat buduje produkty od zera.
+            {content.credentials}
           </p>
 
           <a
@@ -62,7 +81,7 @@
             rel="noopener"
             class="inline-flex items-center gap-2 mt-6 text-sm text-terra hover:text-white transition-colors group"
           >
-            <span>Więcej o mnie na ewachamczyk.pl</span>
+            <span>{content.more}</span>
             <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
