@@ -1,5 +1,5 @@
 ---
-// Lista oczekujących na kurs „Menu z głowy" — URL: /menu-z-glowy
+// Lista oczekujących na kurs „Menu z głowy" – URL: /menu-z-glowy
 // JEDNO zadanie: zapis e-mailem na listę oczekujących. Zero linków wychodzących, zero menu.
 // Formularz MailerLite (konto 2290800, formularz 200972846598457199) → grupy
 // `lista-oczekujacych-menu-z-glowy` + `ai-na-macierzynskim-newsletter` → automation
@@ -13,11 +13,11 @@ const description =
 const canonical = 'https://ainamacierzynskim.pl/menu-z-glowy';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// Endpoint zapisu MailerLite — hostowany formularz lead magnetu.
+// Endpoint zapisu MailerLite – hostowany formularz lead magnetu.
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/200972846598457199/subscribe';
 
-// Treść zgody pod formularzem — ta sama pod oboma formularzami.
+// Treść zgody pod formularzem – ta sama pod oboma formularzami.
 const CONSENT =
   'Zapisując się, dołączasz do listy oczekujących na kurs „Menu z&nbsp;głowy” i&nbsp;dostajesz mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a>';
 ---
@@ -124,7 +124,7 @@ const CONSENT =
       }
       .form button:hover { transform: translateY(-2px); }
       .form button:disabled { opacity: 0.65; cursor: progress; transform: none; }
-      /* honeypot — niewidoczny dla ludzi, łapie boty */
+      /* honeypot – niewidoczny dla ludzi, łapie boty */
       .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
       .micro { font-size: 13.5px; color: var(--krem-dim); max-width: 520px; }
@@ -186,7 +186,7 @@ const CONSENT =
       <div class="wrap">
         <span class="label">Menu z głowy · lista oczekujących</span>
         <h1>Co dziś na obiad?<br /><em>Przygotuj z&nbsp;AI menu na cały tydzień.</em></h1>
-        <p class="sub">W&nbsp;krótkim kursie ustawisz własny planer w&nbsp;Claude — pod smaki rodziny, budżet i&nbsp;czas na gotowanie. Przygotujesz menu, przepisy i&nbsp;listę zakupów. W&nbsp;kolejnych tygodniach skorzystasz z&nbsp;zapisanego profilu rodziny, bez zaczynania od zera.</p>
+        <p class="sub">W&nbsp;krótkim kursie ustawisz własny planer w&nbsp;Claude – pod smaki rodziny, budżet i&nbsp;czas na gotowanie. Przygotujesz menu, przepisy i&nbsp;listę zakupów. W&nbsp;kolejnych tygodniach skorzystasz z&nbsp;zapisanego profilu rodziny, bez zaczynania od zera.</p>
         <p class="premiere">Planowana premiera: <time datetime="2026-10-22">22 października 2026</time></p>
         <p class="invitation">Zapisz się, a&nbsp;o&nbsp;otwarciu sprzedaży poinformuję Cię w&nbsp;pierwszej kolejności. Zapis jest bezpłatny i&nbsp;nie zobowiązuje do zakupu.</p>
 
@@ -230,7 +230,7 @@ const CONSENT =
           <li><strong>Apple Notatki</strong> – lista zakupów zawsze pod ręką w&nbsp;telefonie</li>
           <li><strong>Automatyczne przypomnienie o&nbsp;przeglądzie</strong> – w&nbsp;wybrany dzień dostajesz sygnał, że czas na nowe menu</li>
         </ul>
-        <p class="section-note">Możesz zacząć od samego planera. Notion, Apple Notatki i&nbsp;przypomnienia to dodatki — nie musisz korzystać z&nbsp;nich, żeby przygotować menu i&nbsp;zakupy.</p>
+        <p class="section-note">Możesz zacząć od samego planera. Notion, Apple Notatki i&nbsp;przypomnienia to dodatki – nie musisz korzystać z&nbsp;nich, żeby przygotować menu i&nbsp;zakupy.</p>
       </div>
     </section>
 
