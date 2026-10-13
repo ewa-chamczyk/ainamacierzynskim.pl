@@ -9,7 +9,7 @@
 
 const title = 'Menu z głowy – lista oczekujących | AI na macierzyńskim';
 const description =
-  'Kurs, w którym w jeden wieczór ustawisz z AI własny planer posiłków – pod smaki rodziny, budżet i rytm dnia. Zapisz się na listę oczekujących i dowiedz się pierwsza o premierze.';
+  'Ustaw własny planer w Claude i przygotuj menu na cały tydzień, przepisy oraz listę zakupów. Planowana premiera: 22 października 2026. Dowiedz się o niej pierwsza.';
 const canonical = 'https://ainamacierzynskim.pl/menu-z-glowy';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
@@ -70,7 +70,7 @@ const CONSENT =
       * { box-sizing: border-box; margin: 0; padding: 0; }
       /* atrybut hidden musi wygrać z .form{display:flex} i innymi regułami display */
       [hidden] { display: none !important; }
-      html { scroll-behavior: smooth; }
+      html { scroll-behavior: smooth; overflow-x: clip; }
       body {
         background: var(--wino);
         color: var(--krem);
@@ -86,7 +86,7 @@ const CONSENT =
         color: var(--terakota);
       }
       .ghost {
-        position: absolute; right: -4vw; bottom: -6vh;
+        position: absolute; right: 0; bottom: -6vh;
         font-family: 'Fraunces', serif; font-style: italic; font-weight: 600;
         font-size: 62vw; line-height: 0.7; color: var(--krem); opacity: 0.06;
         pointer-events: none; z-index: 1; user-select: none;
@@ -101,6 +101,9 @@ const CONSENT =
       }
       h1 em { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; color: var(--terakota); }
       .sub { font-size: clamp(17px, 2.6vw, 20px); color: var(--krem-dim); max-width: 540px; }
+      .premiere { margin-top: 22px; font-size: 17px; font-weight: 800; }
+      .invitation { margin-top: 8px; max-width: 540px; color: var(--krem-dim); }
+      .section-note { margin-top: 20px; max-width: 620px; color: var(--krem-dim); font-size: 16px; }
 
       /* FORM */
       .form { margin: 30px 0 12px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -182,8 +185,10 @@ const CONSENT =
     <header class="hero">
       <div class="wrap">
         <span class="label">Menu z głowy · lista oczekujących</span>
-        <h1>Co dziś na obiad?<br /><em>Niech to odwieczne pytanie nie zaprząta Ci&nbsp;więcej&nbsp;głowy.</em></h1>
-        <p class="sub">Przygotowuję „Menu z&nbsp;głowy” – krótki kurs, w&nbsp;którym w&nbsp;jeden wieczór ustawisz z&nbsp;AI własny planer posiłków. Pod smaki Twojej rodziny, budżet, czas na gotowanie i&nbsp;rytm dnia. Zapisz się, a&nbsp;dowiesz się o&nbsp;premierze pierwsza.</p>
+        <h1>Co dziś na obiad?<br /><em>Przygotuj z&nbsp;AI menu na cały tydzień.</em></h1>
+        <p class="sub">W&nbsp;krótkim kursie ustawisz własny planer w&nbsp;Claude — pod smaki rodziny, budżet i&nbsp;czas na gotowanie. Przygotujesz menu, przepisy i&nbsp;listę zakupów. W&nbsp;kolejnych tygodniach skorzystasz z&nbsp;zapisanego profilu rodziny, bez zaczynania od zera.</p>
+        <p class="premiere">Planowana premiera: <time datetime="2026-10-22">22 października 2026</time></p>
+        <p class="invitation">Zapisz się, a&nbsp;o&nbsp;otwarciu sprzedaży poinformuję Cię w&nbsp;pierwszej kolejności. Zapis jest bezpłatny i&nbsp;nie zobowiązuje do zakupu.</p>
 
         <div class="cta">
           <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
@@ -197,7 +202,7 @@ const CONSENT =
           <p class="form-status" role="status" aria-live="polite" hidden></p>
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
-            <p class="thankyou-h"><em>Jesteś na liście.</em> Napiszę do Ciebie pierwsza.</p>
+            <p class="thankyou-h"><em>Jesteś na liście.</em> Dowiesz się o&nbsp;premierze w&nbsp;pierwszej kolejności.</p>
             <p>Gdy kurs będzie gotowy, dowiesz się o&nbsp;nim jako pierwsza. Zajrzyj też do spamu i&nbsp;zakładki „Oferty”, żeby moje maile nie przepadły.</p>
           </div>
         </div>
@@ -210,20 +215,22 @@ const CONSENT =
         <ul>
           <li>profil rodziny: kto je, co lubi, czego unikacie, ile macie czasu i&nbsp;pieniędzy – raz, a&nbsp;potem planer z&nbsp;niego korzysta</li>
           <li>własny planer w&nbsp;Claude lub ChatGPT, także na darmowym koncie</li>
-          <li>pierwsze menu, przepisy i&nbsp;listę zakupów – jeszcze tego samego wieczoru</li>
+          <li>pierwsze menu do sprawdzenia i&nbsp;zatwierdzenia, a&nbsp;następnie przepisy i&nbsp;listę zakupów</li>
           <li>poprawki, kiedy tydzień się zmienia: wyjazd, gorszy dzień, maluszek poznający nowe smaki</li>
         </ul>
+        <p class="section-note">Główną ścieżkę pokazuję w&nbsp;Claude. Kurs zaplanowałam do pracy w&nbsp;jeden wieczór, ale możesz podzielić go na etapy. Własne tempo i&nbsp;limity narzędzia mogą wydłużyć ten czas.</p>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-        <h2>Do tego <em>bonusy</em></h2>
+        <h2>Opcjonalne <em>bonusy</em></h2>
         <ul>
           <li><strong>Notion</strong> – menu, przepisy i&nbsp;zakupy w&nbsp;jednym miejscu, z&nbsp;gotowym szablonem</li>
           <li><strong>Apple Notatki</strong> – lista zakupów zawsze pod ręką w&nbsp;telefonie</li>
           <li><strong>Automatyczne przypomnienie o&nbsp;przeglądzie</strong> – w&nbsp;wybrany dzień dostajesz sygnał, że czas na nowe menu</li>
         </ul>
+        <p class="section-note">Możesz zacząć od samego planera. Notion, Apple Notatki i&nbsp;przypomnienia to dodatki — nie musisz korzystać z&nbsp;nich, żeby przygotować menu i&nbsp;zakupy.</p>
       </div>
     </section>
 
@@ -249,6 +256,8 @@ const CONSENT =
 
     <section class="closer">
       <div class="wrap">
+        <h2>Dowiedz się o&nbsp;premierze <em>pierwsza</em></h2>
+        <p class="sub">Premierę planuję na 22 października. Zostaw adres, a&nbsp;napiszę do Ciebie w&nbsp;pierwszej kolejności, gdy ruszy sprzedaż „Menu z&nbsp;głowy”.</p>
         <div class="cta">
           <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
             <label class="hp" aria-hidden="true">Nie wypełniaj tego pola<input type="text" name="hp_website" tabindex="-1" autocomplete="off" /></label>
@@ -261,7 +270,7 @@ const CONSENT =
           <p class="form-status" role="status" aria-live="polite" hidden></p>
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
-            <p class="thankyou-h"><em>Jesteś na liście.</em> Napiszę do Ciebie pierwsza.</p>
+            <p class="thankyou-h"><em>Jesteś na liście.</em> Dowiesz się o&nbsp;premierze w&nbsp;pierwszej kolejności.</p>
             <p>Gdy kurs będzie gotowy, dowiesz się o&nbsp;nim jako pierwsza. Zajrzyj też do spamu i&nbsp;zakładki „Oferty”, żeby moje maile nie przepadły.</p>
           </div>
         </div>
