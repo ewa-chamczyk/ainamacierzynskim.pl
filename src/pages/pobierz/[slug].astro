@@ -1,0 +1,191 @@
+---
+// Strony udostępniania plików: /pobierz/<slug>
+// PO CO TO JEST: surowy link do PDF-a nie ma metadanych Open Graph, więc komunikatory
+// (Messenger, WhatsApp, LinkedIn, Slack) próbują zrobić podgląd z zawartości pliku
+// i pokazują surowe bajty („%PDF-1.7 % 5 0 obj <> stream…”). Ta strona jest opakowaniem:
+// ma porządne OG, więc link wygląda jak karta, a plik pobiera się jednym kliknięciem.
+// Sam PDF dalej żyje pod starym adresem i nic go nie zmienia.
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'plan' },
+      props: {
+        title: 'Plan dnia z Claude',
+        lead: 'Gotowy prompt, który zamienia „zaplanuj mi dzień” w realny plan – pod Twój czas, priorytety i drzemki maluszka.',
+        meta: 'PDF · 1 strona',
+        file: '/plan-dnia-z-claude.pdf',
+        landing: '/plan',
+      },
+    },
+    {
+      params: { slug: 'mapa' },
+      props: {
+        title: 'Mapa 5 obszarów AI',
+        lead: 'Pięć obszarów, w których AI realnie pomaga w pracy. Pięć gotowych promptów i pięć czerwonych linii – czego AI tu NIE robi.',
+        meta: 'PDF · 15 stron',
+        file: '/mapa-5-obszarow.pdf',
+        landing: '/mapa',
+      },
+    },
+    {
+      params: { slug: 'survival' },
+      props: {
+        title: 'AI Survival Kit mamy na wyjeździe',
+        lead: '8 gotowych promptów na pierwszy wyjazd z niemowlakiem – pakowanie, hotel, lotnisko, powrót do domu.',
+        meta: 'PDF · 4 strony',
+        file: '/survival-kit-wyjazd.pdf',
+        landing: '/survival',
+      },
+    },
+    {
+      params: { slug: 'checklista' },
+      props: {
+        title: 'Checklista dobrego promptu',
+        lead: 'Czego nie może zabraknąć w promptcie, żeby AI nie zgadywało. Do sprawdzenia, zanim wyślesz.',
+        meta: 'PDF · 1 strona',
+        file: '/checklista-prompt.pdf',
+        landing: '/checklista',
+      },
+    },
+    {
+      params: { slug: 'spotkanie' },
+      props: {
+        title: 'Checklista: pierwsze spotkanie po powrocie',
+        lead: 'Jak przygotować się na pierwsze spotkanie po powrocie z macierzyńskiego.',
+        meta: 'PDF · 2 strony',
+        file: '/checklista-pierwsze-spotkanie.pdf',
+        landing: '/spotkanie',
+      },
+    },
+  ];
+}
+
+const { slug } = Astro.params;
+const { title, lead, meta, file, landing } = Astro.props;
+
+const canonical = `https://ainamacierzynskim.pl/pobierz/${slug}`;
+const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
+const description = `${lead} Od Ewy Chamczyk – AI na macierzyńskim.`;
+const fileName = file.replace('/', '');
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph – to naprawia podgląd linku w komunikatorach -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="AI na macierzyńskim" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title} – AI na macierzyńskim</title>
+
+    <style is:global>
+      :root {
+        --bordo: #6b1f1f;
+        --bordo-mid: #571a1d;
+        --wino: #4a1721;
+        --wino-2: #3c121b;
+        --krem: #f2e9dd;
+        --krem-dim: rgba(242, 233, 221, 0.74);
+        --peach: #eea679;
+        --peach-deep: #d88458;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        background:
+          radial-gradient(620px 420px at 88% -6%, rgba(238, 166, 121, 0.3), transparent 64%),
+          radial-gradient(520px 380px at -6% 40%, rgba(216, 132, 88, 0.2), transparent 62%),
+          linear-gradient(170deg, var(--bordo) 0%, var(--bordo-mid) 46%, var(--wino-2) 100%);
+        background-attachment: fixed;
+        color: var(--krem);
+        font-family: 'Archivo', sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        padding: 40px 24px;
+      }
+      .card { max-width: 620px; width: 100%; }
+      .label {
+        font-family: 'IBM Plex Mono', monospace; font-weight: 500;
+        font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase;
+        color: var(--peach); display: inline-flex; align-items: center; gap: 12px;
+      }
+      .label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--peach); }
+      h1 {
+        font-family: 'Archivo', sans-serif; font-weight: 900;
+        font-size: clamp(32px, 6vw, 50px); line-height: 1.05; letter-spacing: -0.03em;
+        margin: 16px 0 16px;
+      }
+      .lead { font-size: clamp(16px, 2.4vw, 19px); color: var(--krem-dim); margin-bottom: 10px; }
+      .meta {
+        font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+        letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242, 233, 221, 0.5);
+        margin-bottom: 28px;
+      }
+      .cta {
+        display: inline-flex; align-items: center; gap: 10px;
+        background: var(--peach); color: var(--wino-2);
+        border-radius: 12px; padding: 17px 30px; text-decoration: none;
+        font-weight: 800; font-size: 17px;
+        transition: transform 0.12s ease, background 0.12s ease;
+      }
+      .cta:hover { transform: translateY(-2px); background: var(--peach-deep); }
+      .after { margin-top: 26px; font-size: 14.5px; color: var(--krem-dim); }
+      .after a { color: var(--peach); text-decoration: underline; text-underline-offset: 3px; }
+      footer {
+        margin-top: 36px; padding-top: 20px; border-top: 1px solid rgba(238, 166, 121, 0.25);
+        font-family: 'IBM Plex Mono', monospace; font-size: 12.5px;
+        letter-spacing: 0.08em; color: rgba(242, 233, 221, 0.5);
+      }
+      @media (prefers-reduced-motion: reduce) { .cta { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <span class="label">AI na macierzyńskim</span>
+      <h1>{title}</h1>
+      <p class="lead">{lead}</p>
+      <p class="meta">{meta} · za darmo</p>
+
+      <a class="cta" href={file} download={fileName}>
+        Pobierz PDF
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" />
+        </svg>
+      </a>
+
+      <p class="after">
+        Chcesz więcej takich rzeczy? <a href={landing}>Zapisz się na newsletter</a> – jedna lekcja o&nbsp;AI co drugi czwartek.
+      </p>
+
+      <footer>ainamacierzynskim.pl · Ewa Chamczyk</footer>
+    </main>
+  </body>
+</html>
