@@ -1,4 +1,8 @@
-# Premiera „Menu z głowy” 29.10.2026 – lista oczekujących przekierowuje na sprzedaż (WebToLearn).
-# 302, bo adres może jeszcze zmienić cel. „!” wymusza przekierowanie mimo istniejącej strony menu-z-glowy.astro.
-/menu-z-glowy   https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
-/menu-z-glowy/  https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
+# Menu z głowy – krótkie linki dla klientek (od 29.10.2026).
+# 302, bo cele mogą się jeszcze zmienić. „!” wymusza przekierowanie mimo istniejącej strony menu-z-glowy.astro.
+# Landing (WebToLearn):
+/menu-z-glowy        https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy   302!
+/menu-z-glowy/       https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy   302!
+# Koszyk (szybka sprzedaż WebToLearn):
+/menu-z-glowy/kup    https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
+/menu-z-glowy/kup/   https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
