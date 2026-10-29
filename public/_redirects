@@ -1,0 +1,4 @@
+# Premiera „Menu z głowy” 29.10.2026 – lista oczekujących przekierowuje na sprzedaż (WebToLearn).
+# 302, bo adres może jeszcze zmienić cel. „!” wymusza przekierowanie mimo istniejącej strony menu-z-glowy.astro.
+/menu-z-glowy   https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
+/menu-z-glowy/  https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
