@@ -1,4 +1,5 @@
 ---
+import MetaPixel from '../../components/MetaPixel.astro';
 // Strony udostępniania plików: /pobierz/<slug>
 // PO CO TO JEST: surowy link do PDF-a nie ma metadanych Open Graph, więc komunikatory
 // (Messenger, WhatsApp, LinkedIn, Slack) próbują zrobić podgląd z zawartości pliku
@@ -187,5 +188,6 @@ const fileName = file.replace('/', '');
 
       <footer>ainamacierzynskim.pl · Ewa Chamczyk</footer>
     </main>
+    <MetaPixel />
   </body>
 </html>

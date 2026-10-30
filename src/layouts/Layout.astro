@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
+import MetaPixel from '../components/MetaPixel.astro';
 import { altPath, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -74,6 +75,7 @@ const enURL = new URL(altPath(Astro.url.pathname, 'en'), Astro.site);
     <main>
       <slot />
     </main>
+    <MetaPixel />
 
     <script>
       const observer = new IntersectionObserver(

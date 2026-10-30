@@ -1,0 +1,85 @@
+---
+// Piksel Meta (zestaw danych „AI na macierzyńskim”, portfolio Duke Art) + baner zgody na cookies.
+// Piksel ładuje się WYŁĄCZNIE po kliknięciu „Akceptuję”. Wybór zapisujemy w localStorage
+// (klucz anm-consent: "granted" | "denied"). Do czasu zgody window.fbq nie istnieje,
+// więc wywołania typu `if (window.fbq) fbq('track','Lead')` w formularzach są bezpieczne.
+// Ponowne otwarcie banera: link z atrybutem data-cookie-settings (np. w polityce prywatności).
+const PIXEL_ID = '1978225302841474';
+---
+
+<div
+  id="anm-consent"
+  hidden
+  role="dialog"
+  aria-live="polite"
+  aria-label="Zgoda na pliki cookies"
+  class="anm-consent"
+>
+  <p>
+    Używam piksela Mety (Facebook, Instagram), żeby sprawdzać, czy moje reklamy działają, i pokazywać je
+    osobom, które już tu były. Włączę je tylko za Twoją zgodą.
+    <a href="/polityka-prywatnosci#cookies">Więcej w polityce prywatności</a>.
+  </p>
+  <div class="anm-consent__btns">
+    <button type="button" data-consent="granted" class="anm-consent__yes">
+      Akceptuję
+    </button>
+    <button type="button" data-consent="denied" class="anm-consent__no">
+      Tylko niezbędne
+    </button>
+  </div>
+</div>
+
+<style is:global>
+  .anm-consent { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 1000; margin: 0 auto; max-width: 36rem;
+    background: #2b2523; color: #f6efe6; border-radius: 16px; padding: 20px; box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.55; }
+  .anm-consent[hidden] { display: none !important; }
+  .anm-consent p { margin: 0; }
+  .anm-consent a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .anm-consent__btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .anm-consent button { font: inherit; font-weight: 600; border-radius: 999px; padding: 8px 20px; cursor: pointer; }
+  .anm-consent__yes { background: #f6efe6; color: #2b2523; border: 1px solid #f6efe6; }
+  .anm-consent__no { background: transparent; color: #f6efe6; border: 1px solid rgba(246,239,230,.5); }
+</style>
+
+<script is:inline define:vars={{ PIXEL_ID }}>
+  (function () {
+    var KEY = 'anm-consent';
+    var box = document.getElementById('anm-consent');
+
+    function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+    function loadPixel() {
+      if (window.fbq) return;
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+
+    function choose(v) {
+      save(v);
+      box.hidden = true;
+      if (v === 'granted') loadPixel();
+      else if (window.fbq) location.reload(); // cofnięcie zgody – przeładuj bez piksela
+    }
+
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-consent]');
+      if (b) choose(b.getAttribute('data-consent'));
+    });
+
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-cookie-settings]')) { e.preventDefault(); box.hidden = false; }
+    });
+
+    var c = read();
+    if (c === 'granted') loadPixel();
+    else if (c !== 'denied') box.hidden = false;
+  })();
+</script>

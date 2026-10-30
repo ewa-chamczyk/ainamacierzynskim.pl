@@ -1,4 +1,5 @@
 ---
+import MetaPixel from '../components/MetaPixel.astro';
 // Lista oczekujących na kurs „Menu z głowy" – URL: /menu-z-glowy
 // JEDNO zadanie: zapis e-mailem na listę oczekujących. Zero linków wychodzących, zero menu.
 // Formularz MailerLite (konto 2290800, formularz 200972846598457199) → grupy
@@ -357,6 +358,7 @@ const CONSENT =
               .then(function (data) {
                 if (data && data.success) {
                   showThankYou(cta);
+                  if (window.fbq) { try { fbq('track', 'Lead'); } catch (e) {} }
                 } else {
                   var err = firstError(data);
                   if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';
@@ -374,5 +376,6 @@ const CONSENT =
         });
       })();
     </script>
+    <MetaPixel />
   </body>
 </html>

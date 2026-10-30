@@ -1,4 +1,5 @@
 ---
+import MetaPixel from '../components/MetaPixel.astro';
 // Landing page lead magnetu „Plan dnia z Claude" — URL: /plan
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
 // JEDNO zadanie: zapis (imię + e-mail) po prompt „Plan dnia z Claude". Zero linków wychodzących, zero menu.
@@ -334,6 +335,7 @@ const CONSENT =
               .then(function (data) {
                 if (data && data.success) {
                   showThankYou(cta);
+                  if (window.fbq) { try { fbq('track', 'Lead'); } catch (e) {} }
                 } else {
                   var err = firstError(data);
                   if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';
@@ -351,5 +353,6 @@ const CONSENT =
         });
       })();
     </script>
+    <MetaPixel />
   </body>
 </html>
