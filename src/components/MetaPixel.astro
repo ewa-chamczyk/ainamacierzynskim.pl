@@ -1,10 +1,12 @@
 ---
-// Piksel Meta (zestaw danych „AI na macierzyńskim”, portfolio Duke Art) + baner zgody na cookies.
-// Piksel ładuje się WYŁĄCZNIE po kliknięciu „Akceptuję”. Wybór zapisujemy w localStorage
-// (klucz anm-consent: "granted" | "denied"). Do czasu zgody window.fbq nie istnieje,
+// Piksel Meta (zestaw danych „AI na macierzyńskim”, portfolio Duke Art) + Google Tag Manager
+// (GA4 + Microsoft Clarity) + baner zgody na cookies.
+// Piksel i GTM ładują się WYŁĄCZNIE po kliknięciu „Akceptuję”. Wybór zapisujemy w localStorage
+// (klucz anm-consent-v2: "granted" | "denied"; v2 od 11.2026 – po dodaniu analityki pytamy ponownie). Do czasu zgody window.fbq nie istnieje,
 // więc wywołania typu `if (window.fbq) fbq('track','Lead')` w formularzach są bezpieczne.
 // Ponowne otwarcie banera: link z atrybutem data-cookie-settings (np. w polityce prywatności).
 const PIXEL_ID = '1978225302841474';
+const GTM_ID = 'GTM-59FN39MG';
 ---
 
 <div
@@ -16,8 +18,8 @@ const PIXEL_ID = '1978225302841474';
   class="anm-consent"
 >
   <p>
-    Używam piksela Mety (Facebook, Instagram), żeby sprawdzać, czy moje reklamy działają, i pokazywać je
-    osobom, które już tu były. Włączę je tylko za Twoją zgodą.
+    Używam Google Analytics i Microsoft Clarity, żeby widzieć, jak korzystasz ze strony, oraz piksela Mety
+    (Facebook, Instagram), żeby sprawdzać, czy moje reklamy działają. Włączę je tylko za Twoją zgodą.
     <a href="/polityka-prywatnosci#cookies">Więcej w polityce prywatności</a>.
   </p>
   <div class="anm-consent__btns">
@@ -43,9 +45,9 @@ const PIXEL_ID = '1978225302841474';
   .anm-consent__no { background: transparent; color: #f6efe6; border: 1px solid rgba(246,239,230,.5); }
 </style>
 
-<script is:inline define:vars={{ PIXEL_ID }}>
+<script is:inline define:vars={{ PIXEL_ID, GTM_ID }}>
   (function () {
-    var KEY = 'anm-consent';
+    var KEY = 'anm-consent-v2';
     var box = document.getElementById('anm-consent');
 
     function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -62,11 +64,27 @@ const PIXEL_ID = '1978225302841474';
       fbq('track', 'PageView');
     }
 
+    // Google Tag Manager (GA4 + Clarity) – tylko po zgodzie. Consent Mode v2: domyślnie odmowa,
+    // po kliknięciu „Akceptuję” zgoda na statystyki i reklamy.
+    function loadGtm() {
+      if (window.__anmGtm) return;
+      window.__anmGtm = true;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+      gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+      window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+      document.head.appendChild(s);
+    }
+
     function choose(v) {
       save(v);
       box.hidden = true;
-      if (v === 'granted') loadPixel();
-      else if (window.fbq) location.reload(); // cofnięcie zgody – przeładuj bez piksela
+      if (v === 'granted') { loadPixel(); loadGtm(); }
+      else if (window.fbq || window.__anmGtm) location.reload(); // cofnięcie zgody – przeładuj bez piksela i GTM
     }
 
     box.addEventListener('click', function (e) {
@@ -79,7 +97,7 @@ const PIXEL_ID = '1978225302841474';
     });
 
     var c = read();
-    if (c === 'granted') loadPixel();
+    if (c === 'granted') { loadPixel(); loadGtm(); }
     else if (c !== 'denied') box.hidden = false;
   })();
 </script>
