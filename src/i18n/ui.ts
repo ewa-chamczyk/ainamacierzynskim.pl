@@ -32,6 +32,7 @@ export function path(p: string, lang: Lang): string {
 
 export const ui = {
   pl: {
+    'nav.kurs': 'Kurs',
     'nav.gabinet': 'Gabinet AI',
     'nav.ebook': 'Ebook',
     'nav.newsletter': 'Newsletter',
@@ -49,6 +50,7 @@ export const ui = {
     'lang.note.pl': '',
   },
   en: {
+    'nav.kurs': 'Course',
     'nav.gabinet': 'AI Clinic',
     'nav.ebook': 'Ebook',
     'nav.newsletter': 'Newsletter',

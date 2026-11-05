@@ -1,13 +1,14 @@
 ---
-// Landing page „Nie zniknęłaś" — dedykowany ebookowi
+// Landing page „Nie zniknęłaś” — dedykowany ebookowi
 // URL: /nie-zniknelas
-// CTA wszędzie → EasyCart: https://easl.ink/Z22wp
+// CTA wszędzie → checkout ebooka na WebToLearn (adres w src/consts.ts).
 import Layout from '../layouts/Layout.astro';
 import ScrollProgress from '../components/ScrollProgress.astro';
 import Footer from '../components/Footer.astro';
 
-// EasyCart URL
-const EASYCART_URL = 'https://easl.ink/Z22wp';
+// Adres checkoutu trzymamy w jednym miejscu — podmiana platformy to jedna linijka.
+import { EBOOK_URL } from '../consts';
+const EASYCART_URL = EBOOK_URL;
 
 // 7 listów + krótki kontekst pod pull quote
 const letters = [
@@ -16,7 +17,7 @@ const letters = [
   { n: '03', title: 'Nie jesteś gorszym pracownikiem', quote: 'Nie jesteś gorsza. Jesteś inna. Inna nie znaczy mniej – znaczy: szybciej, celniej, z mniejszą liczbą zbędnych ruchów', context: 'O nowych umiejętnościach, których nie miałaś przed dzieckiem.' },
   { n: '04', title: 'Na swoich warunkach', quote: 'Stawianie warunków to nie słabość. To siła', context: 'O różnicy między roszczeniowością a dorosłą decyzją.' },
   { n: '05', title: 'Twoje dziecko nie zabrało Ci kariery', quote: 'Twoja kariera nie umarła. Zmieniła kształt', context: 'O zarządzaniu zmianą, której nie da się cofnąć.' },
-  { n: '06', title: 'Rola to nie Ty', quote: 'Gdzieś pod tymi wszystkimi etykietami jest kobieta. Z własnymi pragnieniami, marzeniami, potrzebami. Znajdź ją. Ma na Ciebie ochotę', context: 'O kobiecie pod etykietami „mama", „managerka", „żona".' },
+  { n: '06', title: 'Rola to nie Ty', quote: 'Gdzieś pod tymi wszystkimi etykietami jest kobieta. Z własnymi pragnieniami, marzeniami, potrzebami. Znajdź ją. Ma na Ciebie ochotę', context: 'O kobiecie pod etykietami „mama”, „managerka”, „żona”.' },
   { n: '07', title: 'Pozwolenie', quote: 'Nie jesteś sama. Jest nas więcej. I każda z nas robi to po swojemu. To jest jedyny sposób, żeby zrobić to dobrze', context: 'O tym, że żadna z nas nie jest sama – i że to jedyny sposób, żeby zrobić to dobrze.' },
 ];
 
@@ -25,7 +26,7 @@ const personas = [
   {
     name: 'Ania, 34',
     role: 'Head of Marketing',
-    desc: 'Wróciła po roku urlopu. Czuje, że zespół ją „przerósł". Zostaje po godzinach, żeby udowodnić, że nadal ogarnia.',
+    desc: 'Wróciła po roku urlopu. Czuje, że zespół ją „przerósł”. Zostaje po godzinach, żeby udowodnić, że nadal ogarnia.',
   },
   {
     name: 'Kasia, 38',
@@ -35,24 +36,24 @@ const personas = [
   {
     name: 'Marta, 32',
     role: 'Specjalistka IT',
-    desc: 'Na macierzyńskim, za 3 miesiące wraca. Boi się, że technologia ją wyprzedziła. Chce wrócić, ale nie wie, czy jeszcze „pasuje".',
+    desc: 'Na macierzyńskim, za 3 miesiące wraca. Boi się, że technologia ją wyprzedziła. Chce wrócić, ale nie wie, czy jeszcze „pasuje”.',
   },
 ];
 
 // Czego tu NIE znajdziesz (z briefu)
 const niePisze = [
-  'Kolejnego poradnika „jak być lepszą mamą"',
+  'Kolejnego poradnika „jak być lepszą mamą”',
   'Influencerskiego bełkotu o work-life balance',
-  'Ideologii – ani „musisz wrócić", ani „musisz zostać"',
+  'Ideologii – ani „musisz wrócić”, ani „musisz zostać”',
   'Listy produktywnościowych hacków',
-  '„Wstań o 5:00 i medytuj", „wystarczy chcieć", „follow your passion"',
+  '„Wstań o 5:00 i medytuj”, „wystarczy chcieć”, „follow your passion”',
 ];
 
-// Co tu znajdziesz (z briefu — przeformułowane jako „głos który mówi")
+// Co tu znajdziesz (z briefu — przeformułowane jako „głos który mówi”)
 const tuJest = [
-  'Głos, który mówi: „Widzę Cię. Rozumiem. Nie jesteś zepsuta."',
+  'Głos, który mówi: „Widzę Cię. Rozumiem. Nie jesteś zepsuta.”',
   'Pozwolenie, żeby być ambitną mamą bez poczucia winy',
-  'Walidacja: „To, co czujesz, nie jest fanaberią. Nie jesteś sama."',
+  'Walidacja: „To, co czujesz, nie jest fanaberią. Nie jesteś sama.”',
   'Macierzyństwo traktowane jak projekt do zarządzania, nie misja do poświęcenia',
 ];
 
@@ -102,15 +103,15 @@ const faqs = [
   },
   {
     q: 'Kiedy dokładnie dostanę plik?',
-    a: 'Od razu po opłaceniu – plik PDF dostajesz linkiem na maila. Sprawdź folder „Oferty" i „Spam", gdyby maila brakowało.',
+    a: 'Od razu po opłaceniu – plik PDF dostajesz linkiem na maila. Sprawdź folder „Oferty” i „Spam”, gdyby maila brakowało.',
   },
   {
     q: 'Co z audiobookiem?',
-    a: 'Nagrywam wersję audio – czytam Ci listy własnym głosem. Nie podaję jeszcze daty, ale dam znać w newsletterze „AI na macierzyńskim". Jeśli chcesz dostać informację jako pierwsza – zapisz się.',
+    a: 'Nagrywam wersję audio – czytam Ci listy własnym głosem. Nie podaję jeszcze daty, ale dam znać w newsletterze „AI na macierzyńskim”. Jeśli chcesz dostać informację jako pierwsza – zapisz się.',
   },
 ];
 
-// Wstęp ebooka — CAŁY tekst „Zanim przeczytasz te listy"
+// Wstęp ebooka — CAŁY tekst „Zanim przeczytasz te listy”
 const wstepBlocks = [
   { type: 'p', text: 'Niedawno urodziłam córkę.' },
   { type: 'p', text: 'Nikt mnie nie uprzedził, że pierwsze tygodnie będą przypominać onboarding do pracy, w której nie ma opisu stanowiska, przerwy na lunch ani weekendów. Kursy, szkoła rodzenia, wszystkie książki – przygotowały mnie mniej więcej tak, jak prezentacja PowerPoint przygotowuje do prawdziwego projektu. Czyli teoretycznie.' },
@@ -119,7 +120,7 @@ const wstepBlocks = [
   { type: 'p', text: 'Instagramowy feed mnie zawiódł. Pełno w nim było poradników, młodych mam wracających do formy w tempie, które naruszało prawa fizyki. Fizjoterapeutów pokazujących nowe sposoby trzymania, przewijania, podnoszenia. Nawet wkładania dziecka w ręcznik po kąpieli – bo najwyraźniej robiłam to źle przez całe swoje dorosłe życie. Ginęłam w tym. Nie było tam przestrzeni dla kobiety aktywnej intelektualnie. Dla liderki. Dla kogoś, kto potrzebuje myśleć – nie tylko opiekować się.' },
   { type: 'p', text: 'Odinstalowałam Instagram. Pomyślałam: jestem tym, co konsumuję. Nie chcę tak.' },
   { type: 'p', text: 'I wtedy zrodził się pomysł. Napisać to, co sama chciałabym usłyszeć w tamtych dniach. Słowa, których szukałam między jednym karmieniem a drugim – i nie znajdowałam.' },
-  { type: 'p', text: 'Kilkanaście dni po porodzie dostałam telefon z pracy. Pytanie brzmiało: kiedy wracasz? Najwyraźniej moje „out of office" nie robiło na nikim wystarczającego wrażenia. Byłam zbita z tropu – nie tak się umawialiśmy. I wtedy poczułam to, co pewnie czeka każdą z nas: moment powrotu. Albo moment decyzji, że nie wracamy – przynajmniej nie w ten sam sposób.' },
+  { type: 'p', text: 'Kilkanaście dni po porodzie dostałam telefon z pracy. Pytanie brzmiało: kiedy wracasz? Najwyraźniej moje „out of office” nie robiło na nikim wystarczającego wrażenia. Byłam zbita z tropu – nie tak się umawialiśmy. I wtedy poczułam to, co pewnie czeka każdą z nas: moment powrotu. Albo moment decyzji, że nie wracamy – przynajmniej nie w ten sam sposób.' },
   { type: 'p', text: 'Chcę to zrobić w zgodzie z sobą. Bez poczucia winy, że stawiam warunki. Że zostawiam dziecko. Że deleguję. Że chcę pracować. Albo że potrzebuję więcej czasu. Bez przepraszania za to, że mam oczekiwania – bo od kiedy to jest coś, za co trzeba przepraszać?' },
   { type: 'pullquote', text: 'Nie jestem gorsza. Jestem sobą. Tylko trochę bardziej niewyspana.' },
   { type: 'h', text: 'Te listy są dla Ciebie.' },
@@ -134,8 +135,8 @@ const wstepBlocks = [
 ---
 
 <Layout
-  title='„Nie zniknęłaś" – 7 listów do mamy, która chce iść dalej · ebook'
-  description="Ebook dla mam wracających do pracy po macierzyńskim. 7 emocjonalnych listów. 48 zł, plik PDF od razu po zakupie."
+  title='„Nie zniknęłaś” – 7 listów do mamy, która chce iść dalej · ebook'
+  description="Ebook dla mam wracających do pracy po macierzyńskim. 7 emocjonalnych listów. 47 zł, plik PDF od razu po zakupie."
   ogImage="/images/og-nie-zniknelas.jpg"
 >
   <ScrollProgress />
@@ -167,7 +168,7 @@ const wstepBlocks = [
           </p>
 
           <p class="text-lg md:text-xl text-charcoal/75 mb-10 leading-relaxed max-w-xl">
-            Nie musisz wracać do „dawnej siebie". Możesz iść dalej.<br />
+            Nie musisz wracać do „dawnej siebie”. Możesz iść dalej.<br />
             <strong class="text-charcoal">Na własnych zasadach.</strong>
           </p>
 
@@ -179,7 +180,7 @@ const wstepBlocks = [
               rel="noopener"
               class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-bordo hover:bg-bordo-dark text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-bordo/30 group"
             >
-              <span>Kup ebooka · 48 zł</span>
+              <span>Kup ebooka · 47 zł</span>
               <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -210,7 +211,7 @@ const wstepBlocks = [
 
             <img
               src="/images/ebook-cover.png"
-              alt="„Nie zniknęłaś" – okładka ebooka"
+              alt="„Nie zniknęłaś”" – okładka ebooka"
               class="relative w-full rounded-2xl shadow-2xl"
             />
 
@@ -432,7 +433,7 @@ const wstepBlocks = [
               <div class="bg-white rounded-xl p-3 shadow-xl border border-sand/30">
                 <img
                   src="/images/ebook-cover.png"
-                  alt="Okładka ebooka „Nie zniknęłaś"”
+                  alt="Okładka ebooka „Nie zniknęłaś”"”
                   class="w-full rounded-md aspect-[596/842] object-cover"
                   loading="lazy"
                 />
@@ -657,7 +658,7 @@ const wstepBlocks = [
           <span class="block w-8 h-px bg-gold"></span>
         </p>
         <h2 class="text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Tylko 48 zł.
+          Tylko 47 zł.
         </h2>
       </div>
 
@@ -680,7 +681,7 @@ const wstepBlocks = [
             rel="noopener"
             class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-white text-bordo hover:bg-cream-warm font-semibold rounded-xl transition-all hover:scale-105"
           >
-            <span>Kup ebooka · 48 zł</span>
+            <span>Kup ebooka · 47 zł</span>
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
@@ -835,11 +836,11 @@ const wstepBlocks = [
       </p>
 
       <h2 class="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 leading-tight fade-up">
-        Kup <span class="italic">„Nie zniknęłaś".</span>
+        Kup <span class="italic">„Nie zniknęłaś”.</span>
       </h2>
 
       <p class="text-xl md:text-2xl text-white/85 mb-12 leading-relaxed max-w-2xl mx-auto fade-up delay-100">
-        48 zł zamiast 79 zł. PDF z 7 listami i postscriptum – na maila od razu po opłaceniu.
+        47 zł zamiast 79 zł. PDF z 7 listami i postscriptum – na maila od razu po opłaceniu.
       </p>
 
       <a
@@ -848,7 +849,7 @@ const wstepBlocks = [
         rel="noopener"
         class="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-bordo hover:bg-cream-warm font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-2xl text-lg fade-up delay-200"
       >
-        <span>Kup ebooka · 48 zł</span>
+        <span>Kup ebooka · 47 zł</span>
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>

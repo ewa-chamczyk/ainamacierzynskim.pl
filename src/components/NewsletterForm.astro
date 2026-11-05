@@ -1,0 +1,149 @@
+---
+// NewsletterForm.astro — zapis na newsletter BEZ wychodzenia ze strony głównej.
+// Ten sam formularz MailerLite co na /mapa (konto 2290800, formularz 187811600159213426)
+// → grupa `ai-na-macierzynskim-newsletter` → ten sam welcome flow.
+// Po sukcesie przenosimy na /mapa-dziekuje: tam jest pobranie PDF-a i oferta kursu.
+// Tylko PL — wersja EN ma własny formularz i własną zgodę na /en/newsletter.
+interface Props {
+  /** Etykieta przycisku. */
+  cta: string;
+  /** Wariant kolorystyczny: `jasny` na kremie, `ciemny` na winie. */
+  wariant?: 'jasny' | 'ciemny';
+}
+const { cta, wariant = 'jasny' } = Astro.props;
+
+const ML_ENDPOINT =
+  'https://assets.mailerlite.com/jsonp/2290800/forms/187811600159213426/subscribe';
+
+// Zgoda identyczna jak pod formularzem na /mapa — jeden produkt, jedna treść zgody.
+const CONSENT =
+  'Zapisując się, dostajesz Mapę w&nbsp;PDF i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a class="underline hover:no-underline" href="/polityka-prywatnosci">Polityka prywatności</a> · <a class="underline hover:no-underline" href="/regulamin">Regulamin</a>';
+
+const pole =
+  wariant === 'ciemny'
+    ? 'w-full px-4 py-3.5 rounded-xl bg-cream text-wine placeholder-wine/50 border-2 border-transparent focus-visible:border-terra focus-visible:outline-none'
+    : 'w-full px-4 py-3.5 rounded-xl bg-cream text-wine placeholder-wine/50 border-2 border-beige-dark/40 focus-visible:border-terra focus-visible:outline-none';
+const micro = wariant === 'ciemny' ? 'text-cream/65' : 'text-wine/50';
+const statusKolor = wariant === 'ciemny' ? 'text-terra-light' : 'text-terra-dark';
+---
+
+<div data-nl-box>
+  <form data-nl-form method="POST" action={ML_ENDPOINT} class="grid gap-3 sm:grid-cols-2">
+    <label class="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+      Nie wypełniaj tego pola
+      <input type="text" name="hp_website" tabindex="-1" autocomplete="off" />
+    </label>
+
+    <input
+      type="text"
+      name="fields[name]"
+      required
+      autocomplete="given-name"
+      placeholder="Imię"
+      aria-label="Twoje imię"
+      class={pole}
+    />
+    <input
+      type="email"
+      name="fields[email]"
+      required
+      autocomplete="email"
+      placeholder="Twój e-mail"
+      aria-label="Twój adres e-mail"
+      class={pole}
+    />
+    <input type="hidden" name="anticsrf" value="true" />
+    <input type="hidden" name="ml-submit" value="1" />
+
+    <button
+      type="submit"
+      class="sm:col-span-2 inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-colors disabled:cursor-progress disabled:opacity-65"
+    >
+      {cta}
+    </button>
+  </form>
+
+  <p data-nl-status role="status" aria-live="polite" hidden class={`mt-3 text-sm font-semibold ${statusKolor}`}></p>
+  <p class={`mt-4 text-xs leading-relaxed ${micro}`} set:html={CONSENT}></p>
+</div>
+
+<script>
+  const ENDPOINT =
+    'https://assets.mailerlite.com/jsonp/2290800/forms/187811600159213426/subscribe';
+  const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  const PO_ZAPISIE = '/mapa-dziekuje';
+
+  document.querySelectorAll<HTMLFormElement>('form[data-nl-form]').forEach((form) => {
+    const box = form.closest('[data-nl-box]');
+    const status = box?.querySelector<HTMLElement>('[data-nl-status]');
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const emailInput = form.querySelector<HTMLInputElement>('input[type="email"]');
+    const hp = form.querySelector<HTMLInputElement>('input[name="hp_website"]');
+
+    function setStatus(msg: string) {
+      if (!status) return;
+      status.textContent = msg;
+      status.hidden = false;
+    }
+
+    function firstError(data: any): string {
+      try {
+        const f = data.errors.fields;
+        for (const k in f) if (f[k] && f[k][0]) return f[k][0];
+      } catch (e) {}
+      return '';
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!btn || !emailInput) return;
+
+      // bot: honeypot wypełniony → udajemy sukces, nic nie wysyłamy
+      if (hp && hp.value) {
+        window.location.href = PO_ZAPISIE;
+        return;
+      }
+
+      const email = (emailInput.value || '').trim();
+      if (!EMAIL_RE.test(email)) {
+        setStatus('Podaj poprawny adres e-mail.');
+        emailInput.focus();
+        return;
+      }
+
+      if (status) {
+        status.textContent = '';
+        status.hidden = true;
+      }
+      const original = btn.textContent || '';
+      btn.disabled = true;
+      btn.textContent = 'Wysyłam…';
+
+      const fd = new FormData(form);
+      fd.delete('hp_website');
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        body: fd,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      })
+        .then((res) => res.json().catch(() => ({ success: res.ok })))
+        .then((data) => {
+          if (data && data.success) {
+            window.location.href = PO_ZAPISIE;
+          } else {
+            let err = firstError(data);
+            if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';
+            setStatus(err || 'Coś nie zadziałało. Spróbuj jeszcze raz.');
+            btn.disabled = false;
+            btn.textContent = original;
+          }
+        })
+        .catch(() => {
+          setStatus('Brak połączenia. Spróbuj jeszcze raz za chwilę.');
+          btn.disabled = false;
+          btn.textContent = original;
+        });
+    });
+  });
+</script>

@@ -1,0 +1,70 @@
+---
+// Opinie.astro — dowód społeczny na stronie głównej.
+// Cytaty 1:1 z landingu kursu „Menu z głowy” (sekcja „Co mówią osoby, które uczyły się ze mną AI”).
+// Nie skracam ani nie poprawiam cudzych słów — to wypowiedzi konkretnych osób.
+// Tylko PL: opinie są po polsku, tłumaczenie zmieniałoby czyjąś wypowiedź.
+
+const content = {
+  eyebrow: 'Opinie',
+  h2a: 'Co mówią osoby, które uczyły się',
+  h2em: 'ze mną AI',
+  opinie: [
+    {
+      imie: 'Gosia',
+      inicjal: 'G',
+      tresc: [
+        'Ewo, bardzo dziękuję za wczorajsze spotkanie! Olbrzymia dawka wiedzy. Dzięki Tobie AI okazuje się być rewelacyjnym narzędziem do zarządzania domem czy wprowadzeniem optymalizacji w pracy, ale i swoistym asystentem!',
+      ],
+    },
+    {
+      imie: 'Monika',
+      inicjal: 'M',
+      tresc: [
+        'Teraz wiem nie tylko, z jakich narzędzi korzystać, ale przede wszystkim jak dalej rozwijać swoje umiejętności i stopniowo automatyzować powtarzalne zadania. To oznacza więcej czasu na kreatywną pracę, a mniej na rzeczy, które wcześniej zabierały mi mnóstwo energii.',
+        'Ewa jest przy tym bardzo ciepłą, cierpliwą i uważną osobą. Świetnie prowadzi rozmowę i nawet kiedy zadawałam mnóstwo pytań i odbiegałam od głównego tematu, potrafiła wrócić do tego, co najważniejsze.',
+      ],
+    },
+    {
+      imie: 'Ania',
+      inicjal: 'A',
+      tresc: [
+        'Ewa dokłada wszelkich starań, żeby odpowiedzieć na potrzeby uczestników. Jest profesjonalistą, do którego chętnie wrócę w trakcie mojej przygody z AI.',
+      ],
+    },
+  ],
+};
+---
+
+<section id="opinie" class="relative px-6 py-24 bg-beige/40 overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    <div class="max-w-2xl mb-12 fade-up">
+      <p class="eyebrow mb-5 flex items-center gap-3">
+        <span class="block w-8 h-px bg-terra"></span>
+        {content.eyebrow}
+      </p>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+        {content.h2a}
+        <em class="font-serif italic font-semibold text-terra-dark">{content.h2em}</em>.
+      </h2>
+    </div>
+
+    <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      {content.opinie.map((o, i) => (
+        <li
+          class="fade-up bg-white rounded-2xl p-7 border border-beige-dark/40 shadow-sm"
+          style={`transition-delay:${i * 120}ms`}
+        >
+          <div class="flex items-center gap-3 mb-5">
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-terra text-wine font-display font-black">
+              {o.inicjal}
+            </span>
+            <p class="font-semibold text-wine">{o.imie}</p>
+          </div>
+          {o.tresc.map((akapit) => (
+            <p class="text-wine/80 leading-relaxed mb-3 last:mb-0">{akapit}</p>
+          ))}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

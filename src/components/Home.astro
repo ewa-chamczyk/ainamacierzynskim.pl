@@ -10,6 +10,9 @@ import LeadMagnet from './LeadMagnet.astro';
 import ValueFirst from './ValueFirst.astro';
 import ForWho from './ForWho.astro';
 import Gabinet from './Gabinet.astro';
+import Kurs from './Kurs.astro';
+import Instagram from './Instagram.astro';
+import Opinie from './Opinie.astro';
 import EbookPreview from './EbookPreview.astro';
 import About from './About.astro';
 import FAQ from './FAQ.astro';
@@ -26,11 +29,17 @@ const { lang = 'pl' } = Astro.props;
 <Hero lang={lang} />
 <Problem lang={lang} />
 <CzymJest lang={lang} />
+<Instagram lang={lang} />
 <ValueFirst lang={lang} />
 <LeadMagnet lang={lang} />
 <ForWho lang={lang} />
+{/* Kolejność produktów: kurs → gabinet → ebook.
+    Kurs „Menu z głowy” jest po polsku — sekcja tylko w PL, /en dostaje link w menu. */}
+{lang === 'pl' && <Kurs />}
 <Gabinet lang={lang} />
 <EbookPreview lang={lang} />
+{/* Opinie są po polsku — tłumaczenie zmieniałoby czyjąś wypowiedź, więc tylko PL. */}
+{lang === 'pl' && <Opinie />}
 <About lang={lang} />
 <FAQ lang={lang} />
 <FinalCTA lang={lang} />

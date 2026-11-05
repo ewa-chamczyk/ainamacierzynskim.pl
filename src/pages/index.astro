@@ -1,6 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
+import { KURS_URL } from '../consts';
+
+// Dane strukturalne (JSON-LD) dla wyszukiwarek i agentów AI.
+// Tylko wersja PL — /en opisuje tę samą markę, więc nie dublujemy grafu.
+// Bez ceny kursu: cena się zmienia, a nieaktualna cena w danych strukturalnych szkodzi.
+const SITE = 'https://ainamacierzynskim.pl';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE}/#organizacja`,
+      name: 'AI na macierzyńskim',
+      url: `${SITE}/`,
+      logo: `${SITE}/favicon.png`,
+      description:
+        'Marka edukacyjna dla kobiet w ciąży, na urlopie macierzyńskim i wracających do pracy. Praktyczne korzystanie z AI w codziennym życiu i pracy.',
+      sameAs: ['https://www.instagram.com/ai.na.macierzynskim/'],
+      founder: { '@id': `${SITE}/#ewa-chamczyk` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${SITE}/#ewa-chamczyk`,
+      name: 'Ewa Chamczyk',
+      url: 'https://ewachamczyk.pl/',
+      sameAs: ['https://www.linkedin.com/in/ewachamczyk/'],
+    },
+    {
+      '@type': 'Course',
+      '@id': `${KURS_URL}#kurs`,
+      name: 'Menu z głowy – planer posiłków z AI',
+      description:
+        'Kurs online, w którym krok po kroku budujesz w Claude lub ChatGPT własny planer posiłków dla rodziny: menu na tydzień, przepisy i listę zakupów. 10 lekcji wideo i 3 lekcje bonusowe, działa także w darmowych planach.',
+      url: KURS_URL,
+      inLanguage: 'pl',
+      provider: { '@id': `${SITE}/#organizacja` },
+      creator: { '@id': `${SITE}/#ewa-chamczyk` },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        inLanguage: 'pl',
+      },
+    },
+  ],
+};
 ---
 
 <Layout
@@ -8,5 +54,6 @@ import Home from '../components/Home.astro';
   title="AI na macierzyńskim – wracasz do pracy, AI Cię nie wyprzedzi"
   description="Marka edukacyjna dla kobiet w ciąży, na macierzyńskim i wracających do pracy. Małe kroki, konkretne zastosowania, zero presji. Ebook + newsletter + kurs."
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <Home lang="pl" />
 </Layout>

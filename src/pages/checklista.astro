@@ -1,10 +1,10 @@
 ---
-// Landing page lead magnetu „Checklista dobrego promptu 2026" — URL: /checklista
+// Landing page lead magnetu „Checklista dobrego promptu 2026” — URL: /checklista
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
 // JEDNO zadanie: zapis e-mailem po Checklistę. Zero linków wychodzących, zero menu.
 // Formularz spięty z MailerLite (konto 2290800, formularz 195444370423416519) →
 // grupa `magnes-checklista-prompt` (194773512022394506) → automation
-// „ANM Welcome – Checklista dobrego promptu" (194775405958267921) → kopia do welcome-nurture.
+// „ANM Welcome – Checklista dobrego promptu” (194775405958267921) → kopia do welcome-nurture.
 // Double opt-in w formularzu WYŁĄCZONY (10.08.2026) – inaczej PDF nie dochodzi.
 // Strona standalone (własny <head>), świadomie poza Layout.astro — wzorzec 1:1 z /mapa.
 
@@ -20,7 +20,7 @@ const ML_ENDPOINT =
 
 // Treść zgody pod formularzem — ta sama pod oboma formularzami.
 const CONSENT =
-  'Zapisując się, dostajesz Checklistę (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
+  'Zapisując się, dostajesz Checklistę w&nbsp;PDF i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
 ---
 
 <!doctype html>
@@ -29,7 +29,8 @@ const CONSENT =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -222,7 +223,7 @@ const CONSENT =
         <ul>
           <li>zbierasz prompty z&nbsp;internetu i&nbsp;żaden nie działa tak jak u&nbsp;autora</li>
           <li>piszesz do AI i&nbsp;dostajesz coś ogólnego, więc poprawiasz dłużej, niż napisałabyś sama</li>
-          <li>wciąż zaczynasz od „jesteś światowej klasy ekspertem" i&nbsp;masz przeczucie, że to nic nie daje</li>
+          <li>wciąż zaczynasz od „jesteś światowej klasy ekspertem” i&nbsp;masz przeczucie, że to nic nie daje</li>
         </ul>
       </div>
     </section>

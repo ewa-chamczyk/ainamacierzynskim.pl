@@ -1,9 +1,10 @@
 ---
-// LeadMagnet – sekcja newslettera „AI na macierzyńskim" (#mapa). Dwujęzyczna (prop `lang`).
+// Sekcja newslettera „AI na macierzyńskim” z Mapą 5 obszarów AI (#mapa). Dwujęzyczna (prop `lang`).
 // PL: zapis = Mapa 5 obszarów AI w prezencie, CTA → /mapa.
 // EN: Mapa to PDF po polsku, więc nie obiecujemy jej po angielsku — CTA → /en/newsletter,
 //     z jasną informacją, że newsletter jest po polsku.
 import { type Lang } from '../i18n/ui';
+import NewsletterForm from './NewsletterForm.astro';
 interface Props { lang?: Lang }
 const { lang = 'pl' } = Astro.props;
 
@@ -11,11 +12,11 @@ const content = {
   pl: {
     eyebrow: 'Newsletter · co drugi czwartek, za darmo',
     h2a: 'Newsletter',
-    h2b: '„AI na macierzyńskim"',
+    h2b: '„AI na macierzyńskim”',
     sub: 'Oswajamy AI po ludzku – jeden mail co drugi czwartek.',
     leadA: 'Zapisujesz się i',
     leadStrong: 'na start dostajesz Mapę 5 obszarów AI',
-    leadB: '(PDF). Potem co drugi czwartek jeden krótki mail – da się przeczytać między karmieniami.',
+    leadB: 'w PDF. Potem co drugi czwartek jeden krótki mail – da się przeczytać między karmieniami.',
     items: [
       { label: 'Na start:', text: 'Mapa 5 obszarów AI – pięć konkretów i pięć gotowych promptów, sześć minut czytania.' },
       { label: 'Co drugi czwartek:', text: 'jeden krótki mail – konkret z domu, doby albo pracy i gotowe prompty do wklejenia.' },
@@ -27,12 +28,12 @@ const content = {
     cardSub: 'Jeden zapis, dwie rzeczy naraz.',
     cta: 'Zapisz się · odbierz Mapę',
     href: '/mapa',
-    note: 'Po zapisie dostajesz mail z linkiem do PDF (1,5 MB). Wypiszesz się jednym klikiem.',
+    note: 'Po zapisie dostajesz mail z linkiem do PDF. Wypiszesz się jednym klikiem.',
   },
   en: {
     eyebrow: 'Newsletter · every other Thursday, free',
     h2a: 'The newsletter',
-    h2b: '„AI na macierzyńskim"',
+    h2b: '„AI na macierzyńskim”',
     sub: 'Making AI human – one email every other Thursday.',
     leadA: 'Every other Thursday evening you get',
     leadStrong: 'one lesson, one ready-made prompt and one real use case',
@@ -125,7 +126,7 @@ const content = {
             <div class="w-[45%] max-w-[190px] shrink-0 rounded-xl overflow-hidden shadow-lg border border-beige-dark/30 rotate-2">
               <img
                 src="/images/newsletter-preview.png"
-                alt="Podgląd newslettera „AI na macierzyńskim""
+                alt="Podgląd newslettera „AI na macierzyńskim”""
                 class="w-full block"
                 loading="lazy"
               />
@@ -135,21 +136,27 @@ const content = {
           <p class="text-center text-charcoal font-semibold mb-1">{content.cardTitle}</p>
           <p class="text-center text-sm text-charcoal/55 mb-6">{content.cardSub}</p>
 
-          <!-- CTA button – prowadzi na dedykowany landing zapisu /mapa -->
-          <a
-            href={content.href}
-            class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-terra/30 group"
-          >
-            <span>{content.cta}</span>
-            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+          {/* PL: zapis dzieje się tutaj. EN: osobny formularz i zgoda żyją na /en/newsletter. */}
+          {lang === 'pl' ? (
+            <NewsletterForm cta={content.cta} />
+          ) : (
+            <Fragment>
+              <a
+                href={content.href}
+                class="inline-flex items-center justify-center gap-2 w-full px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-xl hover:shadow-terra/30 group"
+              >
+                <span>{content.cta}</span>
+                <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
 
-          <!-- Mała notka pod formularzem -->
-          <p class="text-xs text-charcoal/50 text-center mt-6">
-            {content.note}
-          </p>
+              <!-- Mała notka pod formularzem -->
+              <p class="text-xs text-charcoal/50 text-center mt-6">
+                {content.note}
+              </p>
+            </Fragment>
+          )}
         </div>
       </div>
     </div>

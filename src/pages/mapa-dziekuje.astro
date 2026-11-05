@@ -1,6 +1,9 @@
 ---
-// Strona „dziękuję" po zapisie na lead magnet — URL: /mapa-dziekuje
-// Cel: pobieranie Mapy 5 obszarów AI (PDF z public/) + nudge na IG.
+import { OFERTA_PO_ZAPISIE_URL } from '../consts';
+
+// Strona „dziękuję” po zapisie na Mapę 5 obszarów AI — URL: /mapa-dziekuje
+// Cel: pobieranie Mapy 5 obszarów AI (PDF z public/) + jedna oferta po zapisie (kurs).
+// Tu ląduje formularz ze strony głównej (NewsletterForm) i hostowany formularz MailerLite.
 // Branding spójny z /mapa (wino / terakota / krem). Standalone, poza Layout.astro.
 // PDF pod URL: /mapa-5-obszarow.pdf (1.1 MB).
 
@@ -19,13 +22,14 @@ const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800;900&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=IBM+Plex+Mono:wght@500&family=Caveat:wght@700&display=swap"
       rel="stylesheet"
     />
 
@@ -99,6 +103,17 @@ const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
       li a { color: var(--krem); border-bottom: 1px solid rgba(224, 138, 91, 0.55); text-decoration: none; }
       li a:hover { color: var(--terakota); }
 
+      /* Odręczny dopisek — ten sam zabieg co na landingu kursu. */
+      .sticky-note {
+        display: inline-block; background: #F1C5A6; color: var(--wino);
+        font-family: 'Caveat', cursive; font-weight: 700;
+        font-size: 25px; line-height: 1.05; padding: 14px 16px 16px;
+        box-shadow: 0 12px 20px -12px rgba(58, 17, 26, 0.55);
+        transform: rotate(-1.5deg); margin: 4px 0 22px;
+      }
+      .oferta .sub { margin-bottom: 20px; }
+      .oferta .cta { margin-top: 26px; }
+
       footer { padding: 40px 0 56px; text-align: center; }
       footer a { color: var(--krem-dim); font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-decoration: none; }
       footer a:hover { color: var(--terakota); }
@@ -122,11 +137,32 @@ const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
 
         <div class="cta-block">
           <a class="cta" href={PDF_URL} download="mapa-5-obszarow-ai.pdf">
-            Pobierz Mapę (PDF)
+            Pobierz Mapę w PDF
           </a>
         </div>
       </div>
     </header>
+
+    <section class="oferta">
+      <div class="wrap">
+        <span class="label">Kurs online</span>
+        <h2>Zanim zamkniesz – <em>Menu z głowy</em></h2>
+        <p class="sub">
+          Mapa pokazuje, gdzie AI pomaga. Kurs to pierwszy obszar doprowadzony do&nbsp;końca:
+          budujesz w&nbsp;Claude albo ChatGPT własny planer posiłków dla swojej rodziny –
+          menu na&nbsp;tydzień, przepisy i&nbsp;listę zakupów.
+        </p>
+        <p class="sticky-note">Raz ustawiasz. Potem tylko zatwierdzasz.</p>
+        <ul>
+          <li>10 lekcji wideo i 3 lekcje bonusowe</li>
+          <li>Działa też w darmowym Claude i ChatGPT</li>
+          <li>Dostęp na 12 miesięcy, jednorazowa płatność</li>
+        </ul>
+        <a class="cta" href={OFERTA_PO_ZAPISIE_URL} target="_blank" rel="noopener">
+          Zobacz kurs →
+        </a>
+      </div>
+    </section>
 
     <footer>
       <a href="/">← ainamacierzynskim.pl</a>

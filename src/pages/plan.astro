@@ -1,24 +1,24 @@
 ---
-// Landing page lead magnetu „Plan dnia z Claude" — URL: /plan
+// Landing page lead magnetu „Plan dnia z Claude” — URL: /plan
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
-// JEDNO zadanie: zapis (imię + e-mail) po prompt „Plan dnia z Claude". Zero linków wychodzących, zero menu.
+// JEDNO zadanie: zapis (imię + e-mail) po prompt „Plan dnia z Claude”. Zero linków wychodzących, zero menu.
 // Formularz spięty z MailerLite (konto 2290800) → grupa `freebie-plan` → automation dostarczająca PDF.
 // Strona standalone (własny <head>), świadomie poza Layout.astro (inny świat marki).
 
 const title = 'Plan dnia z Claude – AI na macierzyńskim';
 const description =
-  'Gotowy prompt, który zamienia „zaplanuj mi dzień" w realny plan – pod Twój czas, priorytety i drzemki maluszka. Pobierz za darmo.';
+  'Gotowy prompt, który zamienia „zaplanuj mi dzień” w realny plan – pod Twój czas, priorytety i drzemki maluszka. Pobierz za darmo.';
 const canonical = 'https://ainamacierzynskim.pl/plan';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// Endpoint zapisu MailerLite — formularz dedykowany dla freebie „Plan dnia z Claude"
+// Endpoint zapisu MailerLite — formularz dedykowany dla freebie „Plan dnia z Claude”
 // (grupa `freebie-plan`). ID formularza uzupełniane po utworzeniu formularza w panelu ML.
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/193234786236499325/subscribe';
 
 // Treść zgody pod formularzem — spójna z /mapa (freebie + newsletter + zgoda marketingowa + dokumenty).
 const CONSENT =
-  'Zapisując się, dostajesz prompt „Plan dnia z&nbsp;Claude" (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
+  'Zapisując się, dostajesz prompt „Plan dnia z&nbsp;Claude” w&nbsp;PDF i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
 ---
 
 <!doctype html>
@@ -27,7 +27,8 @@ const CONSENT =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -181,7 +182,7 @@ const CONSENT =
       <div class="wrap">
         <span class="label">Plan dnia z Claude</span>
         <h1>Zaplanuj dzień, który <em>naprawdę</em> działa</h1>
-        <p class="sub">Gotowy prompt, który zamienia „zaplanuj mi dzień" w&nbsp;realny plan – pod Twój czas, priorytety i&nbsp;drzemki maluszka.</p>
+        <p class="sub">Gotowy prompt, który zamienia „zaplanuj mi dzień” w&nbsp;realny plan – pod Twój czas, priorytety i&nbsp;drzemki maluszka.</p>
 
         <div class="cta">
           <form class="form" data-ml-form method="POST" action={ML_ENDPOINT} target="_blank">
@@ -196,7 +197,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Prompt już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>
@@ -218,7 +219,7 @@ const CONSENT =
       <div class="wrap">
         <h2>To dla Ciebie, <em>jeśli</em></h2>
         <ul>
-          <li>dyktujesz AI „zaplanuj mi dzień" i&nbsp;dostajesz plan dla wszystkich i&nbsp;dla nikogo</li>
+          <li>dyktujesz AI „zaplanuj mi dzień” i&nbsp;dostajesz plan dla wszystkich i&nbsp;dla nikogo</li>
           <li>masz za dużo w&nbsp;głowie i&nbsp;wieczorem nie wiesz, od&nbsp;czego zacząć rano</li>
           <li>chcesz plan pod realny dzień z&nbsp;dzieckiem, nie idealny grafik</li>
         </ul>
@@ -248,7 +249,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Prompt już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>

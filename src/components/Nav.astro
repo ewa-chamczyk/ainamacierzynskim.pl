@@ -1,9 +1,10 @@
 ---
 // Nav.astro — globalne górne menu (sticky). Renderowane przez Layout.astro na stronach
-// „głównego świata": /, /nie-zniknelas, /gabinet-ai, /polityka-prywatnosci, /regulamin, /404.
+// „głównego świata”: /, /nie-zniknelas, /gabinet-ai, /polityka-prywatnosci, /regulamin, /404.
 // Landingi standalone (/mapa, /spotkanie, /newsletter…) są poza Layout i menu NIE mają — świadomie.
 // Dwujęzyczność: prop `lang` wybiera etykiety i prefiksuje linki (/en/...).
 import { useTranslations, altPath, path, type Lang } from '../i18n/ui';
+import { KURS_URL } from '../consts';
 
 interface Props {
   lang?: Lang;
@@ -12,12 +13,16 @@ const { lang = 'pl' } = Astro.props;
 const t = useTranslations(lang);
 const plNote = t('lang.note.pl');
 
-// Ebook „Nie zniknęłaś" jest po polsku — w wersji EN oznaczamy to wprost,
-// żeby nikt nie kupił książki w języku, którego nie zna.
+// Ebook „Nie zniknęłaś” i kurs „Menu z głowy” są po polsku — w wersji EN oznaczamy to
+// wprost, żeby nikt nie kupił produktu w języku, którego nie zna.
+// Kurs mieszka na osobnej platformie, więc otwiera się w nowej karcie.
 const links = [
-  { label: t('nav.gabinet'), href: path('/gabinet-ai', lang), note: '' },
-  { label: t('nav.ebook'), href: '/nie-zniknelas', note: plNote },
-  { label: t('nav.newsletter'), href: path('/newsletter', lang), note: plNote },
+  { label: t('nav.kurs'), href: KURS_URL, note: plNote, external: true },
+  { label: t('nav.gabinet'), href: path('/gabinet-ai', lang), note: '', external: false },
+  { label: t('nav.ebook'), href: '/nie-zniknelas', note: plNote, external: false },
+  // PL: zapis stoi na stronie głównej, więc nie wysyłamy nikogo na osobny landing.
+  // EN: strona główna nie ma formularza, więc zostaje /en/newsletter.
+  { label: t('nav.newsletter'), href: lang === 'pl' ? '/#mapa' : '/en/newsletter', note: plNote, external: false },
 ];
 
 const switchTo: Lang = lang === 'pl' ? 'en' : 'pl';
@@ -38,7 +43,12 @@ const switchHref = altPath(Astro.url.pathname, switchTo);
     <ul class="hidden lg:flex items-center gap-8 text-sm font-medium">
       {links.map((l) => (
         <li>
-          <a href={l.href} class="text-wine/80 hover:text-terra transition-colors">
+          <a
+            href={l.href}
+            target={l.external ? '_blank' : undefined}
+            rel={l.external ? 'noopener' : undefined}
+            class="text-wine/80 hover:text-terra transition-colors"
+          >
             {l.label}
             {l.note && <span class="ml-1 text-xs text-wine/45 font-normal">({l.note})</span>}
           </a>
@@ -104,7 +114,12 @@ const switchHref = altPath(Astro.url.pathname, switchTo);
     <ul class="max-w-6xl mx-auto px-6 py-4 space-y-1">
       {links.map((l) => (
         <li>
-          <a href={l.href} class="block py-2.5 text-wine/90 hover:text-terra font-medium transition-colors">
+          <a
+            href={l.href}
+            target={l.external ? '_blank' : undefined}
+            rel={l.external ? 'noopener' : undefined}
+            class="block py-2.5 text-wine/90 hover:text-terra font-medium transition-colors"
+          >
             {l.label}
             {l.note && <span class="ml-1 text-xs text-wine/45 font-normal">({l.note})</span>}
           </a>

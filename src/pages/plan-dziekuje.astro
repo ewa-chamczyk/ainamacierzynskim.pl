@@ -1,12 +1,12 @@
 ---
-// Strona „dziękuję" po zapisie na lead magnet — URL: /plan-dziekuje
-// Cel: pobieranie promptu „Plan dnia z Claude" (PDF z public/) + nudge na IG.
+// Strona „dziękuję” po zapisie na lead magnet — URL: /plan-dziekuje
+// Cel: pobieranie promptu „Plan dnia z Claude” (PDF z public/) + nudge na IG.
 // Branding spójny z /plan (wino / terakota / krem). Standalone, poza Layout.astro.
 // PDF pod URL: /plan-dnia-z-claude.pdf.
 
 const title = 'Twój prompt już do Ciebie wraca – AI na macierzyńskim';
 const description =
-  'Dziękuję. Twój prompt „Plan dnia z Claude" jest gotowy do pobrania. PDF też wysłałam mailem.';
+  'Dziękuję. Twój prompt „Plan dnia z Claude” jest gotowy do pobrania. PDF też wysłałam mailem.';
 const canonical = 'https://ainamacierzynskim.pl/plan-dziekuje';
 const PDF_URL = '/plan-dnia-z-claude.pdf';
 const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
@@ -19,7 +19,8 @@ const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -122,7 +123,7 @@ const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
 
         <div class="cta-block">
           <a class="cta" href={PDF_URL} download="plan-dnia-z-claude.pdf">
-            Pobierz prompt (PDF)
+            Pobierz prompt w PDF
           </a>
         </div>
       </div>

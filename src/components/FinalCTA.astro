@@ -1,8 +1,9 @@
 ---
 // Final CTA – duży, jeden cel: zapisać. Dwujęzyczny (prop `lang`).
-// PL prowadzi na /mapa (freebie + newsletter). EN prowadzi na /en/newsletter,
+// PL: formularz na miejscu (Mapa 5 obszarów AI + newsletter). EN prowadzi na /en/newsletter,
 // bo Mapa jest PDF-em po polsku — nie obiecujemy anglojęzycznej wersji, której nie ma.
 import type { Lang } from '../i18n/ui';
+import NewsletterForm from './NewsletterForm.astro';
 interface Props { lang?: Lang }
 const { lang = 'pl' } = Astro.props;
 
@@ -11,10 +12,10 @@ const content = {
     badge: 'Mapa 5 obszarów AI · bezpłatnie po zapisie',
     h2a: 'Zapisz się',
     h2b: 'i odbierz Mapę.',
-    lead: 'Po zapisie: Mapa 5 obszarów AI w PDF, newsletter co drugi czwartek, pierwsza wiesz o nowościach i pierwszeństwo do kursu.',
+    lead: 'Po zapisie: Mapa 5 obszarów AI w PDF, newsletter co drugi czwartek i pierwsza wiesz o nowościach.',
     cta: 'Pobierz Mapę 5 obszarów AI',
     href: '/mapa',
-    badges: ['Mapa 5 obszarów AI w PDF', 'Newsletter co drugi czwartek', 'Pierwszeństwo do kursu'],
+    badges: ['Mapa 5 obszarów AI w PDF', 'Newsletter co drugi czwartek', 'Wypisujesz się jednym klikiem'],
     note: '',
   },
   en: {
@@ -31,7 +32,7 @@ const content = {
 ---
 
 <section id="zapis" class="relative px-6 py-28 overflow-hidden">
-  <!-- Anchor #mapa-final: ten sam formularz co w sekcji LeadMagnet, ale w stopce -->
+  <!-- Anchor #mapa-final: ten sam formularz co w sekcji z Mapą 5 obszarów AI, ale w stopce -->
   <a id="mapa-final"></a>
   <!-- Mocny gradient background -->
   <div class="absolute inset-0 bg-gradient-to-br from-terra via-terra-dark to-charcoal"></div>
@@ -64,17 +65,25 @@ const content = {
       {content.lead}
     </p>
 
-    <!-- CTA button -->
-    <a
-      href={content.href}
-      class="max-w-lg mx-auto fade-up delay-300 inline-flex items-center justify-center gap-2 w-full px-8 py-5 bg-white hover:bg-cream text-terra-dark font-semibold rounded-2xl shadow-2xl transition-all hover:scale-105 group text-lg"
-    >
-      <span>{content.cta}</span>
-      <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-      </svg>
-    </a>
-    {content.note && <p class="mt-4 text-sm text-white/70 fade-in delay-300">{content.note}</p>}
+    {/* PL: zapis dzieje się tutaj. EN: osobny formularz i zgoda żyją na /en/newsletter. */}
+    {lang === 'pl' ? (
+      <div class="max-w-lg mx-auto text-left fade-up delay-300 bg-wine/90 rounded-2xl p-6 md:p-8 shadow-2xl">
+        <NewsletterForm cta={content.cta} wariant="ciemny" />
+      </div>
+    ) : (
+      <Fragment>
+        <a
+          href={content.href}
+          class="max-w-lg mx-auto fade-up delay-300 inline-flex items-center justify-center gap-2 w-full px-8 py-5 bg-white hover:bg-cream text-terra-dark font-semibold rounded-2xl shadow-2xl transition-all hover:scale-105 group text-lg"
+        >
+          <span>{content.cta}</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        {content.note && <p class="mt-4 text-sm text-white/70 fade-in delay-300">{content.note}</p>}
+      </Fragment>
+    )}
 
     <!-- Trust badges -->
     <ul class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-white/75 fade-in delay-400">

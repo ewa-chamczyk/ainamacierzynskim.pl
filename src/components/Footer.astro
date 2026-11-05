@@ -3,6 +3,7 @@
 // Dokumenty prawne (polityka, regulamin) zostają po polsku — to dokumenty wiążące prawnie,
 // tłumaczenie robocze wprowadzałoby niejasność. W EN oznaczamy je dopiskiem.
 import { path, type Lang } from '../i18n/ui';
+import { KURS_URL } from '../consts';
 interface Props { lang?: Lang }
 const { lang = 'pl' } = Astro.props;
 const currentYear = new Date().getFullYear();
@@ -11,8 +12,9 @@ const content = {
   pl: {
     tagline: 'Spokojny start z AI przed powrotem do pracy. Małe kroki, konkretne zastosowania, zero presji.',
     offer: 'Oferta',
+    kurs: 'Kurs „Menu z głowy”',
     gabinet: 'Gabinet AI · konsultacja 1:1',
-    ebook: 'Ebook „Nie zniknęłaś"',
+    ebook: 'Ebook „Nie zniknęłaś”',
     newsletter: 'Newsletter',
     contact: 'Kontakt',
     linkedin: 'LinkedIn Ewy',
@@ -25,8 +27,9 @@ const content = {
   en: {
     tagline: 'A calm start with AI before you go back to work. Small steps, concrete use cases, zero pressure.',
     offer: 'Offer',
+    kurs: 'Course „Menu z głowy”',
     gabinet: 'AI Clinic · 1:1 session',
-    ebook: 'Ebook „Nie zniknęłaś"',
+    ebook: 'Ebook „Nie zniknęłaś”',
     newsletter: 'Newsletter',
     contact: 'Contact',
     linkedin: 'Ewa on LinkedIn',
@@ -55,13 +58,24 @@ const content = {
         <p class="text-white font-semibold mb-4">{content.offer}</p>
         <ul class="space-y-2 text-sm">
           <li>
+            <a
+              href={KURS_URL}
+              target="_blank"
+              rel="noopener"
+              class="text-white/60 hover:text-terra-light transition-colors"
+            >{content.kurs}{content.plNote}</a>
+          </li>
+          <li>
             <a href={path('/gabinet-ai', lang)} class="text-white/60 hover:text-terra-light transition-colors">{content.gabinet}</a>
           </li>
           <li>
             <a href="/nie-zniknelas" class="text-white/60 hover:text-terra-light transition-colors">{content.ebook}{content.plNote}</a>
           </li>
           <li>
-            <a href={path('/newsletter', lang)} class="text-white/60 hover:text-terra-light transition-colors">{content.newsletter}{content.plNote}</a>
+            <a
+              href={lang === 'pl' ? '/#mapa' : '/en/newsletter'}
+              class="text-white/60 hover:text-terra-light transition-colors"
+            >{content.newsletter}{content.plNote}</a>
           </li>
         </ul>
       </div>

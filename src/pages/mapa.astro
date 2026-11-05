@@ -1,5 +1,5 @@
 ---
-// Landing page lead magnetu „Mapa 5 obszarów AI" — URL: /mapa
+// Landing page Mapy 5 obszarów AI — URL: /mapa
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
 // JEDNO zadanie: zapis e-mailem po Mapę. Zero linków wychodzących, zero menu.
 // Formularz spięty z MailerLite (konto 2290800, formularz 187811600159213426) →
@@ -12,13 +12,13 @@ const description =
 const canonical = 'https://ainamacierzynskim.pl/mapa';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// Endpoint zapisu MailerLite — identyczny jak w hostowanym formularzu lead magnetu.
+// Endpoint zapisu MailerLite — identyczny jak w hostowanym formularzu Mapy 5 obszarów AI.
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/187811600159213426/subscribe';
 
 // Treść zgody pod formularzem — ta sama pod oboma (Mapa + newsletter + zgoda marketingowa + dokumenty).
 const CONSENT =
-  'Zapisując się, dostajesz Mapę (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
+  'Zapisując się, dostajesz Mapę w&nbsp;PDF i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
 ---
 
 <!doctype html>
@@ -27,7 +27,8 @@ const CONSENT =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -196,7 +197,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Mapa już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>
@@ -220,7 +221,7 @@ const CONSENT =
         <ul>
           <li>wracasz do pracy po macierzyńskim i&nbsp;czujesz, że świat AI Cię wyprzedził</li>
           <li>nie chcesz 50 narzędzi, chcesz wiedzieć, od&nbsp;czego zacząć</li>
-          <li>słyszysz „prompt", „GPT", „agent" i&nbsp;udajesz, że wiesz, o&nbsp;co chodzi</li>
+          <li>słyszysz „prompt”, „GPT”, „agent” i&nbsp;udajesz, że wiesz, o&nbsp;co chodzi</li>
         </ul>
       </div>
     </section>
@@ -248,7 +249,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Mapa już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,81 @@
+---
+// Kurs.astro — teaser kursu „Menu z głowy” na stronie głównej.
+// Sprzedaż i cena żyją na platformie (KURS_URL) — tutaj zero cen, bo cena się zmienia.
+// Sekcja renderuje się TYLKO w wersji PL: kurs jest po polsku, a /en dostaje sam link w menu.
+// Grafika produktowa i odręczny dopisek (.sticky-note) wprost z landingu kursu.
+import { KURS_URL } from '../consts';
+
+const content = {
+  eyebrow: 'Kurs online · nowość',
+  h2a: 'Mniej planowania posiłków,',
+  h2em: 'więcej miejsca w głowie',
+  lead: 'Kurs online, w którym krok po kroku budujesz w Claude albo ChatGPT własny planer posiłków dla swojej rodziny: menu na tydzień, przepisy i listę zakupów. Planer zna Wasze smaki, alergie, budżet i czas, który masz na gotowanie.',
+  punkty: [
+    '10 lekcji wideo i 3 lekcje bonusowe',
+    'Działa też w darmowym Claude i ChatGPT',
+    'Dostęp na 12 miesięcy, jednorazowa płatność',
+  ],
+  cta: 'Zobacz kurs',
+  dopisek: 'Raz ustawiasz. Potem tylko zatwierdzasz.',
+  alt: 'Kurs „Menu z głowy” – lekcje wideo, checklista, ściąga z promptami i kreator profilu rodziny',
+};
+---
+
+<section id="kurs" class="relative px-6 py-24 bg-cream overflow-hidden">
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Lewa: oferta -->
+      <div class="lg:col-span-6 fade-up">
+        <p class="eyebrow mb-5 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          {content.eyebrow}
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6">
+          {content.h2a}
+          <em class="font-serif italic font-semibold text-terra-dark">{content.h2em}</em>.
+        </h2>
+        <p class="text-wine/75 leading-relaxed text-lg mb-7 max-w-xl">
+          {content.lead}
+        </p>
+        <ul class="space-y-3 mb-9">
+          {content.punkty.map((p) => (
+            <li class="flex items-center gap-3 text-wine/85">
+              <svg class="w-5 h-5 text-terra-dark flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={KURS_URL}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-xl transition-colors group"
+        >
+          <span>{content.cta}</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Prawa: grafika produktowa z odręcznym dopiskiem -->
+      <div class="lg:col-span-6 fade-up delay-200">
+        <div class="relative">
+          <img
+            src="/images/kurs-menu-z-glowy.webp"
+            alt={content.alt}
+            width="800"
+            height="470"
+            loading="lazy"
+            class="w-full h-auto"
+          />
+          <p class="sticky-note absolute -bottom-6 left-0 md:left-4 max-w-[16rem]">
+            {content.dopisek}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

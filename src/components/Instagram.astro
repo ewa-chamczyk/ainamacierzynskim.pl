@@ -1,0 +1,87 @@
+---
+// Instagram.astro — pasek z żywym contentem z @ai.na.macierzynskim.
+// Kafelki to prawdziwe okładki rolek i karuzel; każdy prowadzi na profil.
+// Dwujęzyczny (prop `lang`), bo kanał jest ten sam dla obu wersji strony.
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang }
+const { lang = 'pl' } = Astro.props;
+
+const IG_URL = 'https://www.instagram.com/ai.na.macierzynskim/';
+
+const kafelki = [
+  { src: '/images/ig/rolka.jpg', rolka: true, alt: 'Rolka: czat z AI w 2023 i w 2026 – porównanie' },
+  { src: '/images/ig/menu.jpg', rolka: false, alt: 'Karuzela: w jadłospisie wszystko się zgadzało' },
+  { src: '/images/ig/gdybym.jpg', rolka: false, alt: 'Karuzela: gdybym dziś zaczynała z AI' },
+];
+
+const content = {
+  pl: {
+    eyebrow: 'Instagram · @ai.na.macierzynskim',
+    h2a: 'Tu jestem',
+    h2em: 'codziennie',
+    lead: 'Rolki i karuzele z konkretami: jeden prompt, jedno zastosowanie, jedna rzecz mniej na głowie. Bez żargonu i bez filtra na życie z dzieckiem.',
+    cta: 'Zobacz profil',
+  },
+  en: {
+    eyebrow: 'Instagram · @ai.na.macierzynskim',
+    h2a: 'This is where I am',
+    h2em: 'every day',
+    lead: 'Reels and carousels with one prompt, one use case and one thing less to carry. No jargon, no filter on life with a child. Posted in Polish.',
+    cta: 'See the profile',
+  },
+}[lang];
+---
+
+<section class="relative px-6 py-24 bg-cream overflow-hidden">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 fade-up">
+      <div class="max-w-xl">
+        <p class="eyebrow mb-5 flex items-center gap-3">
+          <span class="block w-8 h-px bg-terra"></span>
+          {content.eyebrow}
+        </p>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-5">
+          {content.h2a}
+          <em class="font-serif italic font-semibold text-terra-dark">{content.h2em}</em>.
+        </h2>
+        <p class="text-wine/75 leading-relaxed text-lg">
+          {content.lead}
+        </p>
+      </div>
+
+      <a
+        href={IG_URL}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 px-6 py-3.5 bg-wine hover:bg-wine-dark text-cream font-semibold rounded-xl transition-colors whitespace-nowrap self-start md:self-auto group"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07Zm0 6.18a3.66 3.66 0 1 0 0 7.32 3.66 3.66 0 0 0 0-7.32Zm0 6.04a2.38 2.38 0 1 1 0-4.76 2.38 2.38 0 0 1 0 4.76Zm4.66-6.19a.86.86 0 1 1-1.71 0 .86.86 0 0 1 1.71 0Z" />
+        </svg>
+        <span>{content.cta}</span>
+      </a>
+    </div>
+
+    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      {kafelki.map((k, i) => (
+        <li class={`fade-up ${i === 2 ? 'col-span-2 md:col-span-1' : ''}`} style={`transition-delay:${i * 120}ms`}>
+          <a href={IG_URL} target="_blank" rel="noopener" class="group block relative rounded-2xl overflow-hidden bg-beige">
+            <img
+              src={k.src}
+              alt={k.alt}
+              loading="lazy"
+              class="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+            {k.rolka && (
+              <span class="absolute top-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-wine/75 text-cream backdrop-blur-sm">
+                <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7L8 5Z" />
+                </svg>
+              </span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -1,16 +1,20 @@
 ---
 // Sticky bottom bar – pojawia się po scrollu, znika gdy user dotrze do #zapis. Dwujęzyczny (prop `lang`).
+// PL promuje kurs „Menu z głowy” (świeżo po premierze), EN zostaje przy newsletterze,
+// bo kurs jest po polsku. Bez kwoty: cena premierowa będzie podnoszona.
 import type { Lang } from '../i18n/ui';
+import { KURS_URL } from '../consts';
 interface Props { lang?: Lang }
 const { lang = 'pl' } = Astro.props;
 
 const content = {
   pl: {
-    mainA: 'Odbierz Mapę 5 obszarów AI · ',
-    mainB: 'zapisz się, pierwsza wiesz',
-    sub: 'Zero spamu. Wypiszesz się jednym klikiem.',
-    cta: 'Pobierz Mapę',
-    href: '/mapa',
+    mainA: 'Kurs „Menu z głowy” · ',
+    mainB: 'cena premierowa',
+    sub: 'Planer posiłków, który ustawiasz raz. 10 lekcji wideo i 3 bonusowe.',
+    cta: 'Zobacz kurs',
+    href: KURS_URL,
+    zewnetrzny: true,
     close: 'Zamknij',
   },
   en: {
@@ -19,6 +23,7 @@ const content = {
     sub: 'No spam. Unsubscribe in one click. Written in Polish.',
     cta: 'Sign up',
     href: '/en/newsletter',
+    zewnetrzny: false,
     close: 'Close',
   },
 }[lang];
@@ -40,9 +45,11 @@ const content = {
         </p>
       </div>
 
-      <!-- CTA → dedykowany landing zapisu -->
+      <!-- CTA → landing kursu (PL) albo zapis na newsletter (EN) -->
       <a
         href={content.href}
+        target={content.zewnetrzny ? '_blank' : undefined}
+        rel={content.zewnetrzny ? 'noopener' : undefined}
         class="px-6 py-2.5 bg-terra hover:bg-terra-dark text-wine font-semibold rounded-lg transition-colors text-sm whitespace-nowrap w-full sm:w-auto text-center"
       >
         {content.cta}

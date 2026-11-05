@@ -1,5 +1,5 @@
 ---
-// Landing page lead magnetu „Checklista: pierwsze spotkanie po powrocie" — URL: /spotkanie
+// Landing page lead magnetu „Checklista: pierwsze spotkanie po powrocie” — URL: /spotkanie
 // Wzorzec /mapa (brandkit ANM v2.0: wino / terakota / krem). JEDNO zadanie: zapis po checklistę.
 // Cel płatnych kampanii Meta (zimny ruch). Zero menu, zero linków wychodzących (poza IG w thank-you).
 // Formularz spięty z MailerLite (konto 2290800) → grupy `magnes-checklista` + `ai-na-macierzynskim-newsletter`.
@@ -10,12 +10,12 @@ const description =
 const canonical = 'https://ainamacierzynskim.pl/spotkanie';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// Formularz MailerLite 192268160305464829 (embedded „Lead magnet - Checklista pierwsze spotkanie")
+// Formularz MailerLite 192268160305464829 (embedded „Lead magnet - Checklista pierwsze spotkanie”)
 // dodaje do grup `magnes-checklista` + `ai-na-macierzynskim-newsletter`. Konto ML 2290800.
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/192268160305464829/subscribe';
 
-// Piksel Meta „AI na macierzyńskim" (Duke Art BM, konto reklamowe 1014855627808241). Pusty = piksel się nie ładuje.
+// Piksel Meta „AI na macierzyńskim” (Duke Art BM, konto reklamowe 1014855627808241). Pusty = piksel się nie ładuje.
 const META_PIXEL_ID = '1978225302841474';
 
 // Zgoda pod formularzem (ta sama pod oboma). Copy Ewy + linki RODO dla spójności z /mapa.
@@ -34,7 +34,8 @@ const pixelSnippet = META_PIXEL_ID
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -203,7 +204,7 @@ const pixelSnippet = META_PIXEL_ID
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Checklista już leci.</p>
-            <p>Sprawdź skrzynkę – zajrzyj też do folderu „Oferty" i&nbsp;spamu. Za chwilę odezwę się jeszcze raz. A jeśli wolisz krótsze formy, jestem na Instagramie: <a href="https://www.instagram.com/ai.na.macierzynskim/" target="_blank" rel="noopener">@ai.na.macierzynskim</a>.</p>
+            <p>Sprawdź skrzynkę – zajrzyj też do folderu „Oferty” i&nbsp;spamu. Za chwilę odezwę się jeszcze raz. A jeśli wolisz krótsze formy, jestem na Instagramie: <a href="https://www.instagram.com/ai.na.macierzynskim/" target="_blank" rel="noopener">@ai.na.macierzynskim</a>.</p>
           </div>
         </div>
       </div>
@@ -242,7 +243,7 @@ const pixelSnippet = META_PIXEL_ID
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Checklista już leci.</p>
-            <p>Sprawdź skrzynkę – zajrzyj też do folderu „Oferty" i&nbsp;spamu. Za chwilę odezwę się jeszcze raz. A jeśli wolisz krótsze formy, jestem na Instagramie: <a href="https://www.instagram.com/ai.na.macierzynskim/" target="_blank" rel="noopener">@ai.na.macierzynskim</a>.</p>
+            <p>Sprawdź skrzynkę – zajrzyj też do folderu „Oferty” i&nbsp;spamu. Za chwilę odezwę się jeszcze raz. A jeśli wolisz krótsze formy, jestem na Instagramie: <a href="https://www.instagram.com/ai.na.macierzynskim/" target="_blank" rel="noopener">@ai.na.macierzynskim</a>.</p>
           </div>
         </div>
       </div>

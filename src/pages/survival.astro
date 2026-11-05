@@ -1,5 +1,5 @@
 ---
-// Landing page lead magnetu „AI Survival Kit mamy na wyjeździe" – URL: /survival
+// Landing page lead magnetu „AI Survival Kit mamy na wyjeździe” – URL: /survival
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
 // JEDNO zadanie: zapis (imię + e-mail) po Survival Kit – 8 promptów na wyjazd z niemowlakiem.
 // Zero linków wychodzących, zero menu.
@@ -8,7 +8,7 @@
 // Strona standalone (własny <head>), świadomie poza Layout.astro (inny świat marki).
 //
 // STAN NA 18.07.2026: grupa `magnes-survival` i formularz ML „Lead magnet - AI Survival Kit
-// (wyjazd)" (ID 193330038502852213, double opt-in, imię+e-mail) utworzone w panelu ML.
+// (wyjazd)” (ID 193330038502852213, double opt-in, imię+e-mail) utworzone w panelu ML.
 // ML_ENDPOINT niżej wskazuje właściwy formularz – gotowe do deployu.
 
 const title = 'AI Survival Kit mamy na wyjeździe – AI na macierzyńskim';
@@ -17,14 +17,14 @@ const description =
 const canonical = 'https://ainamacierzynskim.pl/survival';
 const ogImage = 'https://ainamacierzynskim.pl/images/og-home.jpg';
 
-// Endpoint zapisu MailerLite – formularz „Lead magnet - AI Survival Kit (wyjazd)"
+// Endpoint zapisu MailerLite – formularz „Lead magnet - AI Survival Kit (wyjazd)”
 // (grupa `magnes-survival`, double opt-in, utworzony 18.07.2026).
 const ML_ENDPOINT =
   'https://assets.mailerlite.com/jsonp/2290800/forms/193330038502852213/subscribe';
 
 // Treść zgody pod formularzem – spójna z /plan i /mapa (freebie + newsletter + zgoda marketingowa + dokumenty).
 const CONSENT =
-  'Zapisując się, dostajesz „AI Survival Kit mamy na wyjeździe" (PDF) i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
+  'Zapisując się, dostajesz „AI Survival Kit mamy na wyjeździe” w&nbsp;PDF i&nbsp;mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>';
 ---
 
 <!doctype html>
@@ -33,7 +33,8 @@ const CONSENT =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
@@ -202,7 +203,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Survival Kit już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>
@@ -254,7 +255,7 @@ const CONSENT =
           <p class="micro" set:html={CONSENT}></p>
           <div class="thankyou" hidden tabindex="-1">
             <p class="thankyou-h"><em>Gotowe.</em> Survival Kit już leci.</p>
-            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty". Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
+            <p>Sprawdź skrzynkę – zerknij też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Za chwilę napiszę jeszcze raz i&nbsp;pokażę, od&nbsp;czego zacząć.</p>
           </div>
         </div>
       </div>

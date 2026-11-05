@@ -1,13 +1,13 @@
 ---
-// NewsletterPage.astro — landing zapisu na newsletter „AI na macierzyńskim".
+// NewsletterPage.astro — landing zapisu na newsletter „AI na macierzyńskim”.
 // Standalone (własny <head>), świadomie bez globalnego menu. Prop `lang` wybiera treść;
 // strony /newsletter i /en/newsletter to cienkie opakowania na ten komponent.
 //
-// MailerLite (konto 2290800): formularz „Newsletter AI na macierzyńskim (landing /newsletter)"
+// MailerLite (konto 2290800): formularz „Newsletter AI na macierzyńskim (landing /newsletter)”
 // ID 194764420703847967, single opt-in. Zapis trafia do DWÓCH grup naraz:
 //   · ai-na-macierzynskim-newsletter (187343853788857528)
 //   · welcome-nurture               (192276891856536605)
-// Automatyzacja „ANM Welcome – zapis na newsletter" wysyła podziękowanie od razu.
+// Automatyzacja „ANM Welcome – zapis na newsletter” wysyła podziękowanie od razu.
 //
 // EN: newsletter jest pisany PO POLSKU — mówimy o tym wprost w kilku miejscach,
 // żeby nikt nie zapisał się na treści w języku, którego nie zna.
@@ -38,9 +38,9 @@ const content = {
     email: 'Twój e-mail',
     emailAria: 'Twój adres e-mail',
     submit: 'Zapisz się',
-    consent: 'Zapisując się, dostajesz mój newsletter „AI&nbsp;na&nbsp;macierzyńskim" (co drugi czwartek) oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>',
+    consent: 'Zapisując się, dostajesz mój newsletter „AI&nbsp;na&nbsp;macierzyńskim” oraz zgadzasz się na otrzymywanie ode mnie e-maili marketingowych (newsletter i&nbsp;informacje o&nbsp;moich produktach). Bez spamu, wypiszesz się jednym kliknięciem. <a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a>',
     tyH: 'Jesteś na liście.',
-    tyP: 'Za chwilę dostaniesz ode mnie krótkie potwierdzenie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty". Kolejne wydania przychodzą co drugi czwartek wieczorem.',
+    tyP: 'Za chwilę dostaniesz ode mnie krótkie potwierdzenie – sprawdź skrzynkę, zajrzyj też w&nbsp;spam i&nbsp;zakładkę „Oferty”. Kolejne wydania przychodzą co drugi czwartek wieczorem.',
     h2a: 'Co',
     h2aEm: 'dostajesz',
     h2aTail: 'w&nbsp;każdym wydaniu',
@@ -56,8 +56,8 @@ const content = {
     peekLead: 'Dwa wydania z&nbsp;archiwum – żeby nie zapisywać się w&nbsp;ciemno.',
     cap4: 'Wydanie #4 · Sprawdź, zanim wyślesz',
     cap6: 'Wydanie #6 · Najpierw zadanie',
-    alt4: 'Newsletter „AI na macierzyńskim", wydanie 4 – Sprawdź, zanim wyślesz',
-    alt6: 'Newsletter „AI na macierzyńskim", wydanie 6 – Najpierw zadanie, potem narzędzie',
+    alt4: 'Newsletter „AI na macierzyńskim”, wydanie 4 – Sprawdź, zanim wyślesz',
+    alt6: 'Newsletter „AI na macierzyńskim”, wydanie 6 – Najpierw zadanie, potem narzędzie',
     bio: '<strong>Ewa Chamczyk.</strong> Mama, PhD, 3&nbsp;lata w&nbsp;AI (NASK, CampusAI, AI&nbsp;Tact). Pokazuję mamom, jak AI może je wspierać w&nbsp;domu i&nbsp;w&nbsp;pracy – po&nbsp;ludzku, w&nbsp;Twoim tempie.',
     closerA: 'Zacznij od',
     closerEm: 'jednego',
@@ -81,9 +81,9 @@ const content = {
     email: 'Your email',
     emailAria: 'Your email address',
     submit: 'Sign up',
-    consent: 'The newsletter is <strong>written in Polish</strong>. By signing up you get „AI&nbsp;na&nbsp;macierzyńskim" (every other Thursday) and you agree to receive marketing emails from me (the newsletter and news about my products). No spam, unsubscribe in one click. <a href="/polityka-prywatnosci">Privacy policy</a> · <a href="/regulamin">Terms</a> (in Polish)',
+    consent: 'The newsletter is <strong>written in Polish</strong>. By signing up you get „AI&nbsp;na&nbsp;macierzyńskim” and you agree to receive marketing emails from me (the newsletter and news about my products). No spam, unsubscribe in one click. <a href="/polityka-prywatnosci">Privacy policy</a> · <a href="/regulamin">Terms</a> (in Polish)',
     tyH: 'You are on the list.',
-    tyP: 'A short confirmation is on its way – check your inbox, and look in spam and the „Promotions" tab too. New issues arrive every other Thursday evening.',
+    tyP: 'A short confirmation is on its way – check your inbox, and look in spam and the „Promotions” tab too. New issues arrive every other Thursday evening.',
     h2a: 'What you',
     h2aEm: 'get',
     h2aTail: 'in every issue',
@@ -121,7 +121,8 @@ const switchHref = altPath(Astro.url.pathname, switchTo);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={c.description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={c.canonical} />
     <link rel="alternate" hreflang="pl" href="https://ainamacierzynskim.pl/newsletter" />
     <link rel="alternate" hreflang="en" href="https://ainamacierzynskim.pl/en/newsletter" />

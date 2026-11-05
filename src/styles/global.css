@@ -86,6 +86,8 @@
   --font-display: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+  /* Odręczny dopisek – ten sam font co na landingu kursu „Menu z głowy". */
+  --font-hand: "Caveat", "Bradley Hand", cursive;
 }
 
 @layer base {
@@ -144,6 +146,21 @@
 }
 
 @layer utilities {
+  /* Odręczny dopisek na brzoskwiniowej karteczce — wzorzec 1:1 z landingu kursu
+     „Menu z głowy" (.sticky-note): bez zaokrągleń, lekko przekrzywiony, Caveat 700. */
+  .sticky-note {
+    display: inline-block;
+    background: var(--color-terra-light);
+    color: var(--color-wine);
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.05;
+    padding: 0.875rem 1rem 1rem;
+    box-shadow: 0 12px 20px -12px rgba(58, 17, 26, 0.55);
+    transform: rotate(-1.5deg);
+  }
+
   /* Animacje fade-in scroll-triggered */
   .fade-up {
     opacity: 0;

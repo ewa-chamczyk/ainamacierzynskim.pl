@@ -1,0 +1,27 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:ainamacierzynskim.pl:docs:llms-txt",
+      "displayName": "AI na macierzyńskim – opis marki i oferty (llms.txt)",
+      "type": "text/markdown",
+      "url": "https://ainamacierzynskim.pl/llms.txt",
+      "representativeQueries": [
+        "Czym jest AI na macierzyńskim?",
+        "Kurs AI dla mam na urlopie macierzyńskim",
+        "Jak zaplanować posiłki dla rodziny z pomocą AI?"
+      ]
+    },
+    {
+      "identifier": "urn:air:ainamacierzynskim.pl:course:menu-z-glowy",
+      "displayName": "Kurs Menu z głowy – planer posiłków z AI",
+      "type": "text/html",
+      "url": "https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy",
+      "representativeQueries": [
+        "Kurs planowania posiłków z AI",
+        "Jadłospis na tydzień i lista zakupów w ChatGPT lub Claude",
+        "Planer posiłków dla rodziny z AI po polsku"
+      ]
+    }
+  ]
+}
