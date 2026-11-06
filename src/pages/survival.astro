@@ -1,4 +1,5 @@
 ---
+import MetaPixel from '../components/MetaPixel.astro';
 // Landing page lead magnetu „AI Survival Kit mamy na wyjeździe” – URL: /survival
 // Brandkit ANM v2.0 (filar F1 Słownik AI): wino / terakota / krem.
 // JEDNO zadanie: zapis (imię + e-mail) po Survival Kit – 8 promptów na wyjazd z niemowlakiem.
@@ -341,6 +342,7 @@ const CONSENT =
               .then(function (data) {
                 if (data && data.success) {
                   showThankYou(cta);
+                  if (window.fbq) { try { fbq('track', 'Lead'); } catch (e) {} }
                 } else {
                   var err = firstError(data);
                   if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';
@@ -358,5 +360,6 @@ const CONSENT =
         });
       })();
     </script>
+    <MetaPixel />
   </body>
 </html>

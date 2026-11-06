@@ -130,7 +130,19 @@ const statusKolor = wariant === 'ciemny' ? 'text-terra-light' : 'text-terra-dark
         .then((res) => res.json().catch(() => ({ success: res.ok })))
         .then((data) => {
           if (data && data.success) {
-            window.location.href = PO_ZAPISIE;
+            // Zdarzenie Lead dla piksela Meta — tak samo jak na landingach (/mapa, /plan…).
+            // Tu po sukcesie przechodzimy dalej, więc dajemy pikselowi chwilę na wysłanie żądania.
+            const fbq = (window as any).fbq;
+            if (fbq) {
+              try {
+                fbq('track', 'Lead');
+              } catch (e) {}
+              setTimeout(() => {
+                window.location.href = PO_ZAPISIE;
+              }, 150);
+            } else {
+              window.location.href = PO_ZAPISIE;
+            }
           } else {
             let err = firstError(data);
             if (/valid email/i.test(err)) err = 'Podaj poprawny adres e-mail.';

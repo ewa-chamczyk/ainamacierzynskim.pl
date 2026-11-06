@@ -6,7 +6,7 @@ export const KURS_URL =
   'https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy';
 
 /** Checkout ebooka „Nie zniknęłaś” — WebToLearn, Szybka Sprzedaż #5
- *  („Nie zniknęłaś – e-book (cena regularna)”, Stripe, 47 zł).
+ *  („Nie zniknęłaś – e-book (cena regularna)”, 47 zł).
  *  Osobny adres `…/s/nie-zniknelas-oferta.html` to OTO za 27 zł po zakupie kursu —
  *  NIE podpinaj go na stronie, bo zepsujesz cenę regularną.
  *  Poprzedni koszyk EasyTools (easl.ink/Z22wp) ma wyłączone płatności. */
