@@ -1,8 +1,15 @@
+# Stara subdomena platformy kursowej (do 9.11.2026) → nowa, z zachowaniem ścieżki.
+# kurs.ainamacierzynskim.pl wskazuje na Netlify (alias tej strony), WebToLearn działa pod kursy.ewachamczyk.pl.
+https://kurs.ainamacierzynskim.pl/*      https://kursy.ewachamczyk.pl/:splat   301!
+http://kurs.ainamacierzynskim.pl/*       https://kursy.ewachamczyk.pl/:splat   301!
+https://www.kurs.ainamacierzynskim.pl/*  https://kursy.ewachamczyk.pl/:splat   301!
+http://www.kurs.ainamacierzynskim.pl/*   https://kursy.ewachamczyk.pl/:splat   301!
+
 # Menu z głowy – krótkie linki dla klientek (od 29.10.2026).
 # 302, bo cele mogą się jeszcze zmienić. „!” wymusza przekierowanie mimo istniejącej strony menu-z-glowy.astro.
 # Landing (WebToLearn):
-/menu-z-glowy        https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy   302!
-/menu-z-glowy/       https://kurs.ainamacierzynskim.pl/next/public/catalog/product/menu-z-glowy   302!
+/menu-z-glowy        https://kursy.ewachamczyk.pl/next/public/catalog/product/menu-z-glowy   302!
+/menu-z-glowy/       https://kursy.ewachamczyk.pl/next/public/catalog/product/menu-z-glowy   302!
 # Koszyk (szybka sprzedaż WebToLearn):
-/menu-z-glowy/kup    https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
-/menu-z-glowy/kup/   https://kurs.ainamacierzynskim.pl/s/menu-z-glowy.html   302!
+/menu-z-glowy/kup    https://kursy.ewachamczyk.pl/s/menu-z-glowy.html   302!
+/menu-z-glowy/kup/   https://kursy.ewachamczyk.pl/s/menu-z-glowy.html   302!
